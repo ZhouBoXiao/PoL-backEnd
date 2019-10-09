@@ -14,6 +14,7 @@ import com.dudu.tools.StringUtil;
 import com.github.pagehelper.PageInfo;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiImplicitParam;
+import io.swagger.annotations.ApiImplicitParams;
 import io.swagger.annotations.ApiOperation;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -50,19 +51,28 @@ public class VerifyController {
     @RequestMapping(value = "/verify",method = RequestMethod.POST, produces="application/json;charset=UTF-8")
     @ResponseBody
     @ApiOperation(value = "验证证书")
-    @ApiImplicitParam(name = "json", value = "证书", dataType = ApiDataType.STRING, paramType = ApiParamType.FORM)
-    public Map<String, Object> verify(@RequestParam String json){
+    @ApiImplicitParams({
+        @ApiImplicitParam(name = "json", value = "证书", required = true, dataType = ApiDataType.STRING,
+                paramType = ApiParamType.FORM),
+        @ApiImplicitParam(name = "wallet", value = "钱包", required = true, dataType = ApiDataType.STRING,
+                paramType = ApiParamType.FORM),
+        @ApiImplicitParam(name = "passWord", value = "密码", required = true, dataType = ApiDataType.STRING,
+                paramType = ApiParamType.FORM)
+    })
+    public Map<String, Object> verify(@RequestParam(name = "json") String json,
+                                      @RequestParam(name = "wallet") String wallet,
+                                      @RequestParam(name = "passWord") String passWord){
         String res = null;
         Map<String, Object> jo = new HashMap<>();
         logger.info("json: " + json );
 //        String walletfile = "/home/lmars/PoL/PoL-Juice/ju-ethereum/data/keys/826b383b-96be-6651-dd23-619231977052.json";
 //        String walletfile = request.getParameter("walletfile");
-//        String password = request.getParameter("password");
-//        String password = "12345678";
+//        String passWord = request.getParameter("passWord");
+//        String passWord = "12345678";
 
         JSONObject cert = JSON.parseObject(json);
 
-        res = verifyService.verify(cert);
+        res = verifyService.verify(cert, wallet, passWord);
 
         if(res == null || "".equals(res)) {
             jo.put("result", false);
@@ -81,15 +91,15 @@ public class VerifyController {
     @RequestMapping(value = "/generateWallet",method = RequestMethod.GET)
     public void generateWallet(HttpServletRequest request , HttpServletResponse response){
         JSONObject result=new JSONObject();
-        String password = request.getParameter("password");
-        if(StringUtil.isNull(password)){
+        String passWord = request.getParameter("passWord");
+        if(StringUtil.isNull(passWord)){
             result.put("message", "不能为空!");
             result.put("result", false);
             ServletUtil.createSuccessResponse(200, result, response);
             return;
         }
-        logger.info("password:  "+password);
-        String fileName = verifyService.create(password);
+        logger.info("passWord:  "+passWord);
+        String fileName = verifyService.create(passWord);
         if(!StringUtil.isNull(fileName)) {
             result.put("message", fileName);
             result.put("result", true);
@@ -127,12 +137,21 @@ public class VerifyController {
     }
 
     @RequestMapping(value = "/search" ,method = RequestMethod.POST, produces="application/json;charset=UTF-8")
-    @ApiOperation(value = "查询证书")
-    @ApiImplicitParam(name = "json", value = "查询", dataType = ApiDataType.STRING, paramType = ApiParamType.FORM)
-    public Map<String, Object> search(String json){
+    @ApiOperation(value = "查询证书", httpMethod = "POST")
+    @ApiImplicitParams({
+            @ApiImplicitParam(name = "json", value = "查询", dataType = ApiDataType.STRING,
+                    paramType = ApiParamType.FORM),
+            @ApiImplicitParam(name = "wallet", value = "钱包", required = true, dataType = ApiDataType.STRING,
+                    paramType = ApiParamType.FORM),
+            @ApiImplicitParam(name = "passWord", value = "密码", required = true, dataType = ApiDataType.STRING,
+                    paramType = ApiParamType.FORM)
+    })
+    public Map<String, Object> search(@RequestParam(name = "json") String json,
+                                      @RequestParam(name = "wallet") String wallet,
+                                      @RequestParam(name = "passWord") String passWord){
         Map<String, Object> result = new HashMap<>();
 
-        String res = verifyService.search(json);
+        String res = verifyService.search(json, wallet, passWord);
         if("".equals(res) || res==null){
             result.put("result", false);
             result.put("message", "查询失败!");
@@ -144,24 +163,26 @@ public class VerifyController {
         return result;
     }
 
-    @RequestMapping(value = "/createContract" ,method = RequestMethod.POST, produces="application/json;charset=UTF-8")
-    public Map<String, Object> createContract(String json){
+    @RequestMapping(value = "/deployContract" ,method = RequestMethod.POST, produces="application/json;charset=UTF-8")
+    @ApiOperation(value = "部署智能合约", httpMethod = "POST")
+    @ApiImplicitParams({
+            @ApiImplicitParam(name = "wallet", value = "钱包", required = true, dataType = ApiDataType.STRING,
+                    paramType = ApiParamType.FORM),
+            @ApiImplicitParam(name = "passWord", value = "密码", required = true, dataType = ApiDataType.STRING,
+                    paramType = ApiParamType.FORM)
+    })
+    public Map<String, Object> deployContract(@RequestParam(name = "wallet") String wallet,
+                                              @RequestParam(name = "passWord") String passWord){
         String res = null;
         Map<String, Object> result = new HashMap<>();
-        logger.info("position:  "+json);
-        if(StringUtil.isNull(json)){
-            result.put("message", "不能为空!");
-            result.put("result", false);
-            return result;
-        }
 
-        res = verifyService.createContract(json);
+        res = verifyService.deployContract(wallet, passWord);
         if("".equals(res) || res==null){
             result.put("result", false);
             result.put("message", "部署合约失败!");
         }else{
             result.put("result", true);
-            result.put("message", JSON.parseObject(res));
+            result.put("message", res);
         }
         return result;
     }

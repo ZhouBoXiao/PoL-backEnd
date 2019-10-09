@@ -13,27 +13,26 @@ import com.dudu.service.VerifyService;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Service;
-import org.web3j.crypto.CipherException;
-import org.web3j.crypto.Credentials;
-import org.web3j.crypto.WalletUtils;
+import org.web3j.crypto.*;
 import org.web3j.protocol.Web3j;
 import org.web3j.protocol.http.HttpService;
 import org.web3j.tx.gas.ContractGasProvider;
 import org.web3j.tx.gas.DefaultGasProvider;
 
-import java.io.File;
-import java.io.IOException;
+import java.io.*;
 import java.math.BigInteger;
 import java.security.InvalidAlgorithmParameterException;
 import java.security.NoSuchAlgorithmException;
 import java.security.NoSuchProviderException;
+import java.text.SimpleDateFormat;
+import java.util.Date;
 import java.util.HashMap;
 import java.util.Map;
 
 @Service
 public class VerifyServiceImpl implements VerifyService {
 
-    final static String contractAddress = "0x8cc076af08cdaa3cf03fde10e2bf247a6363a008";
+    final static String contractAddress = "0x909de1dbc7940c8d93fdc0a1d675726079624abb";
     final static String provideAddr  = "http://202.114.114.46:6789";
 
     public static final String serverPrivateKey = "MIICdgIBADANBgkqhkiG9w0BAQEFAASCAmAwggJcAgEAAoGBALIZ98KqgLW8IMt4" +
@@ -55,24 +54,24 @@ public class VerifyServiceImpl implements VerifyService {
             "Nlw3L0iogs9WTIGm3el1SuZLyMnMksnV0NCsuq538cPMNppZRwARb7NXmpmh0KM7" +
             "9fJ/1xqnpo1tgRcv4wIDAQAB";
 
-    private static final String walletFile = "/home/lmars/PoL/PoL-Juice/ju-ethereum/data/keys/826b383b-96be-6651-dd23-619231977052.json";
-    private static final String passWord = "12345678";
+//    private static final String walletFile = "/home/lmars/PoL/PoL-Juice/ju-ethereum/data/keys/826b383b-96be-6651-dd23-619231977052.json";
+//    private static final String passWord = "12345678";
 
     private Logger logger = LoggerFactory.getLogger(this.getClass());
     private static Web3j web3j = Web3j.build(new HttpService(provideAddr));
 
     @Override
-    public String verify(JSONObject PoL) {
+    public String verify(JSONObject pol, String wallet, String passWord) {
         String res = null;
         Map<String, Object> params = new HashMap<String,Object>();
-
+        File tmpFile = null;
         try {
-            /* logger.info("PoL : " + PoL); */
+            /* logger.info("PoL : " + pol); */
             logger.info("Connected to Ethereum client version: "
-                    + web3j.web3ClientVersion().send().getWeb3ClientVersion());
-            String clientPublicKey = PoL.getString("publicKey");
-            String data = PoL.getString("data");
-            String encryptkey = PoL.getString("encryptkey");
+                    + web3j.web3ClientVersion().send().getWeb3ClientVersion());   // 得到web3客户端的版本
+            String clientPublicKey = pol.getString("publicKey");
+            String data = pol.getString("data");
+            String encryptkey = pol.getString("encryptkey");
             logger.info("data : " + data);
             logger.info("encryptkey : " + encryptkey);
 //            data = prover.
@@ -81,38 +80,41 @@ public class VerifyServiceImpl implements VerifyService {
             logger.info("clientPublicKey : " + clientPublicKey);
             if (passSign) {
                 // 验签通过
-                String aeskey = RSA.decrypt(encryptkey,
-                        serverPrivateKey);
+                String aeskey = RSA.decrypt(encryptkey,    
+                        serverPrivateKey);                                   
                 String data2 = ConvertUtils.hexStringToString(AES.decryptFromBase64(data,
                         aeskey));
+                //解密得到证书数据并转码
                 System.out.println(data2);
                 JSONObject jsonObj = JSONObject.parseObject(data2);
 
                 String temp = jsonObj.getString("Prover");
 
                 JSONObject prover = JSON.parseObject(temp);
-                JSONArray Location  = prover.getJSONArray("location");
+                JSONArray location = prover.getJSONArray("location");
 
-                JSONArray ZeroKnowledgeProofs  = prover.getJSONArray("ZeroKnowledgeProofs");
-                logger.info("ZeroKnowledgeProofs : " + ZeroKnowledgeProofs);
+                JSONArray zeroKnowledgeProofs  = prover.getJSONArray("ZeroKnowledgeProofs");
+                logger.info("zeroKnowledgeProofs : " + zeroKnowledgeProofs);
                 JSONArray array = new JSONArray();
-                JSONArray Witnesses = new JSONArray();
+                JSONArray witnesses = new JSONArray();
 
                 /* ZeroKnowledgeProofs.stream().forEach(jsonobejct->logger.info("proof : ",jsonobejct)); */
 
-                for (int i=0;i<ZeroKnowledgeProofs.size();i++) {
-                    JSONObject tmp = ZeroKnowledgeProofs.getJSONObject(i);
+                //获取零知识证明中的proof和witness
+                for (int i=0;i<zeroKnowledgeProofs.size();i++) {
+                    JSONObject tmp = zeroKnowledgeProofs.getJSONObject(i);
                     System.out.println(tmp.toJSONString());
                     /* logger.info("tmp: ", tmp.toJSONString()); */
                     array.add(tmp.getJSONObject("proof"));
-                    Witnesses.add(tmp.getString("Witness"));
+                    witnesses.add(tmp.getString("Witness"));
                 }
                 System.out.println("array : "+array.toJSONString());
-                System.out.println("Witnesses : "+Witnesses.toJSONString());
-
+                System.out.println("witnesses : "+witnesses.toJSONString());
+                //生成临时文件存储钱包
+                tmpFile = createTempFile(wallet);
                 Credentials credentials =
                         WalletUtils.loadCredentials(
-                                passWord, walletFile);
+                                passWord, tmpFile);
                 logger.info("Credentials loaded");
 
                 // Now lets deploy a smart contract
@@ -146,24 +148,25 @@ public class VerifyServiceImpl implements VerifyService {
                     String conAddress = prover.getString("contractAddress");
 
                     CertQuery certQuery = CertQuery.load(conAddress, web3j, credentials,contractGasProvider);
-                    BigInteger oldValue = certQuery.sumOfCerts().send();
-                    System.out.println("oldValue: "+oldValue);
+//                    BigInteger oldValue = certQuery.sumOfCerts().send();
+//                    System.out.println("oldValue: "+oldValue);
                     JSONObject cert = new JSONObject();
-                    cert.put("id", PoL.getString("id"));
-                    cert.put("type", PoL.getString("type"));
+                    cert.put("id", pol.getString("id"));
+                    cert.put("type", pol.getString("type"));
                     cert.put("prover", prover.getString("Prover"));
-                    cert.put("issuanceDate", PoL.getString("issuanceDate"));
-                    cert.put("location", Location);
-                    cert.put("Witnesses", Witnesses);
+                    cert.put("issuanceDate", pol.getString("issuanceDate"));
+                    cert.put("location", location);
+                    cert.put("witnesses", witnesses);
                     System.out.println("certificate : " + cert.toJSONString());
 
-                    certQuery.addCertificate(cert.toJSONString(), PoL.getString("issuanceDate")).send();
-                    BigInteger newValue = certQuery.sumOfCerts().send();
+                    certQuery.addCertificate(cert.toJSONString(), pol.getString("issuanceDate")).send();  //test delete send() , what will be happend
+                    res = cert.toJSONString();
+                    /*BigInteger newValue = certQuery.sumOfCerts().send();
                     System.out.println("newValue: "+newValue);
                     BigInteger one = new BigInteger("1");
                     if(one.equals(newValue.subtract(oldValue))){
                         res = cert.toJSONString();
-                    }
+                    }*/
                 }
 
 
@@ -190,19 +193,24 @@ public class VerifyServiceImpl implements VerifyService {
         } catch (Exception e1) {
             e1.printStackTrace();
         }
+        finally {
+            if (tmpFile != null && tmpFile.exists()){
+                tmpFile.delete();  //删除临时文件
+            }
+        }
         return res;
     }
 
     @Override
-    public String search(String _json) {
-
+    public String search(String _json, String wallet, String passWord) {
         JSONObject jsonObject = JSON.parseObject(_json);
         String clientPublicKey = jsonObject.getString("publicKey");
         String data = jsonObject.getString("data");
         String encryptkey = jsonObject.getString("encryptkey");
-        logger.info("data : " + data);
-        logger.info("encryptkey : " + encryptkey);
+//        logger.info("data : " + data);
+//        logger.info("encryptkey : " + encryptkey);
         String res = null;
+        File tmpFile = null;
         try {
             boolean passSign = EncryUtil.checkDecryptAndSign(data,
                     encryptkey, clientPublicKey, serverPrivateKey);
@@ -212,7 +220,7 @@ public class VerifyServiceImpl implements VerifyService {
                         serverPrivateKey);
                 String data2 = ConvertUtils.hexStringToString(AES.decryptFromBase64(data,
                         aeskey));
-                System.out.println(data2);
+//                System.out.println(data2);
                 JSONObject jsonObj = JSONObject.parseObject(data2);
                 String temp = jsonObj.getString("search");
                 System.out.println("temp :" + temp);
@@ -220,11 +228,12 @@ public class VerifyServiceImpl implements VerifyService {
                 String conAddress = queryBody.getString("contractAddress");
                 String startTime = queryBody.getString("startTime");
                 String endTime = queryBody.getString("endTime");
-//                String walletfile = jsonObj.getString("contractAddress");
 
+                //生成临时文件存储钱包
+                tmpFile = createTempFile(wallet);
                 Credentials credentials =
                         WalletUtils.loadCredentials(
-                                passWord, walletFile);
+                                passWord, tmpFile);
                 logger.info("Credentials loaded");
 
                 ContractGasProvider contractGasProvider = new DefaultGasProvider();
@@ -232,7 +241,7 @@ public class VerifyServiceImpl implements VerifyService {
                 System.out.println("startTime :" + startTime);
                 System.out.println("endTime :" + endTime);
                 res = certQuery.search(startTime, endTime).send();
-                System.out.println("----------------------------------------- ");
+//                System.out.println("----------------------------------------- ");
                 System.out.println("res : " + res);
 
             } else {
@@ -240,16 +249,20 @@ public class VerifyServiceImpl implements VerifyService {
             }
         } catch (Exception e) {
             e.printStackTrace();
+        }finally {
+            if (tmpFile != null && tmpFile.exists()){
+                tmpFile.delete();  //删除临时文件
+            }
         }
         return res;
     }
 
     @Override
-    public String create(String password) {
+    public String create(String passWord) {
         String fileName = null;
         try {
             fileName = WalletUtils.generateNewWalletFile(
-                    password,
+                    passWord,
                     new File("/home/lmars/PoL/PoL-Juice/ju-ethereum/data/keys"), true);
             System.out.println("fileName: "+ fileName);
             //logger.info("fileName", fileName);
@@ -264,9 +277,80 @@ public class VerifyServiceImpl implements VerifyService {
         return NativeLib.genProof(position);
     }
 
+    private File createTempFile(String json){
+        FileOutputStream fos = null;
+        //创建临时钱包文件
+        File walletFile = null;
+        ObjectOutputStream out = null;
+        BufferedWriter bw = null;
+        FileWriter fw = null;
+        try {
+            SimpleDateFormat sd = new SimpleDateFormat("yyyyMMddHHmmss");
+
+            String s = sd.format(new Date());
+            walletFile = File.createTempFile(s, ".json");
+            logger.info("临时文件所在的本地路径：" + walletFile.getCanonicalPath());
+            fw = new FileWriter(walletFile.getAbsoluteFile());
+            bw = new BufferedWriter(fw);
+            bw.write(json);
+//            fos = new FileOutputStream(walletFile);
+//            out = new ObjectOutputStream(fos);
+////            logger.info("wallet: ", json);
+//            System.out.println("wallet: "+ json);
+//            out.writeObject(JSON.parseObject(json));
+
+        } catch (IOException e) {
+            e.printStackTrace();
+        } finally {
+            //关闭临时文件
+            try {
+                assert bw != null;
+                bw.flush();
+                fw.flush();
+                bw.close();
+                fw.close();
+//                assert out != null;
+//                out.flush();
+//                out.close();
+//                fos.flush();
+//                fos.close();
+
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
+//            walletFile.deleteOnExit();//程序退出时删除临时文件
+        }
+        return walletFile;
+
+    }
+
     @Override
-    public String createContract(String json) {
-        return null;
+    public String deployContract(String wallet, String passWord) {
+        File tmpFile = null;
+        String contractAddress = null;
+        try {
+            tmpFile = createTempFile(wallet);
+            Credentials credentials =
+                    WalletUtils.loadCredentials(
+                            passWord, tmpFile);
+            ContractGasProvider contractGasProvider = new DefaultGasProvider();
+            CertQuery contract = CertQuery.deploy(
+                    //部署合约
+                    web3j,
+                    credentials,
+                    contractGasProvider
+                ).send();
+            contractAddress = contract.getContractAddress();
+            logger.info("Smart contract deployed to address " + contractAddress);
+        } catch (Exception e) {
+            e.printStackTrace();
+        } finally {
+            if (tmpFile != null && tmpFile.exists()){
+                tmpFile.delete();  //删除临时文件
+            }
+        }
+
+        return contractAddress;
     }
 
 
