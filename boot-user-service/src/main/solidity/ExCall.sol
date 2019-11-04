@@ -1,0 +1,1 @@
+pragma solidity ^0.4.2;import "./LibEcUtils.sol";contract ExCall {    using LibEcUtils for *;    function exCall(string _func, string _args) public constant returns(string) {        ExCall ec = ExCall(0xec);        return ec.exCall32k(_func, _args).toString();    }    function exCall32k(string _func, string _args) public constant returns(uint[1024]) {}}

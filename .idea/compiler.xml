@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="CompilerConfiguration">
+    <annotationProcessing>
+      <profile name="Maven default annotation processors profile" enabled="true">
+        <sourceOutputDir name="target/generated-sources/annotations" />
+        <sourceTestOutputDir name="target/generated-test-sources/test-annotations" />
+        <outputRelativeToContentRoot value="true" />
+        <module name="boot-common" />
+        <module name="boot-interface" />
+        <module name="boot-user-service" />
+      </profile>
+    </annotationProcessing>
+    <bytecodeTargetLevel>
+      <module name="boot-common" target="1.8" />
+      <module name="boot-interface" target="1.8" />
+      <module name="boot-interface-api" target="1.8" />
+      <module name="boot-search-service" target="1.8" />
+      <module name="boot-user-pojo" target="1.8" />
+      <module name="boot-user-service" target="1.8" />
+    </bytecodeTargetLevel>
+  </component>
+</project>
