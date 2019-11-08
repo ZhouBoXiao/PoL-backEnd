@@ -5,7 +5,7 @@
  * @desc      给用户展示如何编写一个自己的模块。
  *            VerifyModule本身也是一个合约，它需要部署到链上；同时，它又负责管理用户的合约。只有添加到模块中的用户合约，用户才能在dapp中调用这些合约
  */
-pragma solidity ^ 0.4 .2;
+pragma solidity ^ 0.4.2;
 
 import "./SystemContracts/sysbase/OwnerNamed.sol";
 import "./SystemContracts/sysbase/BaseModule.sol";

@@ -69,6 +69,7 @@ public class VerifyServiceImpl implements VerifyService {
     @Override
     public String verify(JSONObject pol, String wallet, String passWord) {
         String res = null;
+
         Map<String, Object> params = new HashMap<String,Object>();
         File tmpFile = null;
         try {
@@ -144,6 +145,7 @@ public class VerifyServiceImpl implements VerifyService {
                     logger.info(""+certQuery.isValid());
 //                    if(certQuery.isValid()){
                     JSONObject cert = new JSONObject();
+
                     cert.put("id", pol.getString("id"));
                     cert.put("type", pol.getString("type"));
                     cert.put("prover", prover.getString("Prover"));
@@ -171,6 +173,14 @@ public class VerifyServiceImpl implements VerifyService {
         }
         return res;
     }
+
+
+
+    /**
+     *
+     * @param _json
+     * @return
+     */
     @Override
     public String search(String _json) {
         JSONObject jsonObject = JSON.parseObject(_json);
