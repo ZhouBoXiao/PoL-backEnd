@@ -3,7 +3,8 @@ package com.whu.aesrsa.util;
 import com.alibaba.fastjson.JSON;
 import com.alibaba.fastjson.TypeReference;
 import org.apache.commons.lang3.StringUtils;
-import org.apache.log4j.Logger;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 import java.util.Iterator;
 import java.util.Map.Entry;
@@ -12,7 +13,7 @@ import java.util.TreeMap;
 //import org.apache.commons.lang.StringUtils;
 
 public class EncryUtil {
-	private static final Logger log = Logger.getLogger(EncryUtil.class);
+	private static Logger log = LoggerFactory.getLogger(EncryUtil.class);
 	/**
 	 * 生成RSA签名
 	 */

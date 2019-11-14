@@ -24,7 +24,9 @@ package com.whu.aesrsa.util;
  --------------------------------------------**********--------------------------------------------
  */
 
-import org.apache.log4j.Logger;
+
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 import javax.crypto.Cipher;
 import java.math.BigInteger;
@@ -36,7 +38,7 @@ import java.util.HashMap;
 import java.util.Map;
 
 public class RSA {
-	private static final Logger log = Logger.getLogger(RSA.class);
+	private static Logger log = LoggerFactory.getLogger(RSA.class);
 	/** 指定key的大小 */
 	private static int KEYSIZE = 2048;
 	/**

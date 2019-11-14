@@ -6,7 +6,8 @@ import com.alibaba.fastjson.serializer.SerializeConfig;
 import com.alibaba.fastjson.serializer.SerializeFilter;
 import com.alibaba.fastjson.serializer.SerializerFeature;
 import com.alibaba.fastjson.serializer.SimpleDateFormatSerializer;
-import org.apache.log4j.Logger;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
@@ -35,7 +36,7 @@ public class ServletUtil {
 	//业务名称的缩写
 	private static final String BIZ_NAME = "";
 
-	private static Logger log = Logger.getLogger(ServletUtil.class);
+    private static Logger log = LoggerFactory.getLogger(ServletUtil.class);
 
 	static{
 		try {
