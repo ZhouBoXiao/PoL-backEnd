@@ -1,35 +1,80 @@
-pragma solidity ^ 0.4 .2;
+pragma solidity ^0.4.2;
 
-//juice的管理库，必须引入
-import "./SystemContracts/sysbase/OwnerNamed.sol";
+import "./SystemContracts/utillib/LibString.sol";
+// import "./SystemContracts/utillib/LibJson.sol";
+import "./SystemContracts/utillib/LibStack.sol";
+import "./SystemContracts/utillib/LibLog.sol";
+// import "./SystemContracts/utillib/WhitelistedRole.sol";
+import "./SystemContracts/utillib/IterableMapping.sol";
 
-contract UserManager is OwnerNamed, WhitelistedRole {
-    //余额（状态变量）
-    // uint balance;
-    using LibRegisterUser for *;
-    mapping(address => RegisterUser) users;
-     
-    
+contract UserManager{
+    using LibString
+    for * ;
+
+    using IterableMapping for *;
+    using LibLog for *;
+
+    IterableMapping.itmap data;
+
     // 构造函数
     function UserManager() {
-        //把合约注册到JUICE链上, 参数必须和DemoModule.sol中的保持一致；register注册仓库合约参数只支持字符串形式
-        register("UserModule", "0.0.1.0", "UserContract", "0.0.1.0");
+        LibLog.log("deploy UserManager....");
     }
-    //addUser
-    
-    //deleteUser
-    
-    //updateUser
-    
-    
-    //增加用户的余额
-    // function update(uint amount) public returns(address, uint) {
-    //     balance += amount;
-    //     return (msg.sender, balance);
-    // }
 
-    //查询用户的余额。
-    // function get() public constant returns(uint) {
-    //     return balance;
-    // }
+    // add or update User
+    function insertUser(address key, address value) public returns(bool) {
+        bool replaced = IterableMapping.insert(data, key, value);
+        return replaced;
+    }
+
+    // remove User
+    function removeUser(address key) public returns(bool) {
+        bool flag = IterableMapping.remove(data, key);
+        return flag;
+    }
+
+    // get user address list
+    function getUserList () public constant returns(string _json) {
+        string memory strAddr = "0x";
+        uint len = 0;
+        uint256 counter = 0;
+        len = LibStack.push("{");
+        len = LibStack.append("\"userList\":[");
+        for(var i = IterableMapping.iterate_start(data);
+            IterableMapping.iterate_valid(data, i);
+            i = IterableMapping.iterate_next(data, i)) {
+            var (key ,value) = IterableMapping.iterate_get(data, i);
+            if (counter > 0) {
+                len = LibStack.append(",");
+            }
+            len = LibStack.append(strAddr.concat(key.addrToAsciiString()));
+            counter++;
+        }
+        len = LibStack.append("]");
+        len = LibStack.append("}");
+        _json = LibStack.popex(len);
+    }
+
+    //  get contract address list
+    function getConAddressList() public constant returns(string _json) {
+        string memory strAddr = "0x";
+        uint len = 0;
+        uint256 counter = 0;
+        len = LibStack.push("{");
+        len = LibStack.append("\"contractList\":[");
+        for(var i = IterableMapping.iterate_start(data);
+            IterableMapping.iterate_valid(data, i);
+            i = IterableMapping.iterate_next(data, i)) {
+            var (key ,value) = IterableMapping.iterate_get(data, i);
+            if (counter > 0) {
+                len = LibStack.append(",");
+            }
+            len = LibStack.append(strAddr.concat(value.addrToAsciiString()));
+            counter++;
+        }
+        len = LibStack.append("]");
+        len = LibStack.append("}");
+        _json = LibStack.popex(len);
+    }
+
 }

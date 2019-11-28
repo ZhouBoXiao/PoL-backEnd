@@ -1,5 +1,6 @@
 
 #include "genProofFun.h"
+#define DBG_NEGEXP
 
 CryptoPP::Integer rnd_commitment(const Parameters &pp, CryptoPP::RandomNumberGenerator &rng) {
   return CryptoPP::Integer(rng, pp.rnd_bitsize_commitment);
@@ -13,7 +14,9 @@ CryptoPP::Integer neg_a_exp_b_mod_c(const CryptoPP::Integer& a, const CryptoPP::
     result = c.MultiplicativeInverse(interm);
   } else {
     result = c.Exponentiate(a, b);
-    interm = c.MultiplicativeInverse(result);
+#ifdef DBG_NCOMM
+    std::cout<<"result :"<<result << std::endl;
+#endif
   }
   return result;
 }
@@ -22,13 +25,21 @@ CryptoPP::Integer CreateCommitment(const Parameters &pp, const CryptoPP::Integer
   CryptoPP::Integer s;
 
 #ifdef DBG_NEGEXP
+  CryptoPP::Integer var1 = pp.group.Multiply(
+          	  	  	  	  	  neg_a_exp_b_mod_c(pp.gz, z, pp.group),
+          	  	  	  	  	  	  	  neg_a_exp_b_mod_c(pp.g, r, pp.group));
+#ifdef DBG_NCOMM
+  std::cout<<"var1 :"<<var1 << std::endl;
+#endif
+  CryptoPP::Integer var2 = pp.group.Multiply(neg_a_exp_b_mod_c(pp.gy, y, pp.group),var1);
+#ifdef DBG_NCOMM
+  std::cout<<"var2 :"<<var2 << std::endl;
+#endif
   s = pp.group.Multiply(
-          neg_a_exp_b_mod_c(pp.gx, x, pp.group),
-          pp.group.Multiply(
-             neg_a_exp_b_mod_c(pp.gy, y, pp.group),
-             pp.group.Multiply(
-                neg_a_exp_b_mod_c(pp.gz, z, pp.gz),
-                neg_a_exp_b_mod_c(pp.gr, r, pp.group))));
+          neg_a_exp_b_mod_c(pp.gx, x, pp.group),var2);
+#ifdef DBG_NCOMM
+  std::cout<<"s :"<<s << std::endl;
+#endif
 #else
   s = pp.group.Multiply(
 	  pp.group.Exponentiate(pp.gx, x),
@@ -91,7 +102,7 @@ CryptoPP::Integer CreateNCommitment(const Parameters &pp, const CryptoPP::Intege
   return s;
 }
 
-void Prover::step_challenge(CryptoPP::RandomNumberGenerator &rng) {
+/*void Prover::step_challenge(CryptoPP::RandomNumberGenerator &rng) {
 
 #ifdef DBG_CHALL0
   c = 0;
@@ -103,61 +114,60 @@ void Prover::step_challenge(CryptoPP::RandomNumberGenerator &rng) {
 #endif
   c = CryptoPP::Integer(rng, pp.rnd_bitsize_chall);
 
-}
+}*/
 
-void Prover::step_start(RandomNumberGenerator &rng) {
-	privi.gamma = rnd_commitment(pp, rng);
-	  ic.sa = CreateACommitment(pp, privi.gamma, privi.a);
+void Prover::step_start(CryptoPP::RandomNumberGenerator &rng) {
+  privi.gamma = rnd_commitment(pp, rng);
+  ic.sa = CreateACommitment(pp, privi.gamma, privi.a);
 
-	  privpf.eta = rnd_commitment(pp, rng);
-	  for(int j=0; j<4; j++)
-	#ifdef DBG_CHALL1
-	    privpf.alpha[j] = 0;
-	#else
-	    privpf.alpha[j] = rnd_commitment(pp, rng);
-	#endif
-	  ic.t_a = CreateACommitment(pp, privpf.eta, privpf.alpha);
+  privpf.eta = rnd_commitment(pp, rng);
+  for(int j=0; j<4; j++)
+#ifdef DBG_CHALL1
+    privpf.alpha[j] = 0;
+#else
+    privpf.alpha[j] = rnd_commitment(pp, rng);
+#endif
+  ic.t_a = CreateACommitment(pp, privpf.eta, privpf.alpha);
 
-	#ifdef DBG_CHALL1
-	  privpf.beta_x = 0;
-	  privpf.beta_y = 0;
-	  privpf.beta_z = 0;
-	  privpf.beta_r = 0;
-	#else
-	  privpf.beta_x = rnd_commitment(pp, rng);
-	  privpf.beta_y = rnd_commitment(pp, rng);
-	  privpf.beta_z = rnd_commitment(pp, rng);
-	  privpf.beta_r = rnd_commitment(pp, rng);
-	#endif
-	  ic.t_n = CreateCommitment(pp, privpf.beta_x, privpf.beta_y, privpf.beta_z, privpf.beta_r);
+#ifdef DBG_CHALL1
+  privpf.beta_x = 0;
+  privpf.beta_y = 0;
+  privpf.beta_z = 0;
+  privpf.beta_r = 0;
+#else
+  privpf.beta_x = rnd_commitment(pp, rng);
+  privpf.beta_y = rnd_commitment(pp, rng);
+  privpf.beta_z = rnd_commitment(pp, rng);
+  privpf.beta_r = rnd_commitment(pp, rng);
+#endif
+  ic.t_n = CreateCommitment(pp, privpf.beta_x, privpf.beta_y, privpf.beta_z, privpf.beta_r);
 
-	  privpf.f_0 = -(privpf.beta_x * privpf.beta_x + privpf.beta_y * privpf.beta_y + privpf.beta_z * privpf.beta_z);
-	  privpf.f_1 = (privi.x - pubi.xl)*privpf.beta_x + (privi.y - pubi.yl)*privpf.beta_y + (privi.z - pubi.zl)*privpf.beta_z;
+  privpf.f_0 = -(privpf.beta_x * privpf.beta_x + privpf.beta_y * privpf.beta_y + privpf.beta_z * privpf.beta_z);
+  privpf.f_1 = (privi.x - pubi.xl)/privpf.beta_x + (privi.y - pubi.yl)/privpf.beta_y + (privi.z - pubi.zl)/privpf.beta_z;
 
-	  for(int j=0; j<4; j++) {
-	    privpf.f_0 -= privpf.alpha[j] * privpf.alpha[j];
-	    privpf.f_1 +=  privi.a[j] * privpf.alpha[j];
-	  }
-	  privpf.f_1 *= -2;
-	  privpf.rho_0 = rnd_commitment(pp, rng);
-	  privpf.rho_1 = rnd_commitment(pp, rng);
+  for(int j=0; j<4; j++) {
+    privpf.f_0 -= privpf.alpha[j] * privpf.alpha[j];
+    privpf.f_1 +=  privi.a[j] * privpf.alpha[j];
+  }
+  privpf.f_1 *= -2;
+  privpf.rho_0 = rnd_commitment(pp, rng);
+  privpf.rho_1 = rnd_commitment(pp, rng);
 
-	  ic.b_0 = CreateNCommitment(pp, privpf.f_0, privpf.rho_0);
-	ic.b_1 = CreateNCommitment(pp, privpf.f_1, privpf.rho_1);
-
+  ic.b_0 = CreateNCommitment(pp, privpf.f_0, privpf.rho_0);
+  ic.b_1 = CreateNCommitment(pp, privpf.f_1, privpf.rho_1);
 }
 
 void Prover::step_responses() {
-	rsp.Xn = c*privi.x + privpf.beta_x;
-	rsp.Yn = c*privi.y + privpf.beta_y;
-	rsp.Zn = c*privi.z + privpf.beta_z;
-	rsp.R = c*privi.r + privpf.beta_r;
+  rsp.Xn = c*privi.x + privpf.beta_x;
+  rsp.Yn = c*privi.y + privpf.beta_y;
+  rsp.Zn = c*privi.z + privpf.beta_z;
+  rsp.R = c*privi.r + privpf.beta_r;
 
-	for(int j=0; j<4; j++)
-		rsp.A[j] = c*privi.a[j] + privpf.alpha[j];
+  for(int j=0; j<4; j++)
+    rsp.A[j] = c*privi.a[j] + privpf.alpha[j];
 
-	rsp.R_a = c*privi.gamma + privpf.eta;
-	rsp.R_d = c*privpf.rho_1 + privpf.rho_0;
+  rsp.R_a = c*privi.gamma + privpf.eta;
+  rsp.R_d = c*privpf.rho_1 + privpf.rho_0;
 }
 
 void SetParameters(Parameters &pp, RandomNumberGenerator &rng) {
@@ -186,21 +196,19 @@ void SetParameters(Parameters &pp, RandomNumberGenerator &rng) {
   pp.h[1] = 9555;
   pp.h[2] = 12638;
   pp.h[3] = 2153;
-};
+}
 
 
-void set_node_location(Prover &p, const int xn, const int yn, const int zn) {
+void set_node_location(Prover &p, CryptoPP::RandomNumberGenerator &rng, const int xn, const int yn, const int zn) {
+
 	p.privi.x = xn;
 	p.privi.y = yn;
 	p.privi.z = zn;
-	p.privi.r = 1; // rnd_commitment(pp, rng);
+	p.privi.r = rnd_commitment(p.pp, rng);
 
 	CryptoPP::Integer scomm;
 	scomm = CreateCommitment(p.pp, p.privi.x, p.privi.y, p.privi.z, p.privi.r);
 	p.pubi.su = scomm;
-#ifdef DBG_LOCATIONS
-	std::cout << "set node Xn " << xn << " Yn " << yn << " Zn " << zn << std::endl;
-#endif
 }
 
 void set_airdrop_location(Prover &p, int xl, int yl, int zl, int RR) {
@@ -238,7 +246,9 @@ long get_airdrop_radius(Prover &p) {
 
   //std::cout<<p.privi.x<<","<<p.privi.y<<","<<p.privi.z<<","<<p.pubi.xl<<","<<p.pubi.yl<<","<<p.pubi.zl<<std::endl;
   dist_ln = d2.ConvertToLong();
-  //std::cout <<dist_ln<<std::endl;
+#ifdef DBG_NCOMM
+  std::cout <<dist_ln<<std::endl;
+#endif
   diff_dist = p.pubi.radius * p.pubi.radius - dist_ln;
 
   //  d2 = 0;  // debug
@@ -253,17 +263,20 @@ long get_airdrop_radius(Prover &p) {
     approx = sqrt(diff_dist); // approximation by rounding while assigning to integer
     p.privi.a[j] = approx;
     diff_dist -= approx * approx;
+#ifdef DBG_NCOMM
     std::cout << approx << std::endl;
+#endif
   }
-
+#ifdef DBG_NCOMM
   std::cout << "distance squared " << d2 << std::endl << std::endl;
+#endif
   for(int j=0; j<4; j++) {
     d2 += p.privi.a[j] * p.privi.a[j];
   };
-
+#ifdef DBG_NCOMM
   std::cout << "Recalculated d2 " << d2 << std::endl << std::endl;
   std::cout << "Original d2 " << (p.pubi.radius * p.pubi.radius) << std::endl << std::endl;
-  //  std::cout << "radius squared " << d2 << std::endl << std::endl;
+#endif
   p.pubi.d2 = d2;
   return d2.ConvertToLong();
 }
@@ -281,128 +294,163 @@ double convertStringToDouble(string s)
     ss >> val;
     return val;
 }
+#ifdef DBG_NCOMM
+bool step_verify(Prover &P) {
 
-string genProof(string str){
-    Geocoord gcs;
+  CryptoPP::Integer var1 = CreateCommitment(P.pp, P.rsp.Xn, P.rsp.Yn, P.rsp.Zn, P.rsp.R);
+
+  if(P.pp.group.Multiply(
+       var1,
+       P.pp.group.MultiplicativeInverse(
+    		   P.pp.group.Exponentiate(P.pubi.su, P.c)))
+     !=
+    		 P.ic.t_n) {
+    std::cout << "Trap-location" << std::endl;
+    return false;
+  }
+
+  CryptoPP::Integer var2 = CreateACommitment(P.pp, P.rsp.R_a, P.rsp.A);
+
+  if(P.pp.group.Multiply(
+       var2,
+       P.pp.group.MultiplicativeInverse(
+    		   P.pp.group.Exponentiate(P.ic.sa, P.c)))
+     !=
+    		 P.ic.t_a) {
+    std::cout << "Trap-squares" << std::endl;
+    return false;
+  }
+  CryptoPP::Integer pwr = P.c * P.c * P.pubi.d2 - (
+    (P.rsp.Xn - P.c * P.pubi.xl)*(P.rsp.Xn - P.c * P.pubi.xl) +
+    (P.rsp.Yn - P.c * P.pubi.yl)*(P.rsp.Yn - P.c * P.pubi.yl) +
+    (P.rsp.Zn - P.c * P.pubi.zl)*(P.rsp.Zn - P.c * P.pubi.zl));
+  for(int j=0; j<4; j++)
+    pwr -= P.rsp.A[j] * P.rsp.A[j];
+
+  if(CreateNCommitment(P.pp, pwr, P.rsp.R_d)
+     !=
+    		 P.pp.group.Multiply(
+    				 P.pp.group.Exponentiate(P.ic.b_1, P.c),
+    				 P.ic.b_0)) {
+    std::cout << "Trap-radius" << std::endl;
+    return false;
+  }
+
+  return true;
+}
+#endif
+
+string genProof(string s){
+	Geocoord gcs;
 	Parameters Prm;
 	Prover P;
 	double xn, yn, zn;
-  	double xl=47.1666, yl=8.6166, zl=100.;
-  	long RR=10000;
-  	string s = str;
-  	RandomPool randPool;
-  	SetParameters(Prm, randPool);
-//    FILE *fp;
+	double xl,yl , zl;
+	long RR;
+	RandomPool randPool;
+	SetParameters(Prm, randPool);
+
 	P.pp = Prm;
-//    if((fp=fopen("/home/lmars/PoL/PoL-Juice/ju-ethereum/excall/dev/step_genProof.txt","at+")) == NULL ){
-//    	puts("Fail to open file!");
-//
-//    }
-//	if (sscanf(str,"%lf,%lf,%lf,%ld,%lf,%lf,%lf",&xl,&yl,&zl,&RR,&xn,&yn,&zn)!=7){
-//		return "";
-//	}
-	//cout<<s<<endl;
+
 	neb::CJsonObject st(s);
-	cout<<st.GetArraySize() <<endl;
-    if(st.GetArraySize() != 8){
-        return "parameters_error";
-    }
-    xn = convertStringToDouble(st[0]("xn"));
-    yn = convertStringToDouble(st[1]("yn"));
-    zn = convertStringToDouble(st[2]("zn"));
+
+	int size = st.GetArraySize();
+	cout<<size<<endl;
+	if(size < 8){
+		return "";
+	}
+	xn = convertStringToDouble(st[0]("xn"));
+	yn = convertStringToDouble(st[1]("yn"));
+	zn = convertStringToDouble(st[2]("zn"));
     xl = convertStringToDouble(st[3]("xl"));
     yl = convertStringToDouble(st[4]("yl"));
     zl = convertStringToDouble(st[5]("zl"));
     RR = convertStringToDouble(st[6]("R"));
     P.c = Integer(st[7]("c").c_str());
-    //cout<<"P.c: "<<P.c<<endl;
-    printf( "%lf,%lf,%lf,%ld,%lf,%lf,%lf\n",xl,yl,zl,RR,xn,yn,zn);
-    gcs.set_origin_DD(xl, yl, zl);
-    set_airdrop_location(P, 0, 0, 0, RR);
 
-//	cout<<xn<<"  "<<yn<<"   "<<zn<<endl;
-    gcs.set_coords_DD(xn, yn, zn);
-    set_node_location(P, gcs.get_coord_x(), gcs.get_coord_y(), gcs.get_coord_z());
-    std::cout << "Pocket location (degrees) " << xn << ", " << yn << ", " << zn << std::endl;
-    std::cout << "(meters) " << gcs.get_coord_x() << ", " << gcs.get_coord_y() << ", " << gcs.get_coord_z() << std::endl;
+	gcs.set_origin_DD(xl, yl, zl);
+	set_airdrop_location(P, 0, 0, 0, RR);
+#ifdef DBG_NCOMM
+	printf("%lf,%lf,%lf,%ld,%lf,%lf,%lf\n",xl,yl,zl,RR,xn,yn,zn);
+#endif
+	gcs.set_coords_DD(xn, yn, zn);
+	set_node_location(P, randPool, gcs.get_coord_x(), gcs.get_coord_y(), gcs.get_coord_z());
+#ifdef DBG_NCOMM
+	std::cout << "Pocket location (degrees) " << xn << ", " << yn << ", " << zn << std::endl;
+	std::cout << "(meters) " << gcs.get_coord_x() << ", " << gcs.get_coord_y() << ", " << gcs.get_coord_z() << std::endl;
+#endif
 
-    long radius_actual;  // radius after approximation
-    radius_actual = get_airdrop_radius(P);
-    if(radius_actual == -1){
-        return "radius_error";
-    }
-    radius_actual = sqrt(radius_actual);  // approximate and calculate "more" witness
-    P.step_start(randPool);
+	long radius_actual;  // radius after approximation
+	radius_actual = get_airdrop_radius(P);
+	if(radius_actual == -1){
+		return "-1";
+	}
+	radius_actual = sqrt(radius_actual);  // approximate and calculate "more" witness
+	P.step_start(randPool);
 
-    //P.step_challenge(randPool);
+	P.step_responses();
+//Xn,Yn,Zn,R,Ra,Rd,Sa,c,b1,A[0],A[1],A[2],A[3],xl,yl,zl,Su,d2,pubp,n,gx,gy,gz,g,gr,h[0],h[1],h[2],h[3]
+	stringstream ss;
+//	string Message;
 
-    P.step_responses();
-  //Xn,Yn,Zn,R,Ra,Rd,Sa,c,b1,A[0],A[1],A[2],A[3],xl,yl,zl,Su,d2,pubp,n,gx,gy,gz,g,gr,h[0],h[1],h[2],h[3]
-    stringstream ss;
-  //	string Message;
+	neb::CJsonObject oJson("");
 
-    neb::CJsonObject oJson("");
+	oJson.AddEmptySubObject("response");
+	ss << P.rsp.Xn;   oJson["response"].Add("Xn", ss.str());       ss.str("");
+	ss << P.rsp.Yn;   oJson["response"].Add("Yn", ss.str());       ss.str("");
+	ss << P.rsp.Zn;   oJson["response"].Add("Zn", ss.str());       ss.str("");
+	ss << P.rsp.R;    oJson["response"].Add("R", ss.str());        ss.str("");
+	ss << P.rsp.R_a;  oJson["response"].Add("R_a", ss.str());      ss.str("");
+	ss << P.rsp.R_d;  oJson["response"].Add("R_d", ss.str());      ss.str("");
+	ss << P.rsp.A[0]; oJson["response"].Add("A[0]", ss.str());     ss.str("");
+	ss << P.rsp.A[1]; oJson["response"].Add("A[1]", ss.str());     ss.str("");
+	ss << P.rsp.A[2]; oJson["response"].Add("A[2]", ss.str());     ss.str("");
+	ss << P.rsp.A[3]; oJson["response"].Add("A[3]", ss.str());     ss.str("");
+	//response
+	oJson.AddEmptySubObject("initialCommitments");
+	ss << P.ic.sa;    oJson["initialCommitments"].Add("sa", ss.str());     ss.str("");
+	ss << P.ic.t_n;   oJson["initialCommitments"].Add("t_n", ss.str());    ss.str("");
+	ss << P.ic.t_a;   oJson["initialCommitments"].Add("t_a", ss.str());    ss.str("");
+	ss << P.ic.b_1;   oJson["initialCommitments"].Add("b_1", ss.str());    ss.str("");
+	ss << P.ic.b_0;   oJson["initialCommitments"].Add("b_0", ss.str());    ss.str("");
+	//initialCommitments
+	oJson.AddEmptySubObject("challenge");
+	ss << P.c;        oJson["challenge"].Add("c", ss.str());      ss.str("");
+	//challenge
+	oJson.AddEmptySubObject("publicInfo");
+	ss << P.pubi.xl;  oJson["publicInfo"].Add("xl", ss.str());    ss.str("");
+	ss << P.pubi.yl;  oJson["publicInfo"].Add("yl", ss.str());    ss.str("");
+	ss << P.pubi.zl;  oJson["publicInfo"].Add("zl", ss.str());    ss.str("");
+	ss << P.pubi.su;  oJson["publicInfo"].Add("su", ss.str());    ss.str("");
+	ss << P.pubi.d2;  oJson["publicInfo"].Add("d2", ss.str());    ss.str("");
+	//publicInfo
 
-    oJson.AddEmptySubObject("response");
-    ss << P.rsp.Xn;   oJson["response"].Add("Xn", ss.str());       ss.str("");
-    ss << P.rsp.Yn;   oJson["response"].Add("Yn", ss.str());       ss.str("");
-    ss << P.rsp.Zn;   oJson["response"].Add("Zn", ss.str());       ss.str("");
-    ss << P.rsp.R;    oJson["response"].Add("R", ss.str());        ss.str("");
-    ss << P.rsp.R_a;  oJson["response"].Add("R_a", ss.str());      ss.str("");
-    ss << P.rsp.R_d;  oJson["response"].Add("R_d", ss.str());      ss.str("");
-    ss << P.rsp.A[0]; oJson["response"].Add("A[0]", ss.str());     ss.str("");
-    ss << P.rsp.A[1]; oJson["response"].Add("A[1]", ss.str());     ss.str("");
-    ss << P.rsp.A[2]; oJson["response"].Add("A[2]", ss.str());     ss.str("");
-    ss << P.rsp.A[3]; oJson["response"].Add("A[3]", ss.str());     ss.str("");
-    //response
-    oJson.AddEmptySubObject("initialCommitments");
-    ss << P.ic.sa;    oJson["initialCommitments"].Add("sa", ss.str());     ss.str("");
-    ss << P.ic.t_n;   oJson["initialCommitments"].Add("t_n", ss.str());    ss.str("");
-    ss << P.ic.t_a;   oJson["initialCommitments"].Add("t_a", ss.str());    ss.str("");
-    ss << P.ic.b_1;   oJson["initialCommitments"].Add("b_1", ss.str());    ss.str("");
-    ss << P.ic.b_0;   oJson["initialCommitments"].Add("b_0", ss.str());    ss.str("");
-    //initialCommitments
-    oJson.AddEmptySubObject("challenge");
-    ss << P.c;        oJson["challenge"].Add("c", ss.str());      ss.str("");
-    //challenge
-    oJson.AddEmptySubObject("publicInfo");
-    ss << P.pubi.xl;  oJson["publicInfo"].Add("xl", ss.str());    ss.str("");
-    ss << P.pubi.yl;  oJson["publicInfo"].Add("yl", ss.str());    ss.str("");
-    ss << P.pubi.zl;  oJson["publicInfo"].Add("zl", ss.str());    ss.str("");
-    ss << P.pubi.su;  oJson["publicInfo"].Add("su", ss.str());    ss.str("");
-    ss << P.pubi.d2;  oJson["publicInfo"].Add("d2", ss.str());    ss.str("");
-    //publicInfo
-
-    oJson.AddEmptySubObject("parameters");
-    ss << P.pp.n;     oJson["parameters"].Add("n", ss.str());       ss.str("");
-    ss << P.pp.gx;    oJson["parameters"].Add("gx", ss.str());      ss.str("");
-    ss << P.pp.gy;    oJson["parameters"].Add("gy", ss.str());      ss.str("");
-    ss << P.pp.gz;    oJson["parameters"].Add("gz", ss.str());      ss.str("");
-    ss << P.pp.g;     oJson["parameters"].Add("g", ss.str());       ss.str("");
-    ss << P.pp.gr;    oJson["parameters"].Add("gr", ss.str());      ss.str("");
-    ss << P.pp.h[0];  oJson["parameters"].Add("h[0]", ss.str());    ss.str("");
-    ss << P.pp.h[1];  oJson["parameters"].Add("h[1]", ss.str());    ss.str("");
-    ss << P.pp.h[2];  oJson["parameters"].Add("h[2]", ss.str());    ss.str("");
-    ss << P.pp.h[3];  oJson["parameters"].Add("h[3]", ss.str());
-    //Parameters
-
-    return oJson.ToString();
+	oJson.AddEmptySubObject("parameters");
+	ss << P.pp.n;     oJson["parameters"].Add("n", ss.str());       ss.str("");
+	ss << P.pp.gx;    oJson["parameters"].Add("gx", ss.str());      ss.str("");
+	ss << P.pp.gy;    oJson["parameters"].Add("gy", ss.str());      ss.str("");
+	ss << P.pp.gz;    oJson["parameters"].Add("gz", ss.str());      ss.str("");
+	ss << P.pp.g;     oJson["parameters"].Add("g", ss.str());       ss.str("");
+	ss << P.pp.gr;    oJson["parameters"].Add("gr", ss.str());      ss.str("");
+	ss << P.pp.h[0];  oJson["parameters"].Add("h[0]", ss.str());    ss.str("");
+	ss << P.pp.h[1];  oJson["parameters"].Add("h[1]", ss.str());    ss.str("");
+	ss << P.pp.h[2];  oJson["parameters"].Add("h[2]", ss.str());    ss.str("");
+	ss << P.pp.h[3];  oJson["parameters"].Add("h[3]", ss.str());
+	//Parameters
+#ifdef DBG_NCOMM
+	bool isok = step_verify(P);
+	if(isok)
+	    std::cout << "**Proof verification SUCCEED**" << std::endl << std::endl << std::endl;
+	  else
+	    std::cout << "**Proof verification FAILED**" << std::endl << std::endl << std::endl;
+#endif
+	return oJson.ToString();
 }
-
-// int main() {
-// 	char* s1="[{\"xn\":\"47.1666\"},{\"yn\":\"8.5\"},{\"zn\":\"425\"},{\"xl\":\"47.1666\"},{\"yl\":\"8.6\"},{\"zl\":\"100\"},{\"R\":\"10000\"},{\"c\":\"1212\"}]";
-// 	cout<<genProof(s1)<<endl;
-//   //ZUG
-//   // xl = 47.1666 (grad lalitute) yn = 8.6166 (grad longtitude), zn = 1000 (meters)
-//   // RR = RADIUS OF Airdrop (10000 METERS)
-// //  double xl=47.1666, yl=8.6166, zl=100.;
-// //  long RR=10000;
-
-// //47.1666 8.6166 100.
-// //  double xn=47.1666, yn=8.5161, zn=425.;
-// 	//47.1666 8.5161 425.
-//   return 0;
-// }
-/*
-483469040315852194951124996510728036753125016438235831913013.1130234377797844267563764173139968075924967100917457204179792.1310277894720396581212425815594029684269013586655576941752726.1052072636839559755110267204342205897518168047115627346523548.-49768175080230499054370798179567119434375640758342280087287107478273253225861450172049414.-137057986683405880897376220344930443292612260053773974240358896423201387602110301699465283.11185.111185173704967185631100000000.4967.1099280760750847392422540588514576422498163647519052736117465.472235841809863451542587117397604469466442563346833635746814.1268356626040742022805420917839897667110770836563769742434446.213918444464797238308754426580111786347824647433121159529512.0.0.0.1.100000000.100000000.19673.18652.12642.19445.4323.17679.16385.9555.12638.2153
-*/
+//int main() {
+//	//char* s1 = "[{\"xn\":\"47.1666\"},{\"yn\":\"8.5161\"},{\"zn\":\"425.\"},{\"xl\":\"47.1666\"},{\"yl\":\"8.6166\"},{\"zl\":\"100.\"},{\"R\":\"10000\"},{\"c\":\"121332\"}]";
+//	string s1;
+//	cin>>s1;
+//	cout<<genProof(s1.c_str())<<endl;
+//
+//  return 0;
+//}

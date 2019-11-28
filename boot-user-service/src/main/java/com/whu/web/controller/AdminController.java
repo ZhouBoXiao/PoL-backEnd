@@ -58,4 +58,87 @@ public class AdminController {
         return result;
     }
 
+    @RequestMapping(value = "/deployContract" ,method = RequestMethod.POST, produces="application/json;charset=UTF-8")
+    @ApiOperation(value = "部署智能合约", httpMethod = "POST")
+    @ApiImplicitParams({
+            @ApiImplicitParam(name = "wallet", value = "钱包", dataType = ApiDataType.STRING,
+                    paramType = ApiParamType.FORM),
+            @ApiImplicitParam(name = "passWord", value = "密码", dataType = ApiDataType.STRING,
+                    paramType = ApiParamType.FORM)
+    })
+    public Map<String, Object> deployContract(@RequestParam(name = "wallet") String wallet,
+                                              @RequestParam(name = "passWord") String password){
+        boolean res = false;
+        Map<String, Object> result = new HashMap<>();
+        /*
+        // 可在此设置管理员账户，当前为开发版，所以暂定用ju-ethereum/data/keys下的已有钱包文件
+            adminWalletFile = wallet;
+            adminPassWord = password;
+         */
+        res = adminService.deployContract();
+        if(!res){
+            result.put("result", false);
+            result.put("message", "部署合约失败!");
+        }else{
+            result.put("result", true);
+            result.put("message", res);
+        }
+        return result;
+    }
+
+
+    @RequestMapping(value = "/queryByTime" ,method = RequestMethod.POST, produces="application/json;charset=UTF-8")
+    @ApiOperation(value = "queryByTime", httpMethod = "POST")
+    @ApiImplicitParams({
+            @ApiImplicitParam(name = "json", value = "查询", dataType = ApiDataType.STRING,
+                    paramType = ApiParamType.FORM),
+            @ApiImplicitParam(name = "wallet", value = "钱包", required = true, dataType = ApiDataType.STRING,
+                    paramType = ApiParamType.FORM),
+            @ApiImplicitParam(name = "passWord", value = "密码", required = true, dataType = ApiDataType.STRING,
+                    paramType = ApiParamType.FORM)
+    })
+    public Map<String, Object> queryByTime(@RequestParam(name = "json") String json,
+                                      @RequestParam(name = "wallet") String wallet,
+                                      @RequestParam(name = "passWord") String passWord){
+        Map<String, Object> result = new HashMap<>();
+
+        String res = adminService.queryByTime(json, wallet, passWord);
+        if("".equals(res) || res==null){
+            result.put("result", false);
+            result.put("message", "查询失败!");
+        }
+        else {
+            result.put("result", true);
+            result.put("message", JSON.parseObject(res));
+        }
+        return result;
+    }
+
+    @RequestMapping(value = "/queryBySpace" ,method = RequestMethod.POST, produces="application/json;charset=UTF-8")
+    @ApiOperation(value = "空间查询", httpMethod = "POST")
+    @ApiImplicitParams({
+            @ApiImplicitParam(name = "json", value = "查询", dataType = ApiDataType.STRING,
+                    paramType = ApiParamType.FORM),
+            @ApiImplicitParam(name = "wallet", value = "钱包", required = true, dataType = ApiDataType.STRING,
+                    paramType = ApiParamType.FORM),
+            @ApiImplicitParam(name = "passWord", value = "密码", required = true, dataType = ApiDataType.STRING,
+                    paramType = ApiParamType.FORM)
+    })
+    public Map<String, Object> queryBySpace(@RequestParam(name = "json") String json,
+                                           @RequestParam(name = "wallet") String wallet,
+                                           @RequestParam(name = "passWord") String passWord){
+        Map<String, Object> result = new HashMap<>();
+
+        String res = adminService.queryBySpace(json, wallet, passWord);
+        if("".equals(res) || res==null){
+            result.put("result", false);
+            result.put("message", "查询失败!");
+        }
+        else {
+            result.put("result", true);
+            result.put("message", JSON.parseObject(res));
+        }
+        return result;
+    }
+
 }

@@ -2,98 +2,45 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="2fb87e49-aae9-4a26-926c-2b4344fb3e5a" name="Default Changelist" comment="">
-      <change afterPath="$PROJECT_DIR$/.idea/libraries/Maven__com_fasterxml_jackson_core_jackson_annotations_2_8_0.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.idea/libraries/Maven__com_fasterxml_jackson_core_jackson_core_2_8_5.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.idea/libraries/Maven__com_fasterxml_jackson_core_jackson_databind_2_8_5.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.idea/libraries/Maven__com_squareup_okhttp3_logging_interceptor_3_8_1.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.idea/libraries/Maven__com_squareup_okhttp3_okhttp_3_8_1.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.idea/libraries/Maven__com_squareup_okio_okio_1_13_0.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.idea/libraries/Maven__io_reactivex_rxjava2_rxjava_2_2_2.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.idea/libraries/Maven__org_reactivestreams_reactive_streams_1_0_2.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.idea/libraries/Maven__org_slf4j_jul_to_slf4j_1_7_29.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.idea/libraries/Maven__org_slf4j_slf4j_api_1_7_25.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.idea/libraries/Maven__org_springframework_boot_spring_boot_starter_logging_2_2_1_RELEASE.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.idea/uiDesigner.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/boot-common/src/main/java/com/whu/contract/CertQuery.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/boot-common/src/main/java/com/whu/tools/Constant.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/boot-common/src/main/java/com/whu/tools/Tools.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/boot-interface/src/main/java/com/whu/service/AdminService.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/boot-user-service/src/main/java/com/whu/service/impl/UserServiceImpl.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/boot-user-service/src/main/java/com/whu/web/controller/AdminController.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.gitignore" beforeDir="false" />
+      <change afterPath="$PROJECT_DIR$/boot-common/src/main/DecentralizedApp/SystemContracts/utillib/IterableMapping.sol" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/boot-common/src/main/java/com/whu/tools/AddressUtils.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/boot-common/boot-common.iml" beforeDir="false" afterPath="$PROJECT_DIR$/boot-common/boot-common.iml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/boot-common/pom.xml" beforeDir="false" afterPath="$PROJECT_DIR$/boot-common/pom.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/boot-common/src/main/java/com/whu/aesrsa/util/Digest.java" beforeDir="false" afterPath="$PROJECT_DIR$/boot-common/src/main/java/com/whu/aesrsa/util/Digest.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/boot-common/src/main/java/com/whu/aesrsa/util/EncryUtil.java" beforeDir="false" afterPath="$PROJECT_DIR$/boot-common/src/main/java/com/whu/aesrsa/util/EncryUtil.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/boot-common/src/main/java/com/whu/aesrsa/util/RSA.java" beforeDir="false" afterPath="$PROJECT_DIR$/boot-common/src/main/java/com/whu/aesrsa/util/RSA.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/boot-common/src/main/java/com/whu/tools/ServletUtil.java" beforeDir="false" afterPath="$PROJECT_DIR$/boot-common/src/main/java/com/whu/tools/ServletUtil.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/boot-common/target/boot-common-1.0-SNAPSHOT.jar" beforeDir="false" afterPath="$PROJECT_DIR$/boot-common/target/boot-common-1.0-SNAPSHOT.jar" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/boot-common/target/classes/com/whu/aesrsa/util/Digest.class" beforeDir="false" afterPath="$PROJECT_DIR$/boot-common/target/classes/com/whu/aesrsa/util/Digest.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/boot-common/target/classes/com/whu/aesrsa/util/EncryUtil$1.class" beforeDir="false" afterPath="$PROJECT_DIR$/boot-common/target/classes/com/whu/aesrsa/util/EncryUtil$1.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/boot-common/target/classes/com/whu/aesrsa/util/EncryUtil.class" beforeDir="false" afterPath="$PROJECT_DIR$/boot-common/target/classes/com/whu/aesrsa/util/EncryUtil.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/boot-common/target/classes/com/whu/aesrsa/util/RSA.class" beforeDir="false" afterPath="$PROJECT_DIR$/boot-common/target/classes/com/whu/aesrsa/util/RSA.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/boot-common/target/classes/com/whu/tools/ServletUtil.class" beforeDir="false" afterPath="$PROJECT_DIR$/boot-common/target/classes/com/whu/tools/ServletUtil.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/boot-common/target/maven-archiver/pom.properties" beforeDir="false" afterPath="$PROJECT_DIR$/boot-common/target/maven-archiver/pom.properties" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/boot-common/target/maven-status/maven-compiler-plugin/compile/default-compile/createdFiles.lst" beforeDir="false" afterPath="$PROJECT_DIR$/boot-common/target/maven-status/maven-compiler-plugin/compile/default-compile/createdFiles.lst" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/boot-common/target/maven-status/maven-compiler-plugin/compile/default-compile/inputFiles.lst" beforeDir="false" afterPath="$PROJECT_DIR$/boot-common/target/maven-status/maven-compiler-plugin/compile/default-compile/inputFiles.lst" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/boot-common/target/maven-status/maven-compiler-plugin/testCompile/default-testCompile/createdFiles.lst" beforeDir="false" afterPath="$PROJECT_DIR$/boot-common/target/maven-status/maven-compiler-plugin/testCompile/default-testCompile/createdFiles.lst" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/boot-common/target/surefire-reports/TEST-com.whu.AppTest.xml" beforeDir="false" afterPath="$PROJECT_DIR$/boot-common/target/surefire-reports/TEST-com.whu.AppTest.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/boot-common/target/surefire-reports/com.whu.AppTest.txt" beforeDir="false" afterPath="$PROJECT_DIR$/boot-common/target/surefire-reports/com.whu.AppTest.txt" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/boot-interface/src/main/java/com/whu/service/VerifyService.java" beforeDir="false" afterPath="$PROJECT_DIR$/boot-interface/src/main/java/com/whu/service/UserService.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/boot-interface/target/boot-interface-1.0-SNAPSHOT.jar" beforeDir="false" afterPath="$PROJECT_DIR$/boot-interface/target/boot-interface-1.0-SNAPSHOT.jar" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/boot-interface/target/classes/com/whu/service/VerifyService.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/boot-interface/target/maven-archiver/pom.properties" beforeDir="false" afterPath="$PROJECT_DIR$/boot-interface/target/maven-archiver/pom.properties" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/boot-interface/target/maven-status/maven-compiler-plugin/compile/default-compile/createdFiles.lst" beforeDir="false" afterPath="$PROJECT_DIR$/boot-interface/target/maven-status/maven-compiler-plugin/compile/default-compile/createdFiles.lst" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/boot-interface/target/maven-status/maven-compiler-plugin/compile/default-compile/inputFiles.lst" beforeDir="false" afterPath="$PROJECT_DIR$/boot-interface/target/maven-status/maven-compiler-plugin/compile/default-compile/inputFiles.lst" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/boot-interface/target/maven-status/maven-compiler-plugin/testCompile/default-testCompile/createdFiles.lst" beforeDir="false" afterPath="$PROJECT_DIR$/boot-interface/target/maven-status/maven-compiler-plugin/testCompile/default-testCompile/createdFiles.lst" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/boot-interface/target/surefire-reports/TEST-com.whu.AppTest.xml" beforeDir="false" afterPath="$PROJECT_DIR$/boot-interface/target/surefire-reports/TEST-com.whu.AppTest.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/boot-interface/target/surefire-reports/com.whu.AppTest.txt" beforeDir="false" afterPath="$PROJECT_DIR$/boot-interface/target/surefire-reports/com.whu.AppTest.txt" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/boot-user-service/pom.xml" beforeDir="false" afterPath="$PROJECT_DIR$/boot-user-service/pom.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/boot-user-service/script/buildContracts.sh" beforeDir="false" afterPath="$PROJECT_DIR$/boot-common/script/buildContracts.sh" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/boot-user-service/src/main/java/com/whu/contract/CertQuery.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/boot-user-service/src/main/java/com/whu/contract/ExAddDemo.java" beforeDir="false" afterPath="$PROJECT_DIR$/boot-common/src/main/java/com/whu/contract/ExAddDemo.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/boot-user-service/src/main/java/com/whu/contract/VerifyManager.java" beforeDir="false" afterPath="$PROJECT_DIR$/boot-common/src/main/java/com/whu/contract/VerifyManager.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/boot-user-service/src/main/java/com/whu/service/impl/VerifyServiceImpl.java" beforeDir="false" afterPath="$PROJECT_DIR$/boot-user-service/src/main/java/com/whu/service/impl/AdminServiceImpl.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/boot-user-service/src/main/java/com/whu/web/controller/VerifyController.java" beforeDir="false" afterPath="$PROJECT_DIR$/boot-user-service/src/main/java/com/whu/web/controller/UserController.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/boot-user-service/src/main/solidity/BookManager.sol" beforeDir="false" afterPath="$PROJECT_DIR$/boot-user-service/src/main/solidity_old/BookManager.sol" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/boot-user-service/src/main/solidity/BookModule.sol" beforeDir="false" afterPath="$PROJECT_DIR$/boot-user-service/src/main/solidity_old/BookModule.sol" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/boot-user-service/src/main/solidity/CertQuery.sol" beforeDir="false" afterPath="$PROJECT_DIR$/boot-user-service/src/main/solidity_old/CertQuery.sol" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/boot-user-service/src/main/solidity/ExAddDemo.sol" beforeDir="false" afterPath="$PROJECT_DIR$/boot-user-service/src/main/solidity_old/ExAddDemo.sol" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/boot-user-service/src/main/solidity/ExCall.sol" beforeDir="false" afterPath="$PROJECT_DIR$/boot-user-service/src/main/solidity_old/ExCall.sol" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/boot-user-service/src/main/solidity/ExQueryDemo.sol" beforeDir="false" afterPath="$PROJECT_DIR$/boot-user-service/src/main/solidity_old/ExQueryDemo.sol" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/boot-user-service/src/main/solidity/JuzixTokenManager.sol" beforeDir="false" afterPath="$PROJECT_DIR$/boot-user-service/src/main/solidity_old/JuzixTokenManager.sol" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/boot-user-service/src/main/solidity/LibBook.sol" beforeDir="false" afterPath="$PROJECT_DIR$/boot-user-service/src/main/solidity_old/LibBook.sol" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/boot-user-service/src/main/solidity/LibEcUtils.sol" beforeDir="false" afterPath="$PROJECT_DIR$/boot-user-service/src/main/solidity_old/LibEcUtils.sol" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/boot-user-service/src/main/solidity/SystemContracts/interfaces/IActionManager.sol" beforeDir="false" afterPath="$PROJECT_DIR$/boot-user-service/src/main/solidity_old/SystemContracts/interfaces/IActionManager.sol" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/boot-user-service/src/main/solidity/SystemContracts/interfaces/IJuzixTokenManager.sol" beforeDir="false" afterPath="$PROJECT_DIR$/boot-user-service/src/main/solidity_old/SystemContracts/interfaces/IJuzixTokenManager.sol" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/boot-user-service/src/main/solidity/SystemContracts/interfaces/IRegisterManager.sol" beforeDir="false" afterPath="$PROJECT_DIR$/boot-user-service/src/main/solidity_old/SystemContracts/interfaces/IRegisterManager.sol" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/boot-user-service/src/main/solidity/SystemContracts/interfaces/IRoleFilterManager.sol" beforeDir="false" afterPath="$PROJECT_DIR$/boot-user-service/src/main/solidity_old/SystemContracts/interfaces/IRoleFilterManager.sol" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/boot-user-service/src/main/solidity/SystemContracts/library/LibAction.sol" beforeDir="false" afterPath="$PROJECT_DIR$/boot-user-service/src/main/solidity_old/SystemContracts/library/LibAction.sol" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/boot-user-service/src/main/solidity/SystemContracts/library/LibContract.sol" beforeDir="false" afterPath="$PROJECT_DIR$/boot-user-service/src/main/solidity_old/SystemContracts/library/LibContract.sol" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/boot-user-service/src/main/solidity/SystemContracts/library/LibModule.sol" beforeDir="false" afterPath="$PROJECT_DIR$/boot-user-service/src/main/solidity_old/SystemContracts/library/LibModule.sol" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/boot-user-service/src/main/solidity/SystemContracts/library/LibTokenPailler.sol" beforeDir="false" afterPath="$PROJECT_DIR$/boot-user-service/src/main/solidity_old/SystemContracts/library/LibTokenPailler.sol" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/boot-user-service/src/main/solidity/SystemContracts/library/LibTokenRecord.sol" beforeDir="false" afterPath="$PROJECT_DIR$/boot-user-service/src/main/solidity_old/SystemContracts/library/LibTokenRecord.sol" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/boot-user-service/src/main/solidity/SystemContracts/nizk/LibNIZK.sol" beforeDir="false" afterPath="$PROJECT_DIR$/boot-user-service/src/main/solidity_old/SystemContracts/nizk/LibNIZK.sol" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/boot-user-service/src/main/solidity/SystemContracts/nizk/LibNizkParam.sol" beforeDir="false" afterPath="$PROJECT_DIR$/boot-user-service/src/main/solidity_old/SystemContracts/nizk/LibNizkParam.sol" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/boot-user-service/src/main/solidity/SystemContracts/sysbase/BaseModule.sol" beforeDir="false" afterPath="$PROJECT_DIR$/boot-user-service/src/main/solidity_old/SystemContracts/sysbase/BaseModule.sol" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/boot-user-service/src/main/solidity/SystemContracts/sysbase/OwnerNamed.sol" beforeDir="false" afterPath="$PROJECT_DIR$/boot-user-service/src/main/solidity_old/SystemContracts/sysbase/OwnerNamed.sol" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/boot-user-service/src/main/solidity/SystemContracts/token/BasicToken.sol" beforeDir="false" afterPath="$PROJECT_DIR$/boot-user-service/src/main/solidity_old/SystemContracts/token/BasicToken.sol" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/boot-user-service/src/main/solidity/SystemContracts/token/ERC20.sol" beforeDir="false" afterPath="$PROJECT_DIR$/boot-user-service/src/main/solidity_old/SystemContracts/token/ERC20.sol" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/boot-user-service/src/main/solidity/SystemContracts/token/ERC20Basic.sol" beforeDir="false" afterPath="$PROJECT_DIR$/boot-user-service/src/main/solidity_old/SystemContracts/token/ERC20Basic.sol" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/boot-user-service/src/main/solidity/SystemContracts/token/StandardToken.sol" beforeDir="false" afterPath="$PROJECT_DIR$/boot-user-service/src/main/solidity_old/SystemContracts/token/StandardToken.sol" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/boot-user-service/src/main/solidity/SystemContracts/utillib/LibDb.sol" beforeDir="false" afterPath="$PROJECT_DIR$/boot-user-service/src/main/solidity_old/SystemContracts/utillib/LibDb.sol" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/boot-user-service/src/main/solidity/SystemContracts/utillib/LibDecode.sol" beforeDir="false" afterPath="$PROJECT_DIR$/boot-user-service/src/main/solidity_old/SystemContracts/utillib/LibDecode.sol" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/boot-user-service/src/main/solidity/SystemContracts/utillib/LibInt.sol" beforeDir="false" afterPath="$PROJECT_DIR$/boot-user-service/src/main/solidity_old/SystemContracts/utillib/LibInt.sol" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/boot-user-service/src/main/solidity/SystemContracts/utillib/LibJson.sol" beforeDir="false" afterPath="$PROJECT_DIR$/boot-user-service/src/main/solidity_old/SystemContracts/utillib/LibJson.sol" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/boot-user-service/src/main/solidity/SystemContracts/utillib/LibLog.sol" beforeDir="false" afterPath="$PROJECT_DIR$/boot-user-service/src/main/solidity_old/SystemContracts/utillib/LibLog.sol" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/boot-user-service/src/main/solidity/SystemContracts/utillib/LibPaillier.sol" beforeDir="false" afterPath="$PROJECT_DIR$/boot-user-service/src/main/solidity_old/SystemContracts/utillib/LibPaillier.sol" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/boot-user-service/src/main/solidity/SystemContracts/utillib/LibStack.sol" beforeDir="false" afterPath="$PROJECT_DIR$/boot-user-service/src/main/solidity_old/SystemContracts/utillib/LibStack.sol" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/boot-user-service/src/main/solidity/SystemContracts/utillib/LibString.sol" beforeDir="false" afterPath="$PROJECT_DIR$/boot-user-service/src/main/solidity_old/SystemContracts/utillib/LibString.sol" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/boot-user-service/src/main/solidity/SystemContracts/utillib/Strings.sol" beforeDir="false" afterPath="$PROJECT_DIR$/boot-user-service/src/main/solidity_old/SystemContracts/utillib/Strings.sol" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/boot-user-service/src/main/solidity/TokenModuleManager.sol" beforeDir="false" afterPath="$PROJECT_DIR$/boot-user-service/src/main/solidity_old/TokenModuleManager.sol" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/boot-user-service/src/main/solidity/VerifyManager.sol" beforeDir="false" afterPath="$PROJECT_DIR$/boot-user-service/src/main/solidity_old/VerifyManager.sol" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/boot-user-service/src/main/solidity/VerifyModule.sol" beforeDir="false" afterPath="$PROJECT_DIR$/boot-user-service/src/main/solidity_old/VerifyModule.sol" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/boot-common/script/buildContracts.sh" beforeDir="false" afterPath="$PROJECT_DIR$/boot-common/script/buildContracts.sh" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/boot-common/src/main/DecentralizedApp/CertQuery.sol" beforeDir="false" afterPath="$PROJECT_DIR$/boot-common/src/main/DecentralizedApp/CertQuery.sol" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/boot-common/src/main/DecentralizedApp/UserManager.sol" beforeDir="false" afterPath="$PROJECT_DIR$/boot-common/src/main/DecentralizedApp/UserManager.sol" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/boot-common/src/main/DecentralizedApp/build/CertQuery.abi" beforeDir="false" afterPath="$PROJECT_DIR$/boot-common/src/main/DecentralizedApp/build/CertQuery.abi" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/boot-common/src/main/DecentralizedApp/build/CertQuery.bin" beforeDir="false" afterPath="$PROJECT_DIR$/boot-common/src/main/DecentralizedApp/build/CertQuery.bin" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/boot-common/src/main/java/com/whu/contract/CertQuery.java" beforeDir="false" afterPath="$PROJECT_DIR$/boot-common/src/main/java/com/whu/contract/CertQuery.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/boot-common/src/main/java/com/whu/tools/Constant.java" beforeDir="false" afterPath="$PROJECT_DIR$/boot-common/src/main/java/com/whu/tools/Constant.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/boot-common/src/main/java/com/whu/tools/Tools.java" beforeDir="false" afterPath="$PROJECT_DIR$/boot-common/src/main/java/com/whu/tools/Tools.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/boot-common/target/classes/com/whu/contract/CertQuery$1.class" beforeDir="false" afterPath="$PROJECT_DIR$/boot-common/target/classes/com/whu/contract/CertQuery$1.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/boot-common/target/classes/com/whu/contract/CertQuery$10.class" beforeDir="false" afterPath="$PROJECT_DIR$/boot-common/target/classes/com/whu/contract/CertQuery$10.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/boot-common/target/classes/com/whu/contract/CertQuery$11.class" beforeDir="false" afterPath="$PROJECT_DIR$/boot-common/target/classes/com/whu/contract/CertQuery$11.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/boot-common/target/classes/com/whu/contract/CertQuery$12.class" beforeDir="false" afterPath="$PROJECT_DIR$/boot-common/target/classes/com/whu/contract/CertQuery$12.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/boot-common/target/classes/com/whu/contract/CertQuery$13.class" beforeDir="false" afterPath="$PROJECT_DIR$/boot-common/target/classes/com/whu/contract/CertQuery$13.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/boot-common/target/classes/com/whu/contract/CertQuery$2.class" beforeDir="false" afterPath="$PROJECT_DIR$/boot-common/target/classes/com/whu/contract/CertQuery$2.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/boot-common/target/classes/com/whu/contract/CertQuery$3.class" beforeDir="false" afterPath="$PROJECT_DIR$/boot-common/target/classes/com/whu/contract/CertQuery$3.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/boot-common/target/classes/com/whu/contract/CertQuery$4.class" beforeDir="false" afterPath="$PROJECT_DIR$/boot-common/target/classes/com/whu/contract/CertQuery$4.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/boot-common/target/classes/com/whu/contract/CertQuery$5.class" beforeDir="false" afterPath="$PROJECT_DIR$/boot-common/target/classes/com/whu/contract/CertQuery$5.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/boot-common/target/classes/com/whu/contract/CertQuery$6.class" beforeDir="false" afterPath="$PROJECT_DIR$/boot-common/target/classes/com/whu/contract/CertQuery$6.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/boot-common/target/classes/com/whu/contract/CertQuery$7.class" beforeDir="false" afterPath="$PROJECT_DIR$/boot-common/target/classes/com/whu/contract/CertQuery$7.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/boot-common/target/classes/com/whu/contract/CertQuery$8.class" beforeDir="false" afterPath="$PROJECT_DIR$/boot-common/target/classes/com/whu/contract/CertQuery$8.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/boot-common/target/classes/com/whu/contract/CertQuery$9.class" beforeDir="false" afterPath="$PROJECT_DIR$/boot-common/target/classes/com/whu/contract/CertQuery$9.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/boot-common/target/classes/com/whu/contract/CertQuery$WhitelistAdminAddedEventResponse.class" beforeDir="false" afterPath="$PROJECT_DIR$/boot-common/target/classes/com/whu/contract/CertQuery$WhitelistAdminAddedEventResponse.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/boot-common/target/classes/com/whu/contract/CertQuery$WhitelistAdminRemovedEventResponse.class" beforeDir="false" afterPath="$PROJECT_DIR$/boot-common/target/classes/com/whu/contract/CertQuery$WhitelistAdminRemovedEventResponse.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/boot-common/target/classes/com/whu/contract/CertQuery$WhitelistedAddedEventResponse.class" beforeDir="false" afterPath="$PROJECT_DIR$/boot-common/target/classes/com/whu/contract/CertQuery$WhitelistedAddedEventResponse.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/boot-common/target/classes/com/whu/contract/CertQuery$WhitelistedRemovedEventResponse.class" beforeDir="false" afterPath="$PROJECT_DIR$/boot-common/target/classes/com/whu/contract/CertQuery$WhitelistedRemovedEventResponse.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/boot-common/target/classes/com/whu/contract/CertQuery.class" beforeDir="false" afterPath="$PROJECT_DIR$/boot-common/target/classes/com/whu/contract/CertQuery.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/boot-common/target/classes/com/whu/tools/Constant.class" beforeDir="false" afterPath="$PROJECT_DIR$/boot-common/target/classes/com/whu/tools/Constant.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/boot-common/target/classes/com/whu/tools/Tools.class" beforeDir="false" afterPath="$PROJECT_DIR$/boot-common/target/classes/com/whu/tools/Tools.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/boot-interface/src/main/java/com/whu/service/AdminService.java" beforeDir="false" afterPath="$PROJECT_DIR$/boot-interface/src/main/java/com/whu/service/AdminService.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/boot-user-service/src/main/Native/Makefile" beforeDir="false" afterPath="$PROJECT_DIR$/boot-user-service/src/main/Native/Makefile" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/boot-user-service/src/main/Native/genProofFun.cpp" beforeDir="false" afterPath="$PROJECT_DIR$/boot-user-service/src/main/Native/genProofFun.cpp" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/boot-user-service/src/main/java/com/whu/jni/NativeLib.java" beforeDir="false" afterPath="$PROJECT_DIR$/boot-user-service/src/main/java/com/whu/jni/NativeLib.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/boot-user-service/src/main/java/com/whu/service/impl/AdminServiceImpl.java" beforeDir="false" afterPath="$PROJECT_DIR$/boot-user-service/src/main/java/com/whu/service/impl/AdminServiceImpl.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/boot-user-service/src/main/java/com/whu/service/impl/UserServiceImpl.java" beforeDir="false" afterPath="$PROJECT_DIR$/boot-user-service/src/main/java/com/whu/service/impl/UserServiceImpl.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/boot-user-service/src/main/java/com/whu/web/controller/AdminController.java" beforeDir="false" afterPath="$PROJECT_DIR$/boot-user-service/src/main/java/com/whu/web/controller/AdminController.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/boot-user-service/src/main/java/com/whu/web/controller/UserController.java" beforeDir="false" afterPath="$PROJECT_DIR$/boot-user-service/src/main/java/com/whu/web/controller/UserController.java" afterDir="false" />
     </list>
     <ignored path="$PROJECT_DIR$/boot-user-service/target/" />
     <ignored path="$PROJECT_DIR$/boot-search-service/target/" />
@@ -111,68 +58,74 @@
     <session id="1071556375">
       <usages-collector id="statistics.lifecycle.project">
         <counts>
-          <entry key="project.closed" value="6" />
+          <entry key="project.closed" value="13" />
           <entry key="project.open.time.1" value="2" />
+          <entry key="project.open.time.10" value="1" />
+          <entry key="project.open.time.2" value="1" />
           <entry key="project.open.time.6" value="1" />
-          <entry key="project.open.time.9" value="3" />
-          <entry key="project.opened" value="7" />
+          <entry key="project.open.time.7" value="1" />
+          <entry key="project.open.time.8" value="2" />
+          <entry key="project.open.time.9" value="4" />
+          <entry key="project.opened" value="13" />
         </counts>
       </usages-collector>
       <usages-collector id="statistics.file.extensions.open">
         <counts>
-          <entry key="Makefile" value="1" />
+          <entry key="Makefile" value="2" />
           <entry key="abi" value="1" />
           <entry key="cmd" value="2" />
-          <entry key="cpp" value="2" />
+          <entry key="cpp" value="4" />
           <entry key="gitignore" value="1" />
           <entry key="h" value="1" />
-          <entry key="hpp" value="2" />
-          <entry key="java" value="216" />
+          <entry key="hpp" value="3" />
+          <entry key="java" value="241" />
           <entry key="log" value="3" />
           <entry key="pom" value="6" />
           <entry key="project" value="1" />
           <entry key="properties" value="5" />
           <entry key="properties1" value="1" />
-          <entry key="sh" value="5" />
-          <entry key="sol" value="12" />
+          <entry key="sh" value="8" />
+          <entry key="sol" value="16" />
           <entry key="xml" value="47" />
           <entry key="xsd" value="1" />
-          <entry key="yml" value="13" />
+          <entry key="yml" value="14" />
         </counts>
       </usages-collector>
       <usages-collector id="statistics.file.types.open">
         <counts>
-          <entry key="Bash" value="5" />
-          <entry key="C++" value="5" />
+          <entry key="Bash" value="8" />
+          <entry key="C++" value="8" />
           <entry key="Eclipse" value="1" />
-          <entry key="JAVA" value="216" />
+          <entry key="JAVA" value="241" />
           <entry key="Log" value="3" />
-          <entry key="PLAIN_TEXT" value="18" />
+          <entry key="PLAIN_TEXT" value="23" />
           <entry key="Properties" value="5" />
           <entry key="XML" value="54" />
-          <entry key="YAML" value="13" />
+          <entry key="YAML" value="14" />
         </counts>
       </usages-collector>
       <usages-collector id="statistics.file.extensions.edit">
         <counts>
+          <entry key="Makefile" value="3" />
           <entry key="cpp" value="3" />
           <entry key="dummy" value="8" />
           <entry key="gitignore" value="23" />
           <entry key="h" value="9" />
-          <entry key="java" value="837" />
+          <entry key="java" value="2154" />
           <entry key="pom" value="1" />
           <entry key="properties" value="34" />
-          <entry key="sh" value="16" />
+          <entry key="sh" value="30" />
+          <entry key="sol" value="8" />
           <entry key="xml" value="77" />
           <entry key="yml" value="110" />
         </counts>
       </usages-collector>
       <usages-collector id="statistics.file.types.edit">
         <counts>
-          <entry key="Bash" value="16" />
+          <entry key="Bash" value="30" />
           <entry key="C++" value="12" />
-          <entry key="JAVA" value="837" />
-          <entry key="PLAIN_TEXT" value="31" />
+          <entry key="JAVA" value="2154" />
+          <entry key="PLAIN_TEXT" value="42" />
           <entry key="Properties" value="34" />
           <entry key="XML" value="78" />
           <entry key="YAML" value="110" />
@@ -181,77 +134,86 @@
     </session>
   </component>
   <component name="FileEditorManager">
-    <leaf SIDE_TABS_SIZE_LIMIT_KEY="300">
-      <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/boot-interface/src/main/java/com/whu/service/AdminService.java">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="342">
-              <caret line="18" selection-start-line="18" selection-end-line="18" />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/boot-user-service/src/main/java/com/whu/service/impl/AdminServiceImpl.java">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="475">
-              <caret line="33" column="23" selection-start-line="33" selection-start-column="15" selection-end-line="33" selection-end-column="23" />
-              <folding>
-                <element signature="imports" expanded="true" />
-              </folding>
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/boot-user-service/src/main/java/com/whu/web/controller/AdminController.java">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="470">
-              <caret line="43" column="53" selection-start-line="43" selection-start-column="53" selection-end-line="43" selection-end-column="53" />
-              <folding>
-                <element signature="imports" expanded="true" />
-              </folding>
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/boot-interface/src/main/java/com/whu/service/UserService.java">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="190">
-              <caret line="10" selection-start-line="10" selection-end-line="10" />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/boot-user-service/src/main/java/com/whu/web/controller/UserController.java">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="437">
-              <caret line="41" column="47" selection-start-line="41" selection-start-column="47" selection-end-line="41" selection-end-column="47" />
-              <folding>
-                <element signature="imports" expanded="true" />
-                <element signature="method#genProof#0;class#UserController#0" />
-              </folding>
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file pinned="false" current-in-tab="true">
-        <entry file="file://$PROJECT_DIR$/boot-user-service/src/main/java/com/whu/UserApplication.java">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="171">
-              <caret line="9" column="48" selection-start-line="9" selection-start-column="48" selection-end-line="9" selection-end-column="48" />
-              <folding>
-                <element signature="imports" expanded="true" />
-                <element signature="e#435#436#0" expanded="true" />
-                <element signature="e#501#502#0" expanded="true" />
-              </folding>
-            </state>
-          </provider>
-        </entry>
-      </file>
-    </leaf>
+    <splitter split-orientation="horizontal" split-proportion="0.48106313">
+      <split-first>
+        <leaf SIDE_TABS_SIZE_LIMIT_KEY="300">
+          <file pinned="false" current-in-tab="false">
+            <entry file="file://$PROJECT_DIR$/boot-user-service/src/main/java/com/whu/web/controller/AdminController.java">
+              <provider selected="true" editor-type-id="text-editor">
+                <state relative-caret-position="490">
+                  <caret line="77" column="33" selection-start-line="77" selection-start-column="33" selection-end-line="77" selection-end-column="33" />
+                  <folding>
+                    <element signature="imports" expanded="true" />
+                  </folding>
+                </state>
+              </provider>
+            </entry>
+          </file>
+          <file pinned="false" current-in-tab="false">
+            <entry file="file://$PROJECT_DIR$/boot-interface/src/main/java/com/whu/service/AdminService.java">
+              <provider selected="true" editor-type-id="text-editor">
+                <state relative-caret-position="285">
+                  <caret line="15" column="12" selection-start-line="15" selection-start-column="12" selection-end-line="15" selection-end-column="12" />
+                </state>
+              </provider>
+            </entry>
+          </file>
+          <file pinned="false" current-in-tab="true">
+            <entry file="file://$PROJECT_DIR$/boot-user-service/src/main/java/com/whu/service/impl/AdminServiceImpl.java">
+              <provider selected="true" editor-type-id="text-editor">
+                <state relative-caret-position="114">
+                  <caret line="6" column="34" lean-forward="true" selection-start-line="6" selection-start-column="34" selection-end-line="6" selection-end-column="34" />
+                  <folding>
+                    <element signature="e#3407#6004#0" />
+                    <element signature="e#6146#8880#0" />
+                  </folding>
+                </state>
+              </provider>
+            </entry>
+          </file>
+          <file pinned="false" current-in-tab="false">
+            <entry file="file://$PROJECT_DIR$/boot-common/src/main/DecentralizedApp/CertQuery.sol">
+              <provider selected="true" editor-type-id="text-editor">
+                <state relative-caret-position="389">
+                  <caret line="66" column="37" selection-start-line="66" selection-start-column="37" selection-end-line="66" selection-end-column="37" />
+                </state>
+              </provider>
+            </entry>
+          </file>
+          <file pinned="false" current-in-tab="false">
+            <entry file="file://$PROJECT_DIR$/boot-common/src/main/java/com/whu/tools/Constant.java">
+              <provider selected="true" editor-type-id="text-editor">
+                <state relative-caret-position="570">
+                  <caret line="30" column="39" selection-start-line="30" selection-start-column="39" selection-end-line="30" selection-end-column="39" />
+                  <folding>
+                    <element signature="imports" expanded="true" />
+                  </folding>
+                </state>
+              </provider>
+            </entry>
+          </file>
+        </leaf>
+      </split-first>
+      <split-second>
+        <leaf SIDE_TABS_SIZE_LIMIT_KEY="300">
+          <file pinned="false" current-in-tab="true">
+            <entry file="file://$PROJECT_DIR$/boot-user-service/src/main/java/com/whu/service/impl/UserServiceImpl.java">
+              <provider selected="true" editor-type-id="text-editor">
+                <state relative-caret-position="567">
+                  <caret line="255" lean-forward="true" selection-start-line="255" selection-end-line="255" />
+                  <folding>
+                    <element signature="imports" expanded="true" />
+                    <element signature="method#verify#0;class#UserServiceImpl#0" />
+                    <element signature="method#search#0;class#UserServiceImpl#0" />
+                    <element signature="method#deployContract#0;class#UserServiceImpl#0" />
+                  </folding>
+                </state>
+              </provider>
+            </entry>
+          </file>
+        </leaf>
+      </split-second>
+    </splitter>
   </component>
   <component name="FileTemplateManagerImpl">
     <option name="RECENT_TEMPLATES">
@@ -265,18 +227,24 @@
       <find>qfjy</find>
       <find>dudu</find>
       <find>ui</find>
-      <find>contractAddress</find>
       <find>verifyService</find>
-      <find>walletFile</find>
       <find>mysql</find>
       <find>log.error(e.getMessage(), e);</find>
       <find>log</find>
+      <find>contractAddress</find>
+      <find>owner</find>
+      <find>walletFile</find>
+      <find>passWord</find>
+      <find>tmpFile</find>
+      <find>adminWalletFile</find>
     </findStrings>
     <replaceStrings>
       <replace>whu</replace>
       <replace>adminService</replace>
       <replace>userService</replace>
       <replace>System.out.println(e.getMessage()+&quot; &quot; + e.toString());</replace>
+      <replace>adminWalletFile</replace>
+      <replace>adminPassWord</replace>
     </replaceStrings>
   </component>
   <component name="Git.Settings">
@@ -292,12 +260,6 @@
   <component name="IdeDocumentHistory">
     <option name="CHANGED_PATHS">
       <list>
-        <option value="$PROJECT_DIR$/boot-interface-api/src/main/java/com/whu/service/VerifyService.java" />
-        <option value="$PROJECT_DIR$/boot-user-service/src/main/java/com/whu/tools/ValidatorUtil.java" />
-        <option value="$PROJECT_DIR$/boot-user-service/src/main/java/com/whu/contract/CertQuery.java" />
-        <option value="$PROJECT_DIR$/boot-user-service/src/main/java/com/whu/jni/LibLoader.java" />
-        <option value="$PROJECT_DIR$/boot-user-service/src/main/java/com/whu/aesrsa/util/SecureRandomUtil.java" />
-        <option value="$PROJECT_DIR$/boot-common/src/main/java/tools/DateUtil.java" />
         <option value="$PROJECT_DIR$/boot-common/src/main/java/com/whu/tools/DateUtil.java" />
         <option value="$PROJECT_DIR$/boot-common/src/main/java/com/whu/aesrsa/util/util/Base64.java" />
         <option value="$PROJECT_DIR$/boot-common/src/main/java/com/whu/aesrsa/util/Base64.java" />
@@ -319,30 +281,36 @@
         <option value="$PROJECT_DIR$/boot-user-service/src/main/java/com/whu/interceptor/MyInterceptor.java" />
         <option value="$PROJECT_DIR$/boot-user-service/src/main/Native/NativeLib.cpp" />
         <option value="$PROJECT_DIR$/boot-user-service/src/main/Native/NativeLib.h" />
-        <option value="$PROJECT_DIR$/boot-user-service/src/main/java/com/whu/jni/NativeLib.java" />
         <option value="$PROJECT_DIR$/boot-user-service/src/main/solidity/VerifyModule.sol" />
         <option value="$PROJECT_DIR$/boot-user-service/src/main/solidity/BookManager.sol" />
         <option value="$PROJECT_DIR$/boot-user-service/.gitignore" />
         <option value="$PROJECT_DIR$/boot-user-service/script/buildContracts.sh" />
         <option value="$PROJECT_DIR$/boot-user-service/src/main/java/com/whu/service/impl/VerifyServiceImpl.java" />
         <option value="$PROJECT_DIR$/boot-common/src/main/java/com/whu/tools/Common.java" />
-        <option value="$PROJECT_DIR$/boot-common/src/main/java/com/whu/tools/Constant.java" />
         <option value="$PROJECT_DIR$/boot-common/src/main/java/contract/ExAddDemo.java" />
         <option value="$PROJECT_DIR$/boot-common/src/main/java/com/whu/contract/VerifyManager.java" />
-        <option value="$PROJECT_DIR$/boot-common/script/buildContracts.sh" />
         <option value="$PROJECT_DIR$/boot-interface/src/main/java/com/whu/service/UserService.java" />
-        <option value="$PROJECT_DIR$/boot-user-service/src/main/java/com/whu/web/controller/UserController.java" />
-        <option value="$PROJECT_DIR$/boot-user-service/src/main/java/com/whu/service/impl/UserServiceImpl.java" />
         <option value="$PROJECT_DIR$/boot-user-service/pom.xml" />
         <option value="$PROJECT_DIR$/boot-common/pom.xml" />
-        <option value="$PROJECT_DIR$/boot-common/src/main/java/com/whu/tools/Tools.java" />
         <option value="$PROJECT_DIR$/boot-common/src/main/java/com/whu/aesrsa/util/Digest.java" />
         <option value="$PROJECT_DIR$/boot-common/src/main/java/com/whu/aesrsa/util/EncryUtil.java" />
         <option value="$PROJECT_DIR$/boot-common/src/main/java/com/whu/aesrsa/util/RSA.java" />
         <option value="$PROJECT_DIR$/boot-common/src/main/java/com/whu/tools/ServletUtil.java" />
+        <option value="$PROJECT_DIR$/boot-common/src/main/java/com/whu/tools/Constant.java" />
+        <option value="$PROJECT_DIR$/boot-common/src/main/java/com/whu/tools/Tools.java" />
+        <option value="$PROJECT_DIR$/boot-common/src/main/DecentralizedApp/UserManager.sol" />
+        <option value="$PROJECT_DIR$/boot-common/src/main/DecentralizedApp/SystemContracts/utillib/IterableMapping.sol" />
+        <option value="$PROJECT_DIR$/boot-user-service/src/main/java/com/whu/web/controller/UserController.java" />
         <option value="$PROJECT_DIR$/boot-interface/src/main/java/com/whu/service/AdminService.java" />
-        <option value="$PROJECT_DIR$/boot-user-service/src/main/java/com/whu/service/impl/AdminServiceImpl.java" />
+        <option value="$PROJECT_DIR$/boot-common/script/buildContracts.sh" />
+        <option value="$PROJECT_DIR$/boot-user-service/src/main/Native/genProofFun.cpp" />
+        <option value="$PROJECT_DIR$/boot-user-service/src/main/Native/Makefile" />
+        <option value="$PROJECT_DIR$/boot-user-service/src/main/java/com/whu/jni/NativeLib.java" />
+        <option value="$PROJECT_DIR$/boot-common/src/main/java/com/whu/tools/AddressUtils.java" />
+        <option value="$PROJECT_DIR$/boot-common/src/main/DecentralizedApp/CertQuery.sol" />
         <option value="$PROJECT_DIR$/boot-user-service/src/main/java/com/whu/web/controller/AdminController.java" />
+        <option value="$PROJECT_DIR$/boot-user-service/src/main/java/com/whu/service/impl/AdminServiceImpl.java" />
+        <option value="$PROJECT_DIR$/boot-user-service/src/main/java/com/whu/service/impl/UserServiceImpl.java" />
       </list>
     </option>
   </component>
@@ -396,8 +364,8 @@
     </treeState>
   </component>
   <component name="ProjectFrameBounds" extendedState="7">
-    <option name="x" value="198" />
-    <option name="y" value="131" />
+    <option name="x" value="352" />
+    <option name="y" value="145" />
     <option name="width" value="1456" />
     <option name="height" value="876" />
   </component>
@@ -409,34 +377,6 @@
       <foldersAlwaysOnTop value="true" />
     </navigator>
     <panes>
-      <pane id="CatdeaLogs" />
-      <pane id="PackagesPane">
-        <subPane>
-          <expand>
-            <path>
-              <item name="boot-dubbo" type="58d84e3e:PackageViewProjectNode" />
-              <item name="boot-user-service" type="616d4139:PackageViewModuleNode" />
-            </path>
-            <path>
-              <item name="boot-dubbo" type="58d84e3e:PackageViewProjectNode" />
-              <item name="boot-user-service" type="616d4139:PackageViewModuleNode" />
-              <item name="com.whu" type="1f31426a:PackageElementNode" />
-            </path>
-            <path>
-              <item name="boot-dubbo" type="58d84e3e:PackageViewProjectNode" />
-              <item name="boot-user-service" type="616d4139:PackageViewModuleNode" />
-              <item name="com.whu.jni" type="1f31426a:PackageElementNode" />
-            </path>
-            <path>
-              <item name="boot-dubbo" type="58d84e3e:PackageViewProjectNode" />
-              <item name="boot-user-service" type="616d4139:PackageViewModuleNode" />
-              <item name="com.whu.service.impl" type="1f31426a:PackageElementNode" />
-            </path>
-          </expand>
-          <select />
-        </subPane>
-      </pane>
-      <pane id="AndroidView" />
       <pane id="Scope">
         <subPane subId="Scope 'Project Files'; set:Project Files; class com.intellij.psi.search.scope.ProjectFilesScope">
           <expand>
@@ -483,70 +423,53 @@
           <expand>
             <path>
               <item name="boot-dubbo" type="b2602c69:ProjectViewProjectNode" />
-              <item name="boot-common" type="462c0819:PsiDirectoryNode" />
+              <item name="boot-user-service" type="462c0819:PsiDirectoryNode" />
             </path>
             <path>
               <item name="boot-dubbo" type="b2602c69:ProjectViewProjectNode" />
-              <item name="boot-common" type="462c0819:PsiDirectoryNode" />
+              <item name="boot-user-service" type="462c0819:PsiDirectoryNode" />
               <item name="src" type="462c0819:PsiDirectoryNode" />
             </path>
             <path>
               <item name="boot-dubbo" type="b2602c69:ProjectViewProjectNode" />
-              <item name="boot-common" type="462c0819:PsiDirectoryNode" />
-              <item name="src" type="462c0819:PsiDirectoryNode" />
-              <item name="main" type="462c0819:PsiDirectoryNode" />
-            </path>
-            <path>
-              <item name="boot-dubbo" type="b2602c69:ProjectViewProjectNode" />
-              <item name="boot-interface" type="462c0819:PsiDirectoryNode" />
-            </path>
-            <path>
-              <item name="boot-dubbo" type="b2602c69:ProjectViewProjectNode" />
-              <item name="boot-interface" type="462c0819:PsiDirectoryNode" />
-              <item name="src" type="462c0819:PsiDirectoryNode" />
-            </path>
-            <path>
-              <item name="boot-dubbo" type="b2602c69:ProjectViewProjectNode" />
-              <item name="boot-interface" type="462c0819:PsiDirectoryNode" />
+              <item name="boot-user-service" type="462c0819:PsiDirectoryNode" />
               <item name="src" type="462c0819:PsiDirectoryNode" />
               <item name="main" type="462c0819:PsiDirectoryNode" />
             </path>
             <path>
               <item name="boot-dubbo" type="b2602c69:ProjectViewProjectNode" />
-              <item name="boot-interface" type="462c0819:PsiDirectoryNode" />
+              <item name="boot-user-service" type="462c0819:PsiDirectoryNode" />
               <item name="src" type="462c0819:PsiDirectoryNode" />
               <item name="main" type="462c0819:PsiDirectoryNode" />
               <item name="java" type="462c0819:PsiDirectoryNode" />
             </path>
+          </expand>
+          <select />
+        </subPane>
+      </pane>
+      <pane id="AndroidView" />
+      <pane id="CatdeaLogs" />
+      <pane id="PackagesPane">
+        <subPane>
+          <expand>
             <path>
-              <item name="boot-dubbo" type="b2602c69:ProjectViewProjectNode" />
-              <item name="boot-interface" type="462c0819:PsiDirectoryNode" />
-              <item name="src" type="462c0819:PsiDirectoryNode" />
-              <item name="main" type="462c0819:PsiDirectoryNode" />
-              <item name="java" type="462c0819:PsiDirectoryNode" />
-              <item name="service" type="462c0819:PsiDirectoryNode" />
+              <item name="boot-dubbo" type="58d84e3e:PackageViewProjectNode" />
+              <item name="boot-user-service" type="616d4139:PackageViewModuleNode" />
             </path>
             <path>
-              <item name="boot-dubbo" type="b2602c69:ProjectViewProjectNode" />
-              <item name="boot-user-service" type="462c0819:PsiDirectoryNode" />
+              <item name="boot-dubbo" type="58d84e3e:PackageViewProjectNode" />
+              <item name="boot-user-service" type="616d4139:PackageViewModuleNode" />
+              <item name="com.whu" type="1f31426a:PackageElementNode" />
             </path>
             <path>
-              <item name="boot-dubbo" type="b2602c69:ProjectViewProjectNode" />
-              <item name="boot-user-service" type="462c0819:PsiDirectoryNode" />
-              <item name="src" type="462c0819:PsiDirectoryNode" />
+              <item name="boot-dubbo" type="58d84e3e:PackageViewProjectNode" />
+              <item name="boot-user-service" type="616d4139:PackageViewModuleNode" />
+              <item name="com.whu.jni" type="1f31426a:PackageElementNode" />
             </path>
             <path>
-              <item name="boot-dubbo" type="b2602c69:ProjectViewProjectNode" />
-              <item name="boot-user-service" type="462c0819:PsiDirectoryNode" />
-              <item name="src" type="462c0819:PsiDirectoryNode" />
-              <item name="main" type="462c0819:PsiDirectoryNode" />
-            </path>
-            <path>
-              <item name="boot-dubbo" type="b2602c69:ProjectViewProjectNode" />
-              <item name="boot-user-service" type="462c0819:PsiDirectoryNode" />
-              <item name="src" type="462c0819:PsiDirectoryNode" />
-              <item name="main" type="462c0819:PsiDirectoryNode" />
-              <item name="resources" type="462c0819:PsiDirectoryNode" />
+              <item name="boot-dubbo" type="58d84e3e:PackageViewProjectNode" />
+              <item name="boot-user-service" type="616d4139:PackageViewModuleNode" />
+              <item name="com.whu.service.impl" type="1f31426a:PackageElementNode" />
             </path>
           </expand>
           <select />
@@ -561,7 +484,7 @@
     <property name="RequestMappingsPanelWidth1" value="75" />
     <property name="WebServerToolWindowFactoryState" value="false" />
     <property name="aspect.path.notification.shown" value="true" />
-    <property name="com.android.tools.idea.instantapp.provision.ProvisionBeforeRunTaskProvider.myTimeStamp" value="1573733462293" />
+    <property name="com.android.tools.idea.instantapp.provision.ProvisionBeforeRunTaskProvider.myTimeStamp" value="1574913341695" />
     <property name="go.gopath.indexing.explicitly.defined" value="true" />
     <property name="jdk.selected.JAVA_MODULE" value="1.8" />
     <property name="last_opened_file_path" value="$PROJECT_DIR$/../SpringBootDemo/chapter9-2" />
@@ -600,7 +523,31 @@
       </list>
     </option>
   </component>
-  <component name="RunManager" selected="Spring Boot.UserApplication">
+  <component name="RunManager" selected="Application.AddressUtils">
+    <configuration name="AddressUtils" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
+      <option name="MAIN_CLASS_NAME" value="com.whu.tools.AddressUtils" />
+      <module name="boot-common" />
+      <extension name="coverage">
+        <pattern>
+          <option name="PATTERN" value="com.whu.tools.*" />
+          <option name="ENABLED" value="true" />
+        </pattern>
+      </extension>
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
+    <configuration name="buildContracts.sh" type="BashConfigurationType" factoryName="Bash">
+      <module name="boot-common" />
+      <option name="INTERPRETER_OPTIONS" value="" />
+      <option name="INTERPRETER_PATH" value="" />
+      <option name="PROJECT_INTERPRETER" value="false" />
+      <option name="WORKING_DIRECTORY" value="D:\IdeaProjects\boot-dubbo\boot-common\script" />
+      <option name="PARENT_ENVS" value="true" />
+      <option name="SCRIPT_NAME" value="D:\IdeaProjects\boot-dubbo\boot-common\script\buildContracts.sh" />
+      <option name="PARAMETERS" value="" />
+      <method v="2" />
+    </configuration>
     <configuration name="BootSearchServiceApplication (1)" type="SpringBootApplicationConfigurationType" factoryName="Spring Boot">
       <module name="boot-search-service" />
       <option name="SPRING_BOOT_MAIN_CLASS" value="com.whu.bean.BootSearchServiceApplication" />
@@ -692,11 +639,18 @@
       <method v="2" />
     </configuration>
     <list>
+      <item itemvalue="Bash.buildContracts.sh" />
       <item itemvalue="Spring Boot.UserApplication" />
       <item itemvalue="Spring Boot.BootSearchServiceApplication" />
       <item itemvalue="Spring Boot.BootSearchServiceApplication (1)" />
       <item itemvalue="Spring Boot.SearchServiceApplication" />
+      <item itemvalue="Application.AddressUtils" />
     </list>
+    <recent_temporary>
+      <list>
+        <item itemvalue="Application.AddressUtils" />
+      </list>
+    </recent_temporary>
   </component>
   <component name="SvnConfiguration">
     <configuration />
@@ -714,6 +668,12 @@
       <workItem from="1573443294135" duration="3633000" />
       <workItem from="1573469081830" duration="61000" />
       <workItem from="1573703744480" duration="12296000" />
+      <workItem from="1574074891396" duration="2833000" />
+      <workItem from="1574586432228" duration="11769000" />
+      <workItem from="1574683691628" duration="7334000" />
+      <workItem from="1574733589527" duration="599000" />
+      <workItem from="1574832468906" duration="24000" />
+      <workItem from="1574838591975" duration="11474000" />
     </task>
     <servers />
   </component>
@@ -726,12 +686,12 @@
     </history-entry>
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="50116000" />
+    <option name="totallyTimeSpent" value="84149000" />
   </component>
   <component name="ToolWindowManager">
     <frame x="-8" y="-8" width="1936" height="1176" extended-state="7" />
     <layout>
-      <window_info active="true" content_ui="combo" id="Project" order="0" visible="true" weight="0.1924307" />
+      <window_info active="true" content_ui="combo" id="Project" order="0" visible="true" weight="0.1977612" />
       <window_info id="Structure" order="1" side_tool="true" weight="0.25" />
       <window_info id="Designer" order="2" />
       <window_info id="Image Layers" order="3" />
@@ -740,26 +700,26 @@
       <window_info id="Capture Tool" order="6" />
       <window_info id="Web" order="7" side_tool="true" />
       <window_info anchor="bottom" id="Message" order="0" />
-      <window_info anchor="bottom" id="Find" order="1" weight="0.2991914" />
-      <window_info anchor="bottom" id="Run" order="2" visible="true" weight="0.48511046" />
+      <window_info anchor="bottom" id="Find" order="1" visible="true" weight="0.24783862" />
+      <window_info anchor="bottom" id="Run" order="2" weight="0.1690682" />
       <window_info anchor="bottom" id="Debug" order="3" weight="0.4" />
       <window_info anchor="bottom" id="Cvs" order="4" weight="0.25" />
       <window_info anchor="bottom" id="Inspection" order="5" weight="0.4" />
       <window_info anchor="bottom" id="TODO" order="6" />
       <window_info anchor="bottom" id="Spring" order="7" />
-      <window_info anchor="bottom" id="Terminal" order="8" />
-      <window_info anchor="bottom" id="Event Log" order="9" side_tool="true" />
+      <window_info anchor="bottom" id="Terminal" order="8" weight="0.32949087" />
+      <window_info anchor="bottom" id="Event Log" order="9" side_tool="true" weight="0.32949087" />
       <window_info anchor="bottom" id="Messages" order="10" weight="0.35254562" />
       <window_info anchor="bottom" id="Java Enterprise" order="11" />
       <window_info anchor="bottom" id="Database Changes" order="12" show_stripe_button="false" />
       <window_info anchor="bottom" id="Version Control" order="13" show_stripe_button="false" />
-      <window_info anchor="bottom" id="File Transfer" order="14" weight="0.38712776" />
+      <window_info anchor="bottom" id="File Transfer" order="14" weight="0.19596542" />
       <window_info anchor="right" id="Commander" internal_type="SLIDING" order="0" type="SLIDING" weight="0.4" />
       <window_info anchor="right" id="Ant Build" order="1" weight="0.25" />
       <window_info anchor="right" content_ui="combo" id="Hierarchy" order="2" weight="0.25" />
       <window_info anchor="right" id="Palette" order="3" />
       <window_info anchor="right" id="Capture Analysis" order="4" />
-      <window_info anchor="right" id="Maven Projects" order="5" visible="true" weight="0.32995737" />
+      <window_info anchor="right" id="Maven Projects" order="5" weight="0.24520256" />
       <window_info anchor="right" id="SciView" order="6" />
       <window_info anchor="right" id="Database" order="7" />
       <window_info anchor="right" id="Palette&#9;" order="8" />
@@ -778,103 +738,6 @@
     <option name="FILTER_TARGETS" value="false" />
   </component>
   <component name="editorHistoryManager">
-    <entry file="file://$PROJECT_DIR$/boot-user-service/logback.2019-11-04.log" />
-    <entry file="file://$PROJECT_DIR$/boot-user-service/logback.2019-11-05.log" />
-    <entry file="file://$PROJECT_DIR$/boot-user-service/src/main/java/com/whu/contract/CertQuery.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="-95">
-          <caret line="29" column="26" lean-forward="true" selection-start-line="29" selection-start-column="26" selection-end-line="29" selection-end-column="26" />
-          <folding>
-            <element signature="imports" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/boot-user-service/src/main/java/com/whu/contract/VerifyManager.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="456">
-          <caret line="46" column="60" lean-forward="true" selection-start-line="46" selection-start-column="60" selection-end-line="46" selection-end-column="60" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/boot-interface/src/main/java/com/whu/pojo/User.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="114">
-          <caret line="9" column="23" lean-forward="true" selection-start-line="9" selection-start-column="23" selection-end-line="9" selection-end-column="23" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/boot-user-service/src/main/java/com/whu/config/SwaggerConfig.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="665">
-          <caret line="50" selection-start-line="50" selection-end-line="50" />
-          <folding>
-            <element signature="imports" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/boot-interface/src/main/java/com/whu/service/VerifyService.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="76">
-          <caret line="4" column="17" selection-start-line="4" selection-start-column="17" selection-end-line="4" selection-end-column="17" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/boot-user-service/script/buildContracts.sh">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="361">
-          <caret line="19" column="59" lean-forward="true" selection-start-line="19" selection-start-column="59" selection-end-line="19" selection-end-column="59" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/boot-common/script/buildContracts.sh">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="608">
-          <caret line="32" selection-start-line="32" selection-end-line="32" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/boot-user-service/src/main/java/com/whu/service/impl/VerifyServiceImpl.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="152">
-          <caret line="38" selection-start-line="38" selection-end-line="38" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/boot-user-service/.project">
-      <provider selected="true" editor-type-id="text-editor" />
-    </entry>
-    <entry file="file://$PROJECT_DIR$/boot-user-service/src/main/java/com/whu/web/controller/VerifyController.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="408">
-          <caret line="138" column="12" selection-start-line="138" selection-start-column="12" selection-end-line="138" selection-end-column="12" />
-          <folding>
-            <element signature="imports" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/boot-user-service/src/main/java/com/whu/service/impl/UserServiceImpl.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="235">
-          <caret line="236" column="73" selection-start-line="236" selection-start-column="73" selection-end-line="236" selection-end-column="73" />
-          <folding>
-            <element signature="imports" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/boot-user-service/src/main/resources/application.properties1">
-      <provider selected="true" editor-type-id="text-editor" />
-    </entry>
-    <entry file="file://$PROJECT_DIR$/boot-user-service/src/main/resources/application.yml">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="170">
-          <caret line="47" column="19" selection-start-line="47" selection-start-column="19" selection-end-line="47" selection-end-column="19" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/boot-user-service/src/main/java/com/whu/mapper/UserMapper.java">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="304">
@@ -886,9 +749,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="342">
           <caret line="31" column="13" selection-start-line="31" selection-start-column="13" selection-end-line="31" selection-end-column="13" />
-          <folding>
-            <element signature="imports" expanded="true" />
-          </folding>
         </state>
       </provider>
     </entry>
@@ -896,27 +756,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="266">
           <caret line="41" column="13" selection-start-line="41" selection-start-column="13" selection-end-line="41" selection-end-column="13" />
-          <folding>
-            <element signature="imports" expanded="true" />
-            <element signature="e#7485#7503#0" expanded="true" />
-            <element signature="e#8969#8975#0" expanded="true" />
-            <element signature="e#9631#9649#0" expanded="true" />
-            <element signature="e#9876#9882#0" expanded="true" />
-            <element signature="e#10025#10043#0" expanded="true" />
-            <element signature="e#10338#10344#0" expanded="true" />
-            <element signature="e#10426#10444#0" expanded="true" />
-            <element signature="e#10649#10655#0" expanded="true" />
-            <element signature="e#10689#10707#0" expanded="true" />
-            <element signature="e#10989#10995#0" expanded="true" />
-            <element signature="e#11138#11156#0" expanded="true" />
-            <element signature="e#11781#11787#0" expanded="true" />
-            <element signature="e#11864#11882#0" expanded="true" />
-            <element signature="e#12144#12150#0" expanded="true" />
-            <element signature="e#12227#12245#0" expanded="true" />
-            <element signature="e#12503#12509#0" expanded="true" />
-            <element signature="e#12543#12561#0" expanded="true" />
-            <element signature="e#12973#12996#0" expanded="true" />
-          </folding>
         </state>
       </provider>
     </entry>
@@ -931,9 +770,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="56">
           <caret line="33" column="13" selection-start-line="33" selection-start-column="13" selection-end-line="33" selection-end-column="13" />
-          <folding>
-            <element signature="imports" expanded="true" />
-          </folding>
         </state>
       </provider>
     </entry>
@@ -1024,13 +860,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/boot-common/src/main/java/com/whu/tools/Constant.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="209">
-          <caret line="11" column="80" selection-start-line="11" selection-start-column="80" selection-end-line="11" selection-end-column="80" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/boot-common/src/main/java/com/whu/tools/DateUtil.java">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="95">
@@ -1057,30 +886,10 @@
         <state relative-caret-position="-570" />
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/boot-common/src/main/java/com/whu/tools/StringUtil.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="418">
-          <caret line="23" column="9" selection-start-line="23" selection-start-column="9" selection-end-line="23" selection-end-column="9" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/boot-common/src/main/java/com/whu/tools/ValidatorUtil.java">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="228">
           <caret line="12" column="3" selection-start-line="12" selection-start-column="3" selection-end-line="12" selection-end-column="3" />
-          <folding>
-            <element signature="imports" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/boot-common/src/main/java/com/whu/tools/Tools.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="247">
-          <caret line="13" column="4" selection-start-line="13" selection-start-column="4" selection-end-line="13" selection-end-column="72" />
-          <folding>
-            <element signature="imports" expanded="true" />
-          </folding>
         </state>
       </provider>
     </entry>
@@ -1088,11 +897,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="209">
           <caret line="11" column="4" selection-start-line="11" selection-start-column="4" selection-end-line="11" selection-end-column="70" />
-          <folding>
-            <element signature="imports" expanded="true" />
-            <element signature="e#1122#1123#0" expanded="true" />
-            <element signature="e#1166#1167#0" expanded="true" />
-          </folding>
         </state>
       </provider>
     </entry>
@@ -1100,9 +904,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="285">
           <caret line="15" column="73" selection-start-line="15" selection-start-column="4" selection-end-line="15" selection-end-column="73" />
-          <folding>
-            <element signature="imports" expanded="true" />
-          </folding>
         </state>
       </provider>
     </entry>
@@ -1110,9 +911,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="247">
           <caret line="40" column="4" selection-start-line="40" selection-start-column="4" selection-end-line="40" selection-end-column="67" />
-          <folding>
-            <element signature="imports" expanded="true" />
-          </folding>
         </state>
       </provider>
     </entry>
@@ -1120,36 +918,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="93">
           <caret line="61" column="22" lean-forward="true" selection-start-line="61" selection-start-column="22" selection-end-line="61" selection-end-column="22" />
-          <folding>
-            <element signature="imports" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/boot-user-service/src/main/java/com/whu/service/impl/AdminServiceImpl.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="475">
-          <caret line="33" column="23" selection-start-line="33" selection-start-column="15" selection-end-line="33" selection-end-column="23" />
-          <folding>
-            <element signature="imports" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/boot-user-service/src/main/java/com/whu/web/controller/AdminController.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="470">
-          <caret line="43" column="53" selection-start-line="43" selection-start-column="53" selection-end-line="43" selection-end-column="53" />
-          <folding>
-            <element signature="imports" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/boot-interface/src/main/java/com/whu/service/AdminService.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="342">
-          <caret line="18" selection-start-line="18" selection-end-line="18" />
         </state>
       </provider>
     </entry>
@@ -1160,10 +928,63 @@
         </state>
       </provider>
     </entry>
+    <entry file="file://$PROJECT_DIR$/boot-user-service/src/main/java/com/whu/UserApplication.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="171">
+          <caret line="9" column="48" selection-start-line="9" selection-start-column="48" selection-end-line="9" selection-end-column="48" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/boot-user-service/src/main/java/com/whu/interceptor/MyInterceptor.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="209">
+          <caret line="11" column="32" lean-forward="true" selection-start-line="11" selection-start-column="32" selection-end-line="11" selection-end-column="32" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/boot-common/src/main/java/com/whu/tools/StringUtil.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="418">
+          <caret line="23" column="9" selection-start-line="23" selection-start-column="9" selection-end-line="23" selection-end-column="9" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/boot-common/src/main/DecentralizedApp/SystemContracts/utillib/IterableMapping.sol">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="331">
+          <caret line="47" column="24" lean-forward="true" selection-start-line="47" selection-start-column="24" selection-end-line="47" selection-end-column="24" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/boot-common/src/main/DecentralizedApp/UserManager.sol">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="171">
+          <caret line="9" column="20" selection-start-line="9" selection-start-column="9" selection-end-line="9" selection-end-column="20" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/boot-common/src/main/java/com/whu/contract/UserManager.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="418">
+          <caret line="35" column="64" lean-forward="true" selection-start-line="35" selection-start-column="64" selection-end-line="35" selection-end-column="64" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/boot-common/src/main/java/com/whu/tools/Tools.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="801">
+          <caret line="62" column="39" selection-start-line="62" selection-start-column="25" selection-end-line="62" selection-end-column="39" />
+          <folding>
+            <element signature="e#1538#1539#0" expanded="true" />
+            <element signature="e#1577#1578#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
     <entry file="file://$PROJECT_DIR$/boot-user-service/src/main/java/com/whu/web/controller/UserController.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="437">
-          <caret line="41" column="47" selection-start-line="41" selection-start-column="47" selection-end-line="41" selection-end-column="47" />
+        <state relative-caret-position="1957">
+          <caret line="124" column="14" selection-start-line="124" selection-start-column="14" selection-end-line="124" selection-end-column="14" />
           <folding>
             <element signature="imports" expanded="true" />
             <element signature="method#genProof#0;class#UserController#0" />
@@ -1171,14 +992,127 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/boot-user-service/src/main/java/com/whu/UserApplication.java">
+    <entry file="file://$PROJECT_DIR$/boot-user-service/src/main/java/com/whu/jni/LibLoader.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="171">
-          <caret line="9" column="48" selection-start-line="9" selection-start-column="48" selection-end-line="9" selection-end-column="48" />
+        <state relative-caret-position="95">
+          <caret line="8" column="13" selection-start-line="8" selection-start-column="13" selection-end-line="8" selection-end-column="13" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/boot-user-service/src/main/resources/application.yml">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="668">
+          <caret line="47" column="19" selection-start-line="47" selection-start-column="19" selection-end-line="47" selection-end-column="19" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/boot-user-service/src/main/Native/jni_lib.hpp">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="247">
+          <caret line="13" lean-forward="true" selection-start-line="13" selection-end-line="13" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/boot-user-service/src/main/Native/Makefile">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="285">
+          <caret line="15" lean-forward="true" selection-start-line="15" selection-end-line="15" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/boot-user-service/src/main/Native/genProofFun.cpp">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="2147">
+          <caret line="125" column="24" lean-forward="true" selection-start-line="125" selection-start-column="24" selection-end-line="125" selection-end-column="24" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/boot-user-service/src/main/Native/NativeLib.cpp">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="323">
+          <caret line="17" column="1" lean-forward="true" selection-start-line="17" selection-start-column="1" selection-end-line="17" selection-end-column="1" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/boot-user-service/src/main/java/com/whu/jni/NativeLib.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="342">
+          <caret line="18" column="1" lean-forward="true" selection-start-line="18" selection-start-column="1" selection-end-line="18" selection-end-column="1" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/boot-common/src/main/java/com/whu/tools/AddressUtils.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="684">
+          <caret line="81" column="57" lean-forward="true" selection-start-line="81" selection-start-column="57" selection-end-line="81" selection-end-column="57" />
           <folding>
             <element signature="imports" expanded="true" />
-            <element signature="e#435#436#0" expanded="true" />
-            <element signature="e#501#502#0" expanded="true" />
+            <element signature="e#1430#1446#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/boot-common/src/main/DecentralizedApp/CertQuery.sol">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="389">
+          <caret line="66" column="37" selection-start-line="66" selection-start-column="37" selection-end-line="66" selection-end-column="37" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/boot-common/script/buildContracts.sh">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="247">
+          <caret line="13" column="36" lean-forward="true" selection-start-line="13" selection-start-column="36" selection-end-line="13" selection-end-column="36" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/boot-common/src/main/java/com/whu/tools/Constant.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="570">
+          <caret line="30" column="39" selection-start-line="30" selection-start-column="39" selection-end-line="30" selection-end-column="39" />
+          <folding>
+            <element signature="imports" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/boot-user-service/src/main/java/com/whu/web/controller/AdminController.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="490">
+          <caret line="77" column="33" selection-start-line="77" selection-start-column="33" selection-end-line="77" selection-end-column="33" />
+          <folding>
+            <element signature="imports" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/boot-interface/src/main/java/com/whu/service/AdminService.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="285">
+          <caret line="15" column="12" selection-start-line="15" selection-start-column="12" selection-end-line="15" selection-end-column="12" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/boot-user-service/src/main/java/com/whu/service/impl/UserServiceImpl.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="567">
+          <caret line="255" lean-forward="true" selection-start-line="255" selection-end-line="255" />
+          <folding>
+            <element signature="imports" expanded="true" />
+            <element signature="method#verify#0;class#UserServiceImpl#0" />
+            <element signature="method#search#0;class#UserServiceImpl#0" />
+            <element signature="method#deployContract#0;class#UserServiceImpl#0" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/boot-user-service/src/main/java/com/whu/service/impl/AdminServiceImpl.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="114">
+          <caret line="6" column="34" lean-forward="true" selection-start-line="6" selection-start-column="34" selection-end-line="6" selection-end-column="34" />
+          <folding>
+            <element signature="e#3407#6004#0" />
+            <element signature="e#6146#8880#0" />
           </folding>
         </state>
       </provider>

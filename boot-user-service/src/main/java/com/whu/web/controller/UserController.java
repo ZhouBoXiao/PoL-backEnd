@@ -103,7 +103,7 @@ public class UserController {
     }
 
     @RequestMapping(value = "/search" ,method = RequestMethod.POST, produces="application/json;charset=UTF-8")
-    @ApiOperation(value = "查询证书", httpMethod = "POST")
+    @ApiOperation(value = "查询某个用户的证书", httpMethod = "POST")
     @ApiImplicitParams({
             @ApiImplicitParam(name = "json", value = "查询", dataType = ApiDataType.STRING,
                     paramType = ApiParamType.FORM),

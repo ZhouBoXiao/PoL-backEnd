@@ -9,6 +9,7 @@ import org.slf4j.LoggerFactory;
 import java.io.*;
 import java.text.SimpleDateFormat;
 import java.util.Date;
+import java.util.List;
 
 public class Tools {
     private static Logger logger = LoggerFactory.getLogger(Tools.class);
@@ -52,5 +53,14 @@ public class Tools {
         }
         return walletFile;
 
+    }
+
+    /**
+     * 选取provider 的策略
+     * @param provideAddr
+     * @return
+     */
+    public static String selectProvider(List<String> provideAddr){
+        return provideAddr.get(0);
     }
 }

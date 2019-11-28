@@ -13,6 +13,10 @@ public interface AdminService {
 //
 //    String search(String _json, String wallet, String passWord);
 //
-//    String deployContract(String wallet, String passWord);
+    boolean deployContract();
+
+    String queryBySpace(String json, String wallet, String passWord);
+
+    String queryByTime(String json, String wallet, String passWord);
 }
 

@@ -13,14 +13,11 @@ contract CertQuery is WhitelistedRole {
     for * ;
     using LibJson 
     for * ;
-    // string result;
-    // string proof;
-    // mapping(address => string) proofs;
-    // mapping(address => string) verifies;
-    
+
+    mapping(string => string[]) locCode_certs;
     string[] certificates;
     string[] issuanceDates;
-    address owner;
+    //address owner;
     
     //function owned() private { owner = msg.sender; }
     
@@ -38,12 +35,12 @@ contract CertQuery is WhitelistedRole {
         return certificates.length;
     }
     
-    function addCertificate(string json, string issuanceDate) onlyWhitelisted public {
+    function addCertificate(string json, string issuanceDate, string locCode) onlyWhitelisted public {
         LibLog.log("Certificate into add..");
+        locCode_certs[locCode].push(json);
         certificates.push(json);
         issuanceDates.push(issuanceDate);
         LibLog.log("add a certificate success", "CertQuery");
-        
     }
     
     function listAll() onlyWhitelisted constant public returns(string _json) {
@@ -60,7 +57,27 @@ contract CertQuery is WhitelistedRole {
         len = itemsStackPush(LibStack.popex(len), counter);
         _json = LibStack.popex(len);
     }
-    
+
+    function searchByLocCode(string locCode)  public constant returns(string _json){  //onlyWhitelisted
+        string[] certs = locCode_certs[locCode];
+        uint256 len = 0;
+        uint256 num = certs.length;
+        uint256 counter = 0;
+        len = LibStack.push("");
+        for(uint i = 0; i < num; i++)
+        {
+            if (counter > 0) {
+                len = LibStack.append(",");
+            }
+            len = LibStack.append(certs[i]);
+            counter++;
+        }
+
+        len = itemsStackPush(LibStack.popex(len), counter);
+        _json = LibStack.popex(len);
+        return _json;
+    }
+
     function itemsStackPush(string _items, uint _total) constant private returns(uint len) {
         len = 0;
         len = LibStack.push("{");

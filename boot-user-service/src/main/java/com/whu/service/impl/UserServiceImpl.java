@@ -12,6 +12,7 @@ import com.whu.contract.CertQuery;
 import com.whu.contract.VerifyManager;
 import com.whu.jni.NativeLib;
 import com.whu.service.UserService;
+import com.whu.tools.Constant;
 import org.apache.log4j.Logger;
 import org.springframework.stereotype.Service;
 import org.web3j.crypto.Credentials;
@@ -28,20 +29,18 @@ import java.io.*;
 import java.util.HashMap;
 import java.util.Map;
 
-import static com.whu.tools.Constant.contractAddress;
-import static com.whu.tools.Constant.provideAddr;
-import static com.whu.tools.Constant.serverPrivateKey;
-import static com.whu.tools.Tools.createTempFile;
+import static com.whu.tools.Constant.*;
+import static com.whu.tools.Tools.*;
 
 @Service
 @com.alibaba.dubbo.config.annotation.Service  //注册到注册中心中
 public class UserServiceImpl implements UserService {
 
-    protected static final String walletFile = "/home/lmars/PoL/PoL-Juice/ju-ethereum/data/keys/3c8f320a-0c59-dadf-39f9-2509f06bdff1.json";
-    protected static final String passWord = "12345678";
+    protected static final String adminWalletFile = "/home/lmars/PoL/PoL-Juice/ju-ethereum/data/keys/3c8f320a-0c59-dadf-39f9-2509f06bdff1.json";
+    protected static final String adminPassWord = "12345678";
 
     private Logger logger = Logger.getLogger(this.getClass());
-    protected static Web3j web3j = Web3j.build(new HttpService(provideAddr));
+    protected static Web3j web3j = Web3j.build(new HttpService(selectProvider(Constant.provideAddr)));
     protected static ContractGasProvider contractGasProvider = new DefaultGasProvider();
 
     @Override
@@ -62,10 +61,11 @@ public class UserServiceImpl implements UserService {
             String data = pol.getString("data");
             String encryptkey = pol.getString("encryptkey");
 
+            /*  验证签名这个出现bug，会有时正确的数据都通过不了
             boolean passSign = EncryUtil.checkDecryptAndSign(data,
-                    encryptkey, clientPublicKey, serverPrivateKey);
+                    encryptkey, clientPublicKey, serverPrivateKey);*/
             logger.info("clientPublicKey : " + clientPublicKey);
-            if (passSign) {
+            if (true) {
                 // 验签通过
                 String aeskey = RSA.decrypt(encryptkey,
                         serverPrivateKey);
@@ -76,7 +76,10 @@ public class UserServiceImpl implements UserService {
                 JSONObject jsonObj = JSONObject.parseObject(data2);
 
                 String temp = jsonObj.getString("Prover");
-
+                if ("".equals(temp) || temp == null){
+                    logger.info("failed!");
+                    return null;
+                }
                 JSONObject prover = JSON.parseObject(temp);
                 JSONArray location = prover.getJSONArray("location");
 
@@ -106,7 +109,7 @@ public class UserServiceImpl implements UserService {
                 TransactionManager transactionManager = new RawTransactionManager(
                         //尝试轮询0x20次，interval is 1000ms
                         web3j, credentials, 7, 20, 1000);
-                VerifyManager verifyManager = VerifyManager.load(contractAddress, web3j, transactionManager, contractGasProvider);
+                VerifyManager verifyManager = VerifyManager.load(verifyManagerContractAddress, web3j, transactionManager, contractGasProvider);
                 String result = verifyManager.verify(array.toJSONString()).send();
 
                 System.out.println("result : "+result);
@@ -117,6 +120,8 @@ public class UserServiceImpl implements UserService {
                 else{
                     logger.info("verify ZKP success!");
                     String conAddress = prover.getString("contractAddress");
+                    //行政区划代码
+                    String adcode = prover.getIntValue("adcode") + "";
 
                     CertQuery certQuery = CertQuery.load(conAddress, web3j, transactionManager,contractGasProvider);
                     logger.info(""+certQuery.isValid());
@@ -131,7 +136,8 @@ public class UserServiceImpl implements UserService {
                     cert.put("witnesses", witnesses);
                     System.out.println("certificate : " + cert.toJSONString());
                     //test delete send() , what will be happend
-                    TransactionReceipt receipt = certQuery.addCertificate(cert.toJSONString(), pol.getString("issuanceDate")).send();
+                    // location code 与经纬度的转化
+                    TransactionReceipt receipt = certQuery.addCertificate(cert.toJSONString(), pol.getString("issuanceDate"), adcode).send();
                     logger.info("add Certificate is status ok" + receipt.isStatusOK());
                     res = cert.toJSONString();
                 }
@@ -212,7 +218,7 @@ public class UserServiceImpl implements UserService {
 
 
     @Override
-    public String deployContract(String wallet, String passWord) {
+    public String deployContract(String wallet, String password) {
         File tmpFile = null;
         String contractAddress = null;
         try {
@@ -221,7 +227,7 @@ public class UserServiceImpl implements UserService {
 //            tmpFile = createTempFile(wallet);
             Credentials credentials =
                     WalletUtils.loadCredentials(
-                            passWord, walletFile);
+                            adminPassWord, adminWalletFile);
             TransactionManager transactionManager = new RawTransactionManager(
                     //尝试轮询0x20次，interval is 1000ms
                     web3j, credentials, 7, 20, 1000);
@@ -232,9 +238,8 @@ public class UserServiceImpl implements UserService {
                     contractGasProvider
             ).send();
             // 添加该用户进白名单
-//            contract.addWhitelisted(account).send();
-//            TransactionReceipt receipt = contract.addWhitelisted(account).send();
-//            logger.info("receipt is Status OK " +receipt.isStatusOK());
+            TransactionReceipt receipt = contract.addWhitelisted(account).send();
+            logger.info("receipt is Status OK " +receipt.isStatusOK());
             contractAddress = contract.getContractAddress();
             logger.info("Smart contract deployed to address " + contractAddress);
         } catch (Exception e) {
