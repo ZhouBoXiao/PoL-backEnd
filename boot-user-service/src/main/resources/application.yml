@@ -1,7 +1,7 @@
 
 # server config info
 server:
-  port: 8085
+  port: 8083
 #  servlet:
 #    context-path: /PoL
 # spring config info

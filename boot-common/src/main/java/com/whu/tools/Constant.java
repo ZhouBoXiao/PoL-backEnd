@@ -5,11 +5,11 @@ import java.util.Arrays;
 import java.util.List;
 
 public class Constant {
-    public static String verifyManagerContractAddress = "0x509e7d5308bc90b146cd3ef06953d6e31306408d";
+    public static String verifyManagerContractAddress = "0x031d5a27e7e6144dd5150d1dc6af0a6f69ccf9a6";
     public static List<String> provideAddr = new ArrayList<>(
         Arrays.asList("http://202.114.114.47:6789", "http://202.114.114.48:6789", "http://202.114.114.49:6789", "http://202.114.114.46:6789")
     );
-    public static String userManagerContractAddress = "";
+    public static String userManagerContractAddress = "0x321331b50848822e425ad4a3ff20c98b8dd4e8ff";
 
     public static String serverPrivateKey = "MIICdgIBADANBgkqhkiG9w0BAQEFAASCAmAwggJcAgEAAoGBALIZ98KqgLW8IMt4" +
             "G+N+4d3DiOiEa+5s6lCMSGE/NbU9stJEqw0EuCP54MY6JkT0HCYTCrLXqww6rSQy" +

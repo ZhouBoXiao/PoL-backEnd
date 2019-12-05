@@ -60,14 +60,15 @@ public class AdminController {
 
     @RequestMapping(value = "/deployContract" ,method = RequestMethod.POST, produces="application/json;charset=UTF-8")
     @ApiOperation(value = "部署智能合约", httpMethod = "POST")
-    @ApiImplicitParams({
-            @ApiImplicitParam(name = "wallet", value = "钱包", dataType = ApiDataType.STRING,
-                    paramType = ApiParamType.FORM),
-            @ApiImplicitParam(name = "passWord", value = "密码", dataType = ApiDataType.STRING,
-                    paramType = ApiParamType.FORM)
-    })
-    public Map<String, Object> deployContract(@RequestParam(name = "wallet") String wallet,
-                                              @RequestParam(name = "passWord") String password){
+//    @ApiImplicitParams({
+//            @ApiImplicitParam(name = "wallet", value = "钱包", dataType = ApiDataType.STRING,
+//                    paramType = ApiParamType.FORM),
+//            @ApiImplicitParam(name = "passWord", value = "密码", dataType = ApiDataType.STRING,
+//                    paramType = ApiParamType.FORM)
+//    })
+//    public Map<String, Object> deployContract(@RequestParam(name = "wallet") String wallet,
+//                                              @RequestParam(name = "passWord") String password){
+    public Map<String, Object> deployContract(){
         boolean res = false;
         Map<String, Object> result = new HashMap<>();
         /*
@@ -91,18 +92,17 @@ public class AdminController {
     @ApiOperation(value = "queryByTime", httpMethod = "POST")
     @ApiImplicitParams({
             @ApiImplicitParam(name = "json", value = "查询", dataType = ApiDataType.STRING,
-                    paramType = ApiParamType.FORM),
-            @ApiImplicitParam(name = "wallet", value = "钱包", required = true, dataType = ApiDataType.STRING,
-                    paramType = ApiParamType.FORM),
-            @ApiImplicitParam(name = "passWord", value = "密码", required = true, dataType = ApiDataType.STRING,
                     paramType = ApiParamType.FORM)
+//            @ApiImplicitParam(name = "wallet", value = "钱包", required = false, dataType = ApiDataType.STRING,
+//                    paramType = ApiParamType.FORM),
+//            @ApiImplicitParam(name = "passWord", value = "密码", required = false, dataType = ApiDataType.STRING,
+//                    paramType = ApiParamType.FORM)
     })
-    public Map<String, Object> queryByTime(@RequestParam(name = "json") String json,
-                                      @RequestParam(name = "wallet") String wallet,
-                                      @RequestParam(name = "passWord") String passWord){
+    public void queryByTime(HttpServletRequest request , HttpServletResponse response){
         Map<String, Object> result = new HashMap<>();
-
-        String res = adminService.queryByTime(json, wallet, passWord);
+        String json = request.getParameter("json");
+//        String passWord = "",wallet = "";
+        String res = adminService.queryByTime(json);
         if("".equals(res) || res==null){
             result.put("result", false);
             result.put("message", "查询失败!");
@@ -111,7 +111,10 @@ public class AdminController {
             result.put("result", true);
             result.put("message", JSON.parseObject(res));
         }
-        return result;
+        response.addHeader("Access-Control-Allow-Origin", "*");
+        response.addHeader("Access-Control-Allow-Methods","POST, GET, PATCH, DELETE, PUT");
+        response.addHeader("Access-Control-Allow-Headers",request.getHeader("Access-Control-Request-Headers"));
+        ServletUtil.createSuccessResponse(200, result, response);
     }
 
     @RequestMapping(value = "/queryBySpace" ,method = RequestMethod.POST, produces="application/json;charset=UTF-8")
@@ -119,17 +122,20 @@ public class AdminController {
     @ApiImplicitParams({
             @ApiImplicitParam(name = "json", value = "查询", dataType = ApiDataType.STRING,
                     paramType = ApiParamType.FORM),
-            @ApiImplicitParam(name = "wallet", value = "钱包", required = true, dataType = ApiDataType.STRING,
-                    paramType = ApiParamType.FORM),
-            @ApiImplicitParam(name = "passWord", value = "密码", required = true, dataType = ApiDataType.STRING,
-                    paramType = ApiParamType.FORM)
+//            @ApiImplicitParam(name = "wallet", value = "钱包", required = true, dataType = ApiDataType.STRING,
+//                    paramType = ApiParamType.FORM),
+//            @ApiImplicitParam(name = "passWord", value = "密码", required = true, dataType = ApiDataType.STRING,
+//                    paramType = ApiParamType.FORM)
     })
-    public Map<String, Object> queryBySpace(@RequestParam(name = "json") String json,
-                                           @RequestParam(name = "wallet") String wallet,
-                                           @RequestParam(name = "passWord") String passWord){
+    public void queryBySpace(
+            HttpServletRequest request , HttpServletResponse response){
+//    public Map<String, Object> queryBySpace(@RequestParam(name = "json") String json,
+//                                           @RequestParam(name = "wallet") String wallet,
+//                                           @RequestParam(name = "passWord") String passWord){
         Map<String, Object> result = new HashMap<>();
-
-        String res = adminService.queryBySpace(json, wallet, passWord);
+        String passWord = "",wallet = "";
+        String json = request.getParameter("json");
+        String res = adminService.queryBySpace(json);
         if("".equals(res) || res==null){
             result.put("result", false);
             result.put("message", "查询失败!");
@@ -138,7 +144,10 @@ public class AdminController {
             result.put("result", true);
             result.put("message", JSON.parseObject(res));
         }
-        return result;
+        response.addHeader("Access-Control-Allow-Origin", "*");
+        response.addHeader("Access-Control-Allow-Methods","POST, GET, PATCH, DELETE, PUT");
+        response.addHeader("Access-Control-Allow-Headers",request.getHeader("Access-Control-Request-Headers"));
+        ServletUtil.createSuccessResponse(200, result, response);
     }
 
 }

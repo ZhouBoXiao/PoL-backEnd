@@ -55,17 +55,14 @@ public class UserController {
         @ApiImplicitParam(name = "passWord", value = "密码", required = true, dataType = ApiDataType.STRING,
                 paramType = ApiParamType.FORM)
     })
-    public Map<String, Object> verify(@RequestParam(name = "json") String json,
-                                      @RequestParam(name = "wallet") String wallet,
-                                      @RequestParam(name = "passWord") String passWord){
+    public Map<String, Object> verify(@RequestParam(name = "json") String json){
         String res = null;
         Map<String, Object> jo = new HashMap<>();
         logger.info("json: " + json );
 
-
         JSONObject cert = JSON.parseObject(json);
 
-        res = userService.verify(cert, wallet, passWord);
+        res = userService.verify(cert);
 
         if(res == null || "".equals(res)) {
             jo.put("result", false);
@@ -106,18 +103,13 @@ public class UserController {
     @ApiOperation(value = "查询某个用户的证书", httpMethod = "POST")
     @ApiImplicitParams({
             @ApiImplicitParam(name = "json", value = "查询", dataType = ApiDataType.STRING,
-                    paramType = ApiParamType.FORM),
-            @ApiImplicitParam(name = "wallet", value = "钱包", required = true, dataType = ApiDataType.STRING,
-                    paramType = ApiParamType.FORM),
-            @ApiImplicitParam(name = "passWord", value = "密码", required = true, dataType = ApiDataType.STRING,
                     paramType = ApiParamType.FORM)
+
     })
-    public Map<String, Object> search(@RequestParam(name = "json") String json,
-                                      @RequestParam(name = "wallet") String wallet,
-                                      @RequestParam(name = "passWord") String passWord){
+    public Map<String, Object> search(@RequestParam(name = "json") String json){
         Map<String, Object> result = new HashMap<>();
 
-        String res = userService.search(json, wallet, passWord);
+        String res = userService.search(json);
         if("".equals(res) || res==null){
             result.put("result", false);
             result.put("message", "查询失败!");
@@ -134,15 +126,15 @@ public class UserController {
     @ApiImplicitParams({
             @ApiImplicitParam(name = "wallet", value = "钱包", required = true, dataType = ApiDataType.STRING,
                     paramType = ApiParamType.FORM),
-            @ApiImplicitParam(name = "passWord", value = "密码", required = true, dataType = ApiDataType.STRING,
+            @ApiImplicitParam(name = "username", value = "用户名", required = true, dataType = ApiDataType.STRING,
                     paramType = ApiParamType.FORM)
     })
     public Map<String, Object> deployContract(@RequestParam(name = "wallet") String wallet,
-                                              @RequestParam(name = "passWord") String passWord){
+                                              @RequestParam(name = "username") String username){
         String res = null;
         Map<String, Object> result = new HashMap<>();
 
-        res = userService.deployContract(wallet, passWord);
+        res = userService.deployContract(wallet, username);
         if("".equals(res) || res==null){
             result.put("result", false);
             result.put("message", "部署合约失败!");

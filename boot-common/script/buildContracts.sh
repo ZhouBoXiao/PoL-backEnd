@@ -6,7 +6,7 @@ set -o pipefail
 baseDir="../src/main/DecentralizedApp"
 
 targets="
-CertQuery
+UserManager
 "
 
 for target in ${targets}; do

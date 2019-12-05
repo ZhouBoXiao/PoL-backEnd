@@ -9,6 +9,7 @@ import com.whu.aesrsa.util.ConvertUtils;
 import com.whu.aesrsa.util.EncryUtil;
 import com.whu.aesrsa.util.RSA;
 import com.whu.contract.CertQuery;
+import com.whu.contract.UserManager;
 import com.whu.contract.VerifyManager;
 import com.whu.jni.NativeLib;
 import com.whu.service.UserService;
@@ -36,7 +37,7 @@ import static com.whu.tools.Tools.*;
 @com.alibaba.dubbo.config.annotation.Service  //注册到注册中心中
 public class UserServiceImpl implements UserService {
 
-    protected static final String adminWalletFile = "/home/lmars/PoL/PoL-Juice/ju-ethereum/data/keys/3c8f320a-0c59-dadf-39f9-2509f06bdff1.json";
+    protected static final String adminWalletFile = "/home/lmars/PoL/PoL-Juice/ju-ethereum/data/keys/b756e77a-6694-7640-0e58-d703f8dda14a.json";
     protected static final String adminPassWord = "12345678";
 
     private Logger logger = Logger.getLogger(this.getClass());
@@ -44,7 +45,7 @@ public class UserServiceImpl implements UserService {
     protected static ContractGasProvider contractGasProvider = new DefaultGasProvider();
 
     @Override
-    public String verify(JSONObject pol, String wallet, String passWord) {
+    public String verify(JSONObject pol) {
         String res = null;
 
         Map<String, Object> params = new HashMap<String,Object>();
@@ -75,7 +76,11 @@ public class UserServiceImpl implements UserService {
                 System.out.println(data2);
                 JSONObject jsonObj = JSONObject.parseObject(data2);
 
+                //得到待验证的证书
                 String temp = jsonObj.getString("Prover");
+                //得到钱包和密码
+                JSONObject wallet = jsonObj.getJSONObject("wallet");
+                String passWord = jsonObj.getString("passWord");
                 if ("".equals(temp) || temp == null){
                     logger.info("failed!");
                     return null;
@@ -101,7 +106,7 @@ public class UserServiceImpl implements UserService {
                 System.out.println("array : "+array.toJSONString());
                 System.out.println("witnesses : "+witnesses.toJSONString());
                 //生成临时文件存储钱包
-                tmpFile = createTempFile(wallet);
+                tmpFile = createTempFile(wallet.toJSONString());
                 Credentials credentials =
                         WalletUtils.loadCredentials(
                                 passWord, tmpFile);
@@ -133,6 +138,7 @@ public class UserServiceImpl implements UserService {
                     cert.put("prover", prover.getString("Prover"));
                     cert.put("issuanceDate", pol.getString("issuanceDate"));
                     cert.put("location", location);
+                    cert.put("adcode", adcode);
                     cert.put("witnesses", witnesses);
                     System.out.println("certificate : " + cert.toJSONString());
                     //test delete send() , what will be happend
@@ -157,6 +163,48 @@ public class UserServiceImpl implements UserService {
         return res;
     }
 
+//    /**
+//     * 根据时间查询
+//     * @param _json
+//     * @return
+//     */
+//    @Override
+//    public String queryByTime(String _json) {
+//        JSONObject jsonObject = JSON.parseObject(_json);
+//        String res = null;
+//        File tmpFile = null;
+//        try {
+//            String temp = jsonObj.getString("search");
+//            System.out.println("temp :" + temp);
+//            JSONObject queryBody = JSON.parseObject(temp);
+////            String conAddress = queryBody.getString("contractAddress");
+//            String startTime = queryBody.getString("startTime");
+//            String endTime = queryBody.getString("endTime");
+//            Credentials credentials =
+//                    WalletUtils.loadCredentials(
+//                            UserServiceImpl.adminPassWord, UserServiceImpl.adminWalletFile);
+//            TransactionManager transactionManager = new RawTransactionManager(
+//                    //尝试轮询0x20次，interval is 500ms
+//                    UserServiceImpl.web3j, credentials, 7, 20, 500);
+//
+//            logger.info("Credentials loaded");
+//            CertQuery certQuery = CertQuery.load(conAddress, web3j, credentials, contractGasProvider);
+//
+//            System.out.println("startTime :" + startTime);
+//            System.out.println("endTime :" + endTime);
+//            res = certQuery.search(startTime, endTime).send();
+//            System.out.println("res : " + res);
+//
+//        } catch (Exception e) {
+//            e.printStackTrace();
+//        }
+//        finally {
+//            if (tmpFile != null && tmpFile.exists()){
+//                tmpFile.delete();  //删除临时文件
+//            }
+//        }
+//        return res;
+//    }
 
     /**
      * 根据时间查询
@@ -164,7 +212,7 @@ public class UserServiceImpl implements UserService {
      * @return
      */
     @Override
-    public String search(String _json, String wallet, String passWord) {
+    public String search(String _json) {
         JSONObject jsonObject = JSON.parseObject(_json);
         String clientPublicKey = jsonObject.getString("publicKey");
         String data = jsonObject.getString("data");
@@ -182,13 +230,15 @@ public class UserServiceImpl implements UserService {
                         aeskey));
                 JSONObject jsonObj = JSONObject.parseObject(data2);
                 String temp = jsonObj.getString("search");
+                JSONObject wallet = jsonObj.getJSONObject("wallet");
+                String passWord = jsonObj.getString("passWord");
                 System.out.println("temp :" + temp);
                 JSONObject queryBody = JSON.parseObject(temp);
                 String conAddress = queryBody.getString("contractAddress");
                 String startTime = queryBody.getString("startTime");
                 String endTime = queryBody.getString("endTime");
                 //生成临时文件存储钱包
-                tmpFile = createTempFile(wallet);
+                tmpFile = createTempFile(wallet.toJSONString());
                 Credentials credentials =
                         WalletUtils.loadCredentials(
                                 passWord, tmpFile);
@@ -200,12 +250,16 @@ public class UserServiceImpl implements UserService {
                 res = certQuery.search(startTime, endTime).send();
                 System.out.println("res : " + res);
 
-
             } else {
                 logger.error("验签失败");
             }
         } catch (Exception e) {
             e.printStackTrace();
+        }
+        finally {
+            if (tmpFile != null && tmpFile.exists()){
+                tmpFile.delete();  //删除临时文件
+            }
         }
         return res;
     }
@@ -216,13 +270,19 @@ public class UserServiceImpl implements UserService {
     }
 
 
-
+    /**
+     * 用管理员账号部署证书合约，把当前用户添加到白名单，添加用户到管理列表
+     * @param _json
+     * @param username
+     * @return contract Address
+     */
     @Override
-    public String deployContract(String wallet, String password) {
-        File tmpFile = null;
+    public String deployContract(String _json, String username) {
+//        File tmpFile = null;
         String contractAddress = null;
         try {
-            String account = JSONObject.parseObject(wallet).getString("address");
+            JSONObject wallet = JSON.parseObject(_json);
+            String account = wallet.getString("address");
 
 //            tmpFile = createTempFile(wallet);
             Credentials credentials =
@@ -231,27 +291,39 @@ public class UserServiceImpl implements UserService {
             TransactionManager transactionManager = new RawTransactionManager(
                     //尝试轮询0x20次，interval is 1000ms
                     web3j, credentials, 7, 20, 1000);
-            CertQuery contract = CertQuery.deploy(
+            CertQuery certQuery = CertQuery.deploy(
                     //部署合约
                     web3j,
                     transactionManager,
                     contractGasProvider
             ).send();
+            //?????????
             // 添加该用户进白名单
-            TransactionReceipt receipt = contract.addWhitelisted(account).send();
-            logger.info("receipt is Status OK " +receipt.isStatusOK());
-            contractAddress = contract.getContractAddress();
+            TransactionReceipt receipt = certQuery.addWhitelisted(account).send();
+            logger.info("CertQuery receipt is Status OK " +receipt.isStatusOK());
+            contractAddress = certQuery.getContractAddress();
             logger.info("Smart contract deployed to address " + contractAddress);
+            if ("".equals(Constant.userManagerContractAddress)){
+                return null;
+            }
+            UserManager userManager = UserManager.load(Constant.userManagerContractAddress,
+                    UserServiceImpl.web3j, transactionManager, UserServiceImpl.contractGasProvider);
+            // 添加用户到管理列表
+            receipt = userManager.insert(username, account, contractAddress).send();
+            logger.info("userManager receipt is Status OK " +receipt.isStatusOK());
+
         } catch (Exception e) {
             e.printStackTrace();
-        } finally {
-            if (tmpFile != null && tmpFile.exists()){
-                tmpFile.delete();  //删除临时文件
-            }
         }
+//        } finally {
+//            if (tmpFile != null && tmpFile.exists()){
+//                tmpFile.delete();  //删除临时文件
+//            }
+//        }
 
         return contractAddress;
     }
+
 
 
 }

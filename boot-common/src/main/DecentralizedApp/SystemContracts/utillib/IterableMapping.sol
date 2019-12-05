@@ -49,6 +49,14 @@ library IterableMapping {
         }
     }
 
+    function getByKey(itmap storage self, address key) returns(address) {
+        address value = 0x0;
+        if (self.data[key].KeyIndex > 0) {
+            value = self.data[key].value;
+        }
+        return value;
+    }
+
     // 获取数据
     function iterate_get(itmap storage self, uint KeyIdx) returns(address key, address value) {
         key = self.keys[KeyIdx].key;
@@ -72,7 +80,7 @@ library IterableMapping {
 
     // 开始
     function iterate_start(itmap storage self) returns(uint keyIndex) {
-        iterate_next(self, uint(-1));
+        return iterate_next(self, uint(-1));
     }
 
     // 是否有效

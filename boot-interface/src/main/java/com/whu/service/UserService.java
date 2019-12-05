@@ -4,15 +4,15 @@ import com.alibaba.fastjson.JSONObject;
 
 public interface UserService {
 
-    String verify(JSONObject cert, String wallet, String password);
+    String verify(JSONObject cert);
 
 //    String create(String password);
 
 
     String genProof(String position);
 
-    String search(String _json, String wallet, String passWord);
+    String search(String _json);
 
-    String deployContract(String wallet, String passWord);
+    String deployContract(String _json, String username);
 }
 

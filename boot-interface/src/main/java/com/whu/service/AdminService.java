@@ -15,8 +15,8 @@ public interface AdminService {
 //
     boolean deployContract();
 
-    String queryBySpace(String json, String wallet, String passWord);
+    String queryBySpace(String json);
 
-    String queryByTime(String json, String wallet, String passWord);
+    String queryByTime(String json);
 }
 

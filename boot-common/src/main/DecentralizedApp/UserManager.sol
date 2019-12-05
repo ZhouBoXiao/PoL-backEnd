@@ -1,80 +1,96 @@
 pragma solidity ^0.4.2;
-
 import "./SystemContracts/utillib/LibString.sol";
-// import "./SystemContracts/utillib/LibJson.sol";
-import "./SystemContracts/utillib/LibStack.sol";
-import "./SystemContracts/utillib/LibLog.sol";
-// import "./SystemContracts/utillib/WhitelistedRole.sol";
-import "./SystemContracts/utillib/IterableMapping.sol";
+
 
 contract UserManager{
-    using LibString
-    for * ;
+    using LibString for * ;
+    struct itmap {
+    	//username ->
+    	mapping(string => IndexValue) data;
+    	KeyFlag[] keys;
+    	uint size;
+    }
+    struct IndexValue {
+    	uint keyIndex;
+    	string value;  //contract address
+    	string addr;  // user address
+    }
+    struct KeyFlag {
+    	string key;
+    	bool deleted;
+    }
+    itmap self;
+    string userList="";
+    string contractList="";
 
-    using IterableMapping for *;
-    using LibLog for *;
+    function insert(string key, string value, string addr) returns(bool replaced) {
+    	uint keyIndex = self.data[key].keyIndex;
+    	self.data[key].value = value;
+    	self.data[key].addr = addr;
+    	userList = userList.concat(addr, ",");  //user address list
+    	contractList = contractList.concat(value, ","); // contract address list
+    	if (keyIndex > 0){
 
-    IterableMapping.itmap data;
-
-    // 构造函数
-    function UserManager() {
-        LibLog.log("deploy UserManager....");
+    		return true;
+    	}
+    	else {
+    		keyIndex = self.keys.length++;
+    		self.data[key].keyIndex = keyIndex + 1;
+    		self.keys[keyIndex].key = key;
+    		self.size++;
+    		return false;
+    	}
     }
 
-    // add or update User
-    function insertUser(address key, address value) public returns(bool) {
-        bool replaced = IterableMapping.insert(data, key, value);
-        return replaced;
+    function remove(string key) returns(bool success) {
+    	uint keyIndex = self.data[key].keyIndex;
+    	if (keyIndex == 0)
+    		return false;
+    	delete self.data[key];
+    	self.keys[keyIndex - 1].deleted = true;
+    	self.size--;
     }
 
-    // remove User
-    function removeUser(address key) public returns(bool) {
-        bool flag = IterableMapping.remove(data, key);
-        return flag;
-    }
+    function getContractByUsername(string key) public constant returns(string value) {
 
-    // get user address list
-    function getUserList () public constant returns(string _json) {
-        string memory strAddr = "0x";
-        uint len = 0;
-        uint256 counter = 0;
-        len = LibStack.push("{");
-        len = LibStack.append("\"userList\":[");
-        for(var i = IterableMapping.iterate_start(data);
-            IterableMapping.iterate_valid(data, i);
-            i = IterableMapping.iterate_next(data, i)) {
-            var (key ,value) = IterableMapping.iterate_get(data, i);
-            if (counter > 0) {
-                len = LibStack.append(",");
-            }
-            len = LibStack.append(strAddr.concat(key.addrToAsciiString()));
-            counter++;
+        if (self.data[key].keyIndex >= 0) {
+            value = self.data[key].value;
         }
-        len = LibStack.append("]");
-        len = LibStack.append("}");
-        _json = LibStack.popex(len);
-    }
-
-    //  get contract address list
-    function getConAddressList() public constant returns(string _json) {
-        string memory strAddr = "0x";
-        uint len = 0;
-        uint256 counter = 0;
-        len = LibStack.push("{");
-        len = LibStack.append("\"contractList\":[");
-        for(var i = IterableMapping.iterate_start(data);
-            IterableMapping.iterate_valid(data, i);
-            i = IterableMapping.iterate_next(data, i)) {
-            var (key ,value) = IterableMapping.iterate_get(data, i);
-            if (counter > 0) {
-                len = LibStack.append(",");
-            }
-            len = LibStack.append(strAddr.concat(value.addrToAsciiString()));
-            counter++;
+        else{
+            value = "";
         }
-        len = LibStack.append("]");
-        len = LibStack.append("}");
-        _json = LibStack.popex(len);
     }
 
+    function contains(string key) returns(bool) {
+    	return self.data[key].keyIndex > 0;
+    }
+
+    function iterate_start() returns(uint keyIndex) {
+    	return iterate_next( uint(-1));
+    }
+
+    function iterate_valid( uint keyIndex) returns(bool) {
+    	return keyIndex < self.keys.length;
+    }
+
+    function iterate_next(uint keyIndex) returns(uint r_keyIndex) {
+    	keyIndex++;
+    	while (keyIndex < self.keys.length && self.keys[keyIndex].deleted)
+    		keyIndex++;
+    	return keyIndex;
+    }
+
+    function iterate_get(uint keyIndex) returns(string key, string value, string addr) {
+    	key = self.keys[keyIndex].key;
+    	value = self.data[key].value;
+    	addr = self.data[key].addr;
+    }
+
+    function getUserList() public constant returns(string) {
+        return userList;
+    }
+
+    function getConAddressList() public constant returns(string ) {
+        return contractList;
+    }
 }
