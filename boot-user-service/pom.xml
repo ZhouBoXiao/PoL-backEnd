@@ -16,6 +16,8 @@
 
     <properties>
         <java.version>1.8</java.version>
+        <springfox-version>2.9.2</springfox-version>
+        <skipTests>true</skipTests>
     </properties>
 
     <dependencies>
@@ -61,12 +63,12 @@
             <groupId>org.projectlombok</groupId>
             <artifactId>lombok</artifactId>
         </dependency>
-        <!-- 热部署 -->
-        <dependency>
-            <groupId>org.springframework.boot</groupId>
-            <artifactId>spring-boot-devtools</artifactId>
-            <optional>true</optional>
-        </dependency>
+         <!--热部署-->
+        <!--<dependency>-->
+            <!--<groupId>org.springframework.boot</groupId>-->
+            <!--<artifactId>spring-boot-devtools</artifactId>-->
+            <!--<optional>true</optional>-->
+        <!--</dependency>-->
         <!-- spring junit单元测试 -->
         <dependency>
             <groupId>org.springframework.boot</groupId>
@@ -74,11 +76,11 @@
             <scope>test</scope>
         </dependency>
 
-        <dependency>
+        <!--<dependency>
             <groupId>org.web3j</groupId>
             <artifactId>core</artifactId>
             <version>4.5.5</version>
-        </dependency>
+        </dependency>-->
         <!-- Swagger2 End -->
         <dependency>
             <groupId>commons-fileupload</groupId>
@@ -90,7 +92,22 @@
             <artifactId>commons-lang3</artifactId>
             <version>3.9</version>
         </dependency>
-        <!-- Swagger -->
+        <!--SpringFox dependencies -->
+        <!--<dependency>-->
+            <!--<groupId>io.springfox</groupId>-->
+            <!--<artifactId>springfox-swagger2</artifactId>-->
+            <!--<version>${springfox-version}</version>-->
+        <!--</dependency>-->
+        <!--<dependency>-->
+            <!--<groupId>io.springfox</groupId>-->
+            <!--<artifactId>springfox-swagger-ui</artifactId>-->
+            <!--<version>${springfox-version}</version>-->
+        <!--</dependency>-->
+        <!--<dependency>-->
+            <!--<groupId>com.battcn</groupId>-->
+            <!--<artifactId>swagger-spring-boot-starter</artifactId>-->
+            <!--<version>2.1.5-RELEASE</version>-->
+        <!--</dependency>-->
         <dependency>
             <groupId>io.springfox</groupId>
             <artifactId>springfox-swagger2</artifactId>
@@ -107,30 +124,22 @@
             <artifactId>swagger-spring-boot-starter</artifactId>
             <version>1.4.5-RELEASE</version>
         </dependency>
-        <!--<dependency>-->
-            <!--<groupId>io.springfox</groupId>-->
-            <!--<artifactId>springfox-swagger-ui</artifactId>-->
-            <!--<version>2.2.2</version>-->
-        <!--</dependency>-->
         <!-- spring boot 整合dubbo
         导入zookeeper-3.4.9.jar 同时还将curator-client.jar相关导入
 -->
+        <dependency>
+            <groupId>javax.validation</groupId>
+            <artifactId>validation-api</artifactId>
+        </dependency>
         <dependency>
             <groupId>com.alibaba.boot</groupId>
             <artifactId>dubbo-spring-boot-starter</artifactId>
             <version>0.2.0</version>
         </dependency>
 
-        <dependency>
-            <groupId>com.whu</groupId>
-            <artifactId>boot-interface</artifactId>
-            <version>1.0-SNAPSHOT</version>
-        </dependency>
-        <dependency>
-            <groupId>com.whu</groupId>
-            <artifactId>boot-common</artifactId>
-            <version>1.0-SNAPSHOT</version>
-        </dependency>
+
+
+        <!-- Exclude Spring Boot's Default Logging -->
         <dependency>
             <groupId>org.springframework.boot</groupId>
             <artifactId>spring-boot-starter</artifactId>
@@ -141,30 +150,46 @@
                 </exclusion>
             </exclusions>
         </dependency>
-        <!--引入日志依赖-->
+
+        <!-- Add Log4j2 Dependency -->
         <dependency>
-            <groupId>org.slf4j</groupId>
-            <artifactId>slf4j-api</artifactId>
-            <version>1.7.21</version>
+            <groupId>org.springframework.boot</groupId>
+            <artifactId>spring-boot-starter-log4j2</artifactId>
+        </dependency>
+        <!-- 加上这个才能辨认到log4j2.yml文件 -->
+        <dependency>
+            <groupId>com.fasterxml.jackson.dataformat</groupId>
+            <artifactId>jackson-dataformat-yaml</artifactId>
         </dependency>
         <dependency>
-            <groupId>org.slf4j</groupId>
-            <artifactId>slf4j-log4j12</artifactId>
-            <version>1.7.21</version>
+            <groupId>com.whu</groupId>
+            <artifactId>boot-interface</artifactId>
+            <version>1.0-SNAPSHOT</version>
         </dependency>
         <dependency>
-            <groupId>commons-logging</groupId>
-            <artifactId>commons-logging</artifactId>
-            <version>1.2</version>
+            <groupId>com.whu</groupId>
+            <artifactId>boot-common</artifactId>
+            <version>1.0-SNAPSHOT</version>
         </dependency>
     </dependencies>
 
 
     <build>
+        <sourceDirectory>src/main/java</sourceDirectory>
         <plugins>
             <plugin>
                 <groupId>org.springframework.boot</groupId>
                 <artifactId>spring-boot-maven-plugin</artifactId>
+
+                <executions>
+                    <execution>
+                        <goals>
+                            <goal>repackage</goal>
+                        </goals>
+                    </execution>
+                </executions>
+
+
             </plugin>
         </plugins>
     </build>

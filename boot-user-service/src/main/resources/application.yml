@@ -34,7 +34,16 @@ spring:
     mode: LEGACYHTML5  # nekohtml
   swagger:
     enabled: true
+#    title: 文档
+#    description: API文档
+#    version: v2.0.5
+#    contact:
+#      name: boxiao
     base-package: com.whu
+#    security:
+#      filter-plugin: false
+#      username: boxiao
+#      password: zhou
 
 # mybatis spring config
 #mybatis:
@@ -42,6 +51,7 @@ spring:
 #  mapper-locations: classpath:com/whu/mapper/*.xml
 # log config info
 logging:
+  config: classpath:log4j2.xml
   level:
     com.whu: info
 

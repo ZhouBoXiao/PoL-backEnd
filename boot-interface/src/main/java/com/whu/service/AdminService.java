@@ -1,7 +1,5 @@
 package com.whu.service;
 
-import com.alibaba.fastjson.JSONObject;
-
 public interface AdminService {
 
 
@@ -18,5 +16,11 @@ public interface AdminService {
     String queryBySpace(String json);
 
     String queryByTime(String json);
+
+    boolean initGridIndex();
+
+    String getPointsFromRegion(String json);
+
+    String getPointsFromRegionByGeoHash(String json);
 }
 

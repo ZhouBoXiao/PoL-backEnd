@@ -5,11 +5,14 @@ import java.util.Arrays;
 import java.util.List;
 
 public class Constant {
-    public static String verifyManagerContractAddress = "0x031d5a27e7e6144dd5150d1dc6af0a6f69ccf9a6";
+    public static String verifyManagerContractAddress = "0xa02f52233d0fb247ad4768deb17cb0a8c47f6877";
     public static List<String> provideAddr = new ArrayList<>(
         Arrays.asList("http://202.114.114.47:6789", "http://202.114.114.48:6789", "http://202.114.114.49:6789", "http://202.114.114.46:6789")
     );
-    public static String userManagerContractAddress = "0x321331b50848822e425ad4a3ff20c98b8dd4e8ff";
+    public static String userManagerContractAddress = "0xb16b65a61675219b0461f937f2ee32b8af0387f0";
+
+    public static String gridIndexContractAddress = "0xd499e67b98309a1acdaef19c21c9dc351b9a6535";
+    public static String geoHashConContractAddress = "0xf862139378a4815c6ecd3331d871b07cc02687ab";
 
     public static String serverPrivateKey = "MIICdgIBADANBgkqhkiG9w0BAQEFAASCAmAwggJcAgEAAoGBALIZ98KqgLW8IMt4" +
             "G+N+4d3DiOiEa+5s6lCMSGE/NbU9stJEqw0EuCP54MY6JkT0HCYTCrLXqww6rSQy" +
@@ -29,4 +32,10 @@ public class Constant {
             "hGvubOpQjEhhPzW1PbLSRKsNBLgj+eDGOiZE9BwmEwqy16sMOq0kMlhewTQlRrLJ" +
             "Nlw3L0iogs9WTIGm3el1SuZLyMnMksnV0NCsuq538cPMNppZRwARb7NXmpmh0KM7" +
             "9fJ/1xqnpo1tgRcv4wIDAQAB";
+
+    public static boolean GRID_INDEX = false;
+
+    public static boolean GEO_HASH = true;
+
+
 }

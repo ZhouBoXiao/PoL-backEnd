@@ -3,18 +3,15 @@ package com.whu.web.controller;
 
 import com.alibaba.dubbo.config.spring.context.annotation.EnableDubbo;
 import com.alibaba.fastjson.JSON;
-import com.alibaba.fastjson.JSONObject;
 import com.battcn.swagger.properties.ApiDataType;
 import com.battcn.swagger.properties.ApiParamType;
 import com.whu.jni.NativeLib;
 import com.whu.service.AdminService;
 import com.whu.tools.ServletUtil;
-import com.whu.tools.StringUtil;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiImplicitParam;
 import io.swagger.annotations.ApiImplicitParams;
 import io.swagger.annotations.ApiOperation;
-import org.apache.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
@@ -34,9 +31,7 @@ public class AdminController {
 
     @Autowired
     private AdminService adminService;
-    private Logger logger = Logger.getLogger(this.getClass());
-
-
+    private static final org.slf4j.Logger logger = org.slf4j.LoggerFactory.getLogger(AdminController.class);
 
     @RequestMapping("/uuid")
     @ResponseBody
@@ -91,7 +86,7 @@ public class AdminController {
     @RequestMapping(value = "/queryByTime" ,method = RequestMethod.POST, produces="application/json;charset=UTF-8")
     @ApiOperation(value = "queryByTime", httpMethod = "POST")
     @ApiImplicitParams({
-            @ApiImplicitParam(name = "json", value = "查询", dataType = ApiDataType.STRING,
+            @ApiImplicitParam(name = "param", value = "查询", required = true ,dataType = ApiDataType.STRING,
                     paramType = ApiParamType.FORM)
 //            @ApiImplicitParam(name = "wallet", value = "钱包", required = false, dataType = ApiDataType.STRING,
 //                    paramType = ApiParamType.FORM),
@@ -100,8 +95,10 @@ public class AdminController {
     })
     public void queryByTime(HttpServletRequest request , HttpServletResponse response){
         Map<String, Object> result = new HashMap<>();
-        String json = request.getParameter("json");
+        System.out.println("getParameterNames: " +request.getParameterNames());
+        String json = request.getParameter("param");
 //        String passWord = "",wallet = "";
+//        String startTime = request.getParameter("startTime");
         String res = adminService.queryByTime(json);
         if("".equals(res) || res==null){
             result.put("result", false);
@@ -144,10 +141,76 @@ public class AdminController {
             result.put("result", true);
             result.put("message", JSON.parseObject(res));
         }
+        ServletUtil.createSuccessResponse(200, result, response);
+    }
+
+//    @RequestMapping(value = "/InitGridIndex" ,method = RequestMethod.POST, produces="application/json;charset=UTF-8")
+//    @ApiOperation(value = "初始化网格索引", httpMethod = "POST")
+//
+//    public void initGridIndex(HttpServletRequest request , HttpServletResponse response){
+//
+//        Map<String, Object> result = new HashMap<>();
+//
+//        boolean res = adminService.initGridIndex();
+//        if(!res){
+//            result.put("result", false);
+//            result.put("message", "失败!");
+//        }
+//        else {
+//            result.put("result", true);
+//            result.put("message", "初始化成功!");
+//        }
+//        ServletUtil.createSuccessResponse(200, result, response);
+//    }
+//
+    @RequestMapping(value = "/getPointsFromRegion" ,method = RequestMethod.POST, produces="application/json;charset=UTF-8")
+    @ApiOperation(value = "根据给定区域查询", httpMethod = "POST")
+    @ApiImplicitParams({
+            @ApiImplicitParam(name = "json", value = "查询", dataType = ApiDataType.STRING,
+                    paramType = ApiParamType.FORM),
+    })
+    public void getPointsFromRegion(HttpServletRequest request , HttpServletResponse response){
+
+        Map<String, Object> result = new HashMap<>();
+
+        String json = request.getParameter("json");
+        String res = adminService.getPointsFromRegion(json);
+
+        if("".equals(res) || res==null){
+            result.put("result", false);
+            result.put("message", "查询失败!");
+        }
+        else {
+            result.put("result", true);
+            result.put("message", JSON.parseObject(res));
+        }
+        ServletUtil.createSuccessResponse(200, result, response);
+    }
+
+    @RequestMapping(value = "/getPointsFromRegionByGeoHash" ,method = RequestMethod.POST, produces="application/json;charset=UTF-8")
+    @ApiOperation(value = "根据给定区域查询", httpMethod = "POST")
+    @ApiImplicitParams({
+            @ApiImplicitParam(name = "json", value = "查询", dataType = ApiDataType.STRING,
+                    paramType = ApiParamType.FORM),
+    })
+    public void getPointsFromRegionByGeoHash(HttpServletRequest request , HttpServletResponse response){
+
+        Map<String, Object> result = new HashMap<>();
+
+        String json = request.getParameter("json");
+        String res = adminService.getPointsFromRegionByGeoHash(json);
+
+        if("".equals(res) || res==null){
+            result.put("result", false);
+            result.put("message", "查询失败!");
+        }
+        else {
+            result.put("result", true);
+            result.put("message", JSON.parseObject(res));
+        }
         response.addHeader("Access-Control-Allow-Origin", "*");
         response.addHeader("Access-Control-Allow-Methods","POST, GET, PATCH, DELETE, PUT");
         response.addHeader("Access-Control-Allow-Headers",request.getHeader("Access-Control-Request-Headers"));
         ServletUtil.createSuccessResponse(200, result, response);
     }
-
 }

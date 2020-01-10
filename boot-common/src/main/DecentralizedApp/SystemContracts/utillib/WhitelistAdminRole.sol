@@ -21,7 +21,7 @@ contract WhitelistAdminRole is Context {
 
     modifier onlyWhitelistAdmin() {
         // require(isWhitelistAdmin(_msgSender()), "WhitelistAdminRole: caller does not have the WhitelistAdmin role");
-        if(isWhitelistAdmin(_msgSender())){
+        if(!isWhitelistAdmin(_msgSender())){
             throw;
         }
         _;
@@ -32,6 +32,9 @@ contract WhitelistAdminRole is Context {
     }
 
     function addWhitelistAdmin(address account) public onlyWhitelistAdmin {
+        if(!isWhitelistAdmin(msg.sender)){
+            throw;
+        }
         _addWhitelistAdmin(account);
     }
 

@@ -13,7 +13,6 @@ import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiImplicitParam;
 import io.swagger.annotations.ApiImplicitParams;
 import io.swagger.annotations.ApiOperation;
-import org.apache.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
@@ -30,7 +29,7 @@ import java.util.Map;
 @Api(tags = "1.1", description = "后台", value = "后台")
 public class UserController {
 
-    private Logger logger = Logger.getLogger(this.getClass());
+    private static final org.slf4j.Logger logger = org.slf4j.LoggerFactory.getLogger(UserController.class);
     @Autowired
     private UserService userService;
 
@@ -48,12 +47,12 @@ public class UserController {
     @ResponseBody
     @ApiOperation(value = "验证证书")
     @ApiImplicitParams({
-        @ApiImplicitParam(name = "json", value = "证书", required = true, dataType = ApiDataType.STRING,
-                paramType = ApiParamType.FORM),
-        @ApiImplicitParam(name = "wallet", value = "钱包", required = true, dataType = ApiDataType.STRING,
-                paramType = ApiParamType.FORM),
-        @ApiImplicitParam(name = "passWord", value = "密码", required = true, dataType = ApiDataType.STRING,
-                paramType = ApiParamType.FORM)
+            @ApiImplicitParam(name = "json", value = "证书", required = true, dataType = ApiDataType.STRING,
+                    paramType = ApiParamType.FORM),
+            @ApiImplicitParam(name = "wallet", value = "钱包", required = true, dataType = ApiDataType.STRING,
+                    paramType = ApiParamType.FORM),
+            @ApiImplicitParam(name = "passWord", value = "密码", required = true, dataType = ApiDataType.STRING,
+                    paramType = ApiParamType.FORM)
     })
     public Map<String, Object> verify(@RequestParam(name = "json") String json){
         String res = null;

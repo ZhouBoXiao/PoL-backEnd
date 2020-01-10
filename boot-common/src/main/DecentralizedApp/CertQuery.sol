@@ -41,7 +41,10 @@ contract CertQuery is WhitelistedRole {
         return certificates.length;
     }
 
-    function addCertificate(string json, string issuanceDate, string locCode)  onlyWhitelisted public { //onlyWhitelisted
+    function addCertificate(string json, string issuanceDate, string locCode)  public { //onlyWhitelisted
+        if(!isWhitelisted(msg.sender)){
+            throw;
+        }
         // LibLog.log("Certificate into add..");
         locCode_certs[locCode].push(json);
         // cert_locCode[json] = locCode;
@@ -50,7 +53,10 @@ contract CertQuery is WhitelistedRole {
         // LibLog.log("add a certificate success", "CertQuery");
     }
 
-    function listAll() onlyWhitelisted constant public returns(string _json) {  //onlyWhitelisted
+    function listAll() constant public returns(string _json) {  //onlyWhitelisted
+        if(!isWhitelisted(msg.sender)){
+            throw;
+        }
         uint len = 0;
         uint counter = 0;
         len = LibStack.append("");
@@ -77,7 +83,10 @@ contract CertQuery is WhitelistedRole {
         return len;
     }
 
-    function searchByLocCode(string locCode) onlyWhitelisted public constant returns(string _json){  //onlyWhitelisted
+    function searchByLocCode(string locCode) public constant returns(string _json){  //onlyWhitelisted
+        if(!isWhitelisted(msg.sender)){
+            throw;
+        }
         string[] certs = locCode_certs[locCode];
         uint256 len = 0;
         uint256 num = certs.length;
@@ -101,46 +110,56 @@ contract CertQuery is WhitelistedRole {
         onlyWhitelisted
     }*/
 
-    function search(string startTime, string endTime) onlyWhitelisted public constant returns(string _json){  //
+    function search(string startTime, string endTime)  public constant returns(string _json){  //onlyWhitelisted
+        if(!isWhitelisted(msg.sender)){
+            throw;
+        }
         uint256 len = 0;
         uint256 counter = 0;
         len = LibStack.push("");
         uint256 low = 0;
         uint256 high = certificates.length;
-        
+        _json = "";
+        if(high > 0){
         // startTime <  issuanceDates[0]  && endTime > issuanceDates[-1]
-        if (issuanceDates[0].compare(startTime) >= 0 && issuanceDates[issuanceDates.length-1].compare(endTime) <= 0){   
-            _json = listAll();
-            return _json;
-        } else{ 
-     
-            while (low < high) {
-                uint256 mid = Math.average(low, high);
-                if( issuanceDates[mid].compare(startTime) >= 0  && 
-                    issuanceDates[mid].compare(endTime) <= 0 ){
-                    break;   
+            if (issuanceDates[0].compare(startTime) >= 0 && issuanceDates[issuanceDates.length-1].compare(endTime) <= 0){
+                _json = listAll();
+                return _json;
+
+            } else{
+
+                while (low < high) {
+                    uint256 mid = Math.average(low, high);
+                    if( issuanceDates[mid].compare(startTime) >= 0  &&
+                        issuanceDates[mid].compare(endTime) <= 0 ){
+                        break;
+                    }
+                    if (issuanceDates[mid].compare(startTime) < 0){
+                        low = mid + 1;
+                    } else if(issuanceDates[mid].compare(endTime) > 0){
+                        high = mid;
+                    }
+
                 }
-                if (issuanceDates[mid].compare(startTime) < 0){
-                    low = mid + 1;
-                } else if(issuanceDates[mid].compare(endTime) > 0){
-                    high = mid;
+
+                for (uint i = low ; i < high ; ++i) {
+
+                    if( issuanceDates[i].compare(startTime) >= 0  &&
+                        issuanceDates[i].compare(endTime) <= 0 ) {
+                            if (counter > 0) {
+                                len = LibStack.append(",");
+                            }
+                            len = LibStack.append(certificates[i]);
+                            counter++;
+
+                    }
                 }
-                
+
+                len = itemsStackPush(LibStack.popex(len), counter);
+                _json = LibStack.popex(len);
             }
-            
-            for (uint i = low ; i < high ; ++i) {
-                
-                if( issuanceDates[i].compare(startTime) >= 0  && 
-                    issuanceDates[i].compare(endTime) <= 0 ) {
-                        if (counter > 0) {
-                            len = LibStack.append(",");
-                        }
-                        len = LibStack.append(certificates[i]);
-                        counter++;
-                        
-                }
-            }
-            
+        }
+        else {
             len = itemsStackPush(LibStack.popex(len), counter);
             _json = LibStack.popex(len);
         }

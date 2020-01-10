@@ -8,23 +8,21 @@ import com.whu.aesrsa.util.AES;
 import com.whu.aesrsa.util.ConvertUtils;
 import com.whu.aesrsa.util.EncryUtil;
 import com.whu.aesrsa.util.RSA;
-import com.whu.contract.CertQuery;
-import com.whu.contract.UserManager;
-import com.whu.contract.VerifyManager;
+import com.whu.contract.*;
+import com.whu.contract.singleton.ContractApi;
 import com.whu.jni.NativeLib;
 import com.whu.service.UserService;
+import com.whu.spatialIndex.geohash.GPSToGeoHash;
+import com.whu.spatialIndex.geohash.GeoHash;
+import com.whu.spatialIndex.gridIndex.GridIndex;
 import com.whu.tools.Constant;
-import org.apache.log4j.Logger;
 import org.springframework.stereotype.Service;
 import org.web3j.crypto.Credentials;
 import org.web3j.crypto.WalletUtils;
-import org.web3j.protocol.Web3j;
 import org.web3j.protocol.core.methods.response.TransactionReceipt;
-import org.web3j.protocol.http.HttpService;
 import org.web3j.tx.RawTransactionManager;
 import org.web3j.tx.TransactionManager;
-import org.web3j.tx.gas.ContractGasProvider;
-import org.web3j.tx.gas.DefaultGasProvider;
+
 
 import java.io.*;
 import java.util.HashMap;
@@ -37,12 +35,7 @@ import static com.whu.tools.Tools.*;
 @com.alibaba.dubbo.config.annotation.Service  //注册到注册中心中
 public class UserServiceImpl implements UserService {
 
-    protected static final String adminWalletFile = "/home/lmars/PoL/PoL-Juice/ju-ethereum/data/keys/b756e77a-6694-7640-0e58-d703f8dda14a.json";
-    protected static final String adminPassWord = "12345678";
-
-    private Logger logger = Logger.getLogger(this.getClass());
-    protected static Web3j web3j = Web3j.build(new HttpService(selectProvider(Constant.provideAddr)));
-    protected static ContractGasProvider contractGasProvider = new DefaultGasProvider();
+    private static final org.slf4j.Logger logger = org.slf4j.LoggerFactory.getLogger(UserServiceImpl.class);
 
     @Override
     public String verify(JSONObject pol) {
@@ -52,8 +45,9 @@ public class UserServiceImpl implements UserService {
         File tmpFile = null;
         try {
             /* logger.info("PoL : " + pol); */
+            // 得到web3客户端的版本
             logger.info("Connected to Ethereum client version: "
-                    + web3j.web3ClientVersion().send().getWeb3ClientVersion());   // 得到web3客户端的版本
+                    + EthereumApi.getInstance().web3j.web3ClientVersion().send().getWeb3ClientVersion());
             //以太坊客户端连接到的网络的链ID   -- 初始设置为7
 //            String netVersion = web3j.netVersion().send().getNetVersion();
 //            logger.info("netVersion: ", netVersion);
@@ -79,15 +73,15 @@ public class UserServiceImpl implements UserService {
                 //得到待验证的证书
                 String temp = jsonObj.getString("Prover");
                 //得到钱包和密码
-                JSONObject wallet = jsonObj.getJSONObject("wallet");
-                String passWord = jsonObj.getString("passWord");
+
                 if ("".equals(temp) || temp == null){
                     logger.info("failed!");
                     return null;
                 }
                 JSONObject prover = JSON.parseObject(temp);
                 JSONArray location = prover.getJSONArray("location");
-
+                JSONObject wallet = prover.getJSONObject("wallet");
+                String passWord = prover.getString("passWord");
                 JSONArray zeroKnowledgeProofs  = prover.getJSONArray("ZeroKnowledgeProofs");
                 logger.info("zeroKnowledgeProofs : " + zeroKnowledgeProofs);
                 JSONArray array = new JSONArray();
@@ -113,8 +107,12 @@ public class UserServiceImpl implements UserService {
                 logger.info("Credentials loaded");
                 TransactionManager transactionManager = new RawTransactionManager(
                         //尝试轮询0x20次，interval is 1000ms
-                        web3j, credentials, 7, 20, 1000);
-                VerifyManager verifyManager = VerifyManager.load(verifyManagerContractAddress, web3j, transactionManager, contractGasProvider);
+                        EthereumApi.getInstance().web3j, credentials, 7, 20, 1000);
+                VerifyManager verifyManager = ContractApi.getInstance().verifyManager;
+//                VerifyManager verifyManager = VerifyManager.load(verifyManagerContractAddress,
+//                        EthereumApi.getInstance().web3j,
+//                        transactionManager,
+//                        EthereumApi.getInstance().contractGasProvider);
                 String result = verifyManager.verify(array.toJSONString()).send();
 
                 System.out.println("result : "+result);
@@ -128,9 +126,14 @@ public class UserServiceImpl implements UserService {
                     //行政区划代码
                     String adcode = prover.getIntValue("adcode") + "";
 
-                    CertQuery certQuery = CertQuery.load(conAddress, web3j, transactionManager,contractGasProvider);
+                    CertQuery certQuery = CertQuery.load(conAddress, EthereumApi.getInstance().web3j,
+                            transactionManager,
+                            EthereumApi.getInstance().contractGasProvider);
                     logger.info(""+certQuery.isValid());
 //                    if(certQuery.isValid()){
+                    /**
+                     *  证书格式要修改
+                     */
                     JSONObject cert = new JSONObject();
 
                     cert.put("id", pol.getString("id"));
@@ -143,9 +146,53 @@ public class UserServiceImpl implements UserService {
                     System.out.println("certificate : " + cert.toJSONString());
                     //test delete send() , what will be happend
                     // location code 与经纬度的转化
-                    TransactionReceipt receipt = certQuery.addCertificate(cert.toJSONString(), pol.getString("issuanceDate"), adcode).send();
+                    TransactionReceipt receipt = certQuery.addCertificate(
+                            cert.toJSONString(), pol.getString("issuanceDate"), adcode).send();
                     logger.info("add Certificate is status ok" + receipt.isStatusOK());
                     res = cert.toJSONString();
+
+                    /*
+                      geohash   但是现在先用geohash   gridindex不用
+                     */
+                    if (GRID_INDEX) {
+                        GridIndexCon gridIndex = GridIndexCon.load(gridIndexContractAddress,
+                                EthereumApi.getInstance().web3j,
+                                EthereumApi.getInstance().transactionManager,
+                                EthereumApi.getInstance().contractGasProvider
+                        );
+                        String arrlist = gridIndex.get().send();
+                        double lon = Double.parseDouble(location.getJSONObject(0).getString("xn"));
+                        double lat = Double.parseDouble(location.getJSONObject(1).getString("yn"));
+                        if (arrlist.equals(JSON.toJSONString(GridIndex.getInstance().getArrGrids()))) {
+                            GridIndex.getInstance().point2GridObject(lon, lat);
+                            arrlist = JSON.toJSONString(GridIndex.getInstance().getArrGrids());
+                            TransactionReceipt transactionReceipt = gridIndex.set(arrlist).send();
+                            if (transactionReceipt.isStatusOK()) {
+                                logger.info("add point to gridindex success!!");
+                            } else {
+                                logger.info("add point to gridindex fail!!");
+                            }
+                        } else {
+                            logger.info("gridindex is not consistent with the data on the chain !!");
+                        }
+                    }
+                    else if (GEO_HASH){
+                        /*
+                          记住 xn是latitude ，yn是 longitude
+                         */
+                        double lat = Double.parseDouble(location.getJSONObject(0).getString("xn"));
+                        double lon = Double.parseDouble(location.getJSONObject(1).getString("yn"));
+                        String tmphash = new GeoHash(lon, lat).getBase32FromBits();
+                        logger.info("geohash: " + tmphash);
+                        GeoHashCon geoHashCon = ContractApi.getInstance().geoHashCon;
+                        TransactionReceipt transactionReceipt = geoHashCon.insert(tmphash, cert.toJSONString()).send();
+                        if (transactionReceipt.isStatusOK()) {
+                            logger.info("add point to GPSToGeoHash success!!");
+                        } else {
+                            logger.info("add point to GPSToGeoHash fail!!");
+                        }
+                    }
+
                 }
 
             } else {
@@ -228,12 +275,12 @@ public class UserServiceImpl implements UserService {
                         serverPrivateKey);
                 String data2 = ConvertUtils.hexStringToString(AES.decryptFromBase64(data,
                         aeskey));
-                JSONObject jsonObj = JSONObject.parseObject(data2);
-                String temp = jsonObj.getString("search");
-                JSONObject wallet = jsonObj.getJSONObject("wallet");
-                String passWord = jsonObj.getString("passWord");
+                String temp = JSONObject.parseObject(data2).getString("search");
                 System.out.println("temp :" + temp);
                 JSONObject queryBody = JSON.parseObject(temp);
+                JSONObject wallet = queryBody.getJSONObject("wallet");
+                String passWord = queryBody.getString("passWord");
+
                 String conAddress = queryBody.getString("contractAddress");
                 String startTime = queryBody.getString("startTime");
                 String endTime = queryBody.getString("endTime");
@@ -243,12 +290,17 @@ public class UserServiceImpl implements UserService {
                         WalletUtils.loadCredentials(
                                 passWord, tmpFile);
                 logger.info("Credentials loaded");
-                CertQuery certQuery = CertQuery.load(conAddress, web3j, credentials, contractGasProvider);
+                TransactionManager transactionManager = new RawTransactionManager(
+                        //尝试轮询0x20次，interval is 1000ms
+                        EthereumApi.getInstance().web3j, credentials, 0, 20, 1000);
+
+                CertQuery certQuery = CertQuery.load(conAddress,
+                        EthereumApi.getInstance().web3j, transactionManager, EthereumApi.getInstance().contractGasProvider);
                 //if(certQuery.isValid()) {
-                System.out.println("startTime :" + startTime);
-                System.out.println("endTime :" + endTime);
+                logger.info("startTime :" + startTime);
+                logger.info("endTime :" + endTime);
                 res = certQuery.search(startTime, endTime).send();
-                System.out.println("res : " + res);
+                logger.info("res : " + res);
 
             } else {
                 logger.error("验签失败");
@@ -285,17 +337,12 @@ public class UserServiceImpl implements UserService {
             String account = wallet.getString("address");
 
 //            tmpFile = createTempFile(wallet);
-            Credentials credentials =
-                    WalletUtils.loadCredentials(
-                            adminPassWord, adminWalletFile);
-            TransactionManager transactionManager = new RawTransactionManager(
-                    //尝试轮询0x20次，interval is 1000ms
-                    web3j, credentials, 7, 20, 1000);
+
             CertQuery certQuery = CertQuery.deploy(
                     //部署合约
-                    web3j,
-                    transactionManager,
-                    contractGasProvider
+                    EthereumApi.getInstance().web3j,
+                    EthereumApi.getInstance().transactionManager,
+                    EthereumApi.getInstance().contractGasProvider
             ).send();
             //?????????
             // 添加该用户进白名单
@@ -307,9 +354,11 @@ public class UserServiceImpl implements UserService {
                 return null;
             }
             UserManager userManager = UserManager.load(Constant.userManagerContractAddress,
-                    UserServiceImpl.web3j, transactionManager, UserServiceImpl.contractGasProvider);
+                    EthereumApi.getInstance().web3j,
+                    EthereumApi.getInstance().transactionManager,
+                    EthereumApi.getInstance().contractGasProvider);
             // 添加用户到管理列表
-            receipt = userManager.insert(username, account, contractAddress).send();
+            receipt = userManager.insert(username, contractAddress, "0x"+account).send();
             logger.info("userManager receipt is Status OK " +receipt.isStatusOK());
 
         } catch (Exception e) {

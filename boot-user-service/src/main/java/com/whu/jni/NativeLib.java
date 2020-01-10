@@ -2,7 +2,7 @@ package com.whu.jni;
 
 public class NativeLib {
     static {
-        LibLoader.loadLib("jniLibs/oNativeLib.so");
+        LibLoader.loadLib("jniLibs/bNativeLib.so");
     }
 //    static {
 //        URL url = NativeLib.class.getClassLoader().getResource("jniLibs/libNativeLib.so");

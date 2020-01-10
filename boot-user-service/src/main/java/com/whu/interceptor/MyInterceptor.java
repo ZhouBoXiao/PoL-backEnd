@@ -74,6 +74,15 @@ public class MyInterceptor implements HandlerInterceptor {
                 System.out.println("[" + method.getDeclaringClass().getSimpleName() + "." + method.getName() + "] 执行耗时 : "
                         + executeTime + "ms");
             }
+            response.addHeader("Access-Control-Allow-Origin", "*");
+            response.setHeader("Access-Control-Allow-Origin", "*");
+            System.out.println(response.getHeader("Access-Control-Allow-Origin"));
+//            System.out.println(request.getHeader("Origin"));
+            response.setHeader("Access-Control-Allow-Methods",
+                    "POST, GET, OPTIONS, DELETE");
+            response.setHeader("Access-Control-Max-Age", "3600");
+            response.setHeader("Access-Control-Allow-Headers", "x-requested-with");
+
         }
 
     }

@@ -16,19 +16,40 @@
     <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
     <maven.compiler.source>1.8</maven.compiler.source>
     <maven.compiler.target>1.8</maven.compiler.target>
+    <skipTests>true</skipTests>
+
   </properties>
 
   <dependencies>
+    <!--&lt;!&ndash; https://mvnrepository.com/artifact/org.apache.poi/poi &ndash;&gt;-->
+    <!--<dependency>-->
+      <!--<groupId>org.apache.poi</groupId>-->
+      <!--<artifactId>poi</artifactId>-->
+      <!--<version>4.1.1</version>-->
+    <!--</dependency>-->
+    <!--&lt;!&ndash; https://mvnrepository.com/artifact/org.apache.poi/poi-ooxml &ndash;&gt;-->
+    <!--<dependency>-->
+      <!--<groupId>org.apache.poi</groupId>-->
+      <!--<artifactId>poi-ooxml</artifactId>-->
+      <!--<version>4.1.1</version>-->
+    <!--</dependency>-->
+      <dependency>
+        <groupId>com.monitorjbl</groupId>
+        <artifactId>xlsx-streamer</artifactId>
+        <version>2.1.0</version>
+      </dependency>
+
     <dependency>
       <groupId>junit</groupId>
       <artifactId>junit</artifactId>
       <version>4.11</version>
       <scope>test</scope>
     </dependency>
+    <!-- https://mvnrepository.com/artifact/com.alibaba/fastjson -->
     <dependency>
       <groupId>com.alibaba</groupId>
       <artifactId>fastjson</artifactId>
-      <version>1.2.31</version>
+      <version>1.2.62</version>
     </dependency>
       <!-- https://mvnrepository.com/artifact/javax.servlet/javax.servlet-api -->
       <dependency>
@@ -38,11 +59,7 @@
           <scope>provided</scope>
       </dependency>
     <!-- https://mvnrepository.com/artifact/org.springframework.boot/spring-boot-starter-logging -->
-    <dependency>
-      <groupId>org.springframework.boot</groupId>
-      <artifactId>spring-boot-starter-logging</artifactId>
-      <version>2.2.1.RELEASE</version>
-    </dependency>
+
       <dependency>
           <groupId>org.web3j</groupId>
           <artifactId>core</artifactId>

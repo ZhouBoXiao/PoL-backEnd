@@ -24,7 +24,7 @@ contract WhitelistedRole is Context, WhitelistAdminRole {
 
     modifier onlyWhitelisted() {
         // require(isWhitelisted(_msgSender()), "WhitelistedRole: caller does not have the Whitelisted role");
-        if(isWhitelisted(_msgSender())){
+        if(!isWhitelisted(_msgSender())){
             throw;
         }
         _;
@@ -35,10 +35,16 @@ contract WhitelistedRole is Context, WhitelistAdminRole {
     }
 
     function addWhitelisted(address account) public onlyWhitelistAdmin {
+        if(!isWhitelistAdmin(_msgSender())){
+            throw;
+        }
         _addWhitelisted(account);
     }
 
     function removeWhitelisted(address account) public onlyWhitelistAdmin {
+        if(!isWhitelistAdmin(_msgSender())){
+            throw;
+        }
         _removeWhitelisted(account);
     }
 
