@@ -2,10 +2,11 @@
 <project version="4">
   <component name="Encoding">
     <file url="file://$PROJECT_DIR$/boot-common" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/boot-common/src/main/java" charset="UTF-8" />
     <file url="file://$PROJECT_DIR$/boot-interface" charset="UTF-8" />
-    <file url="file://$PROJECT_DIR$/boot-interface-api" charset="UTF-8" />
-    <file url="file://$PROJECT_DIR$/boot-search-service" charset="UTF-8" />
-    <file url="file://$PROJECT_DIR$/boot-user-pojo" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/boot-interface/src/main/java" charset="UTF-8" />
     <file url="file://$PROJECT_DIR$/boot-user-service" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/boot-user-service/src/main/java" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/boot-user-service/src/main/resources" charset="UTF-8" />
   </component>
 </project>

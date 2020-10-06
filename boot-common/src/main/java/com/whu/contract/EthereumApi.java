@@ -1,6 +1,7 @@
 package com.whu.contract;
 
 import com.whu.tools.Constant;
+import com.whu.tools.OSInfo;
 import org.web3j.crypto.CipherException;
 import org.web3j.crypto.Credentials;
 import org.web3j.crypto.WalletUtils;
@@ -12,11 +13,13 @@ import org.web3j.tx.RawTransactionManager;
 import org.web3j.tx.TransactionManager;
 import org.web3j.tx.gas.ContractGasProvider;
 import org.web3j.tx.gas.DefaultGasProvider;
+import sun.awt.image.OffScreenImage;
 
 import java.io.IOException;
 import java.math.BigInteger;
 
 import static com.whu.tools.Tools.selectProvider;
+
 
 public class EthereumApi {
     private static final String INFURA_MAIN_NODE = "https://mainnet.infura.io/xxx";
@@ -29,9 +32,7 @@ public class EthereumApi {
 
     private static final boolean DEV_MODE = true;
 
-//    private volatile static EthereumApi instance;
     public Web3j web3j;
-//    private Streak contract = null;
     private String contractAddress = "";
     public ContractGasProvider contractGasProvider;
     public TransactionManager transactionManager;
@@ -46,9 +47,12 @@ public class EthereumApi {
             System.out.println("[ETH-INFO] Connected to Infura Node on Ropsten...");
         }
         try {
-//            adminWalletFile = "C:\\Users\\Administrator\\keystores\\125308d1-3a4e-ee28-87c6-38ae02b4f6c3.json";
-            adminWalletFile = "C:\\Users\\Administrator\\keystores\\admin.json";
+            if (OSInfo.isLinux()) {
 //            adminWalletFile = "/home/lmars/PoL/PoL-Juice/ju-ethereum/data/keys/125308d1-3a4e-ee28-87c6-38ae02b4f6c3.json";
+                adminWalletFile = "/home/lmars/PoL/PoL-Juice/ju-ethereum/data/keys/125308d1-3a4e-ee28-87c6-38ae02b4f6c3.json";
+            } else {
+                adminWalletFile = "C:\\Users\\Administrator\\keystores\\admin.json";
+            }
             String adminPassWord = "12345678";
             Credentials credentials = WalletUtils.loadCredentials(
                     adminPassWord, adminWalletFile);

@@ -1,0 +1,32 @@
+
+f
+java:S1192"MDefine a constant instead of duplicating this literal "issuanceDate" 3 times.(´–ª´úÿÿÿÿ
+d	java:S117"QRename this local variable to match the regular expression '^[a-z][a-zA-Z0-9]*$'.(¸Ïè¬
+d	java:S117"QRename this local variable to match the regular expression '^[a-z][a-zA-Z0-9]*$'.(ÿ¸ö—
+Y
+java:S1128"FRemove this unused import 'com.whu.spatialIndex.geohash.GPSToGeoHash'.(•Ø§
+f
+java:S3776"RRefactor this method to reduce its Cognitive Complexity from 33 to the 15 allowed.(†ýÝ•
+N	java:S899";Do something with the "boolean" value returned by "delete".(ßñ ß
+N	java:S899";Do something with the "boolean" value returned by "delete".(ßñ ß
+?
+java:S1481"+Remove this unused "params" local variable.(½¬á¢
+T	java:S125"<This block of commented-out lines of code should be removed.(î¬Û¦ûÿÿÿÿ
+O	java:S125"<This block of commented-out lines of code should be removed.(ýÊ¼™
+N	java:S125"<This block of commented-out lines of code should be removed.(¬ÁÞ1
+O	java:S125"<This block of commented-out lines of code should be removed.(ºþÂÚ
+T	java:S125"<This block of commented-out lines of code should be removed.(çðœñùÿÿÿÿ
+O	java:S125"<This block of commented-out lines of code should be removed.(êÍò
+O	java:S125"<This block of commented-out lines of code should be removed.(ƒÓè
+O	java:S125"<This block of commented-out lines of code should be removed.(ÔŒì„
+N	java:S125"<This block of commented-out lines of code should be removed.(üÉÇ}
+O	java:S125"<This block of commented-out lines of code should be removed.(æ„À×
+O	java:S125"<This block of commented-out lines of code should be removed.(Œ°Œ
+O	java:S125"<This block of commented-out lines of code should be removed.(ž€Œ
+O	java:S125"<This block of commented-out lines of code should be removed.(ñ±™Œ
+T	java:S125"<This block of commented-out lines of code should be removed.(éØ»Úûÿÿÿÿ
+O	java:S125"<This block of commented-out lines of code should be removed.(ƒÓè
+T	java:S125"<This block of commented-out lines of code should be removed.(×Ê‹üÿÿÿÿ
+T	java:S125"<This block of commented-out lines of code should be removed.(ƒ³úÃùÿÿÿÿ
+N	java:S125"<This block of commented-out lines of code should be removed.(ïÀ›D
+T	java:S125"<This block of commented-out lines of code should be removed.(éØ»Úûÿÿÿÿ
