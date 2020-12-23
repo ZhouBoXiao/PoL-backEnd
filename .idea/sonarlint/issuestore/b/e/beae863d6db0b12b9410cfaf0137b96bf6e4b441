@@ -1,32 +1,38 @@
 
-f
-java:S1192"MDefine a constant instead of duplicating this literal "issuanceDate" 3 times.(´–ª´úÿÿÿÿ
-d	java:S117"QRename this local variable to match the regular expression '^[a-z][a-zA-Z0-9]*$'.(¸Ïè¬
-d	java:S117"QRename this local variable to match the regular expression '^[a-z][a-zA-Z0-9]*$'.(ÿ¸ö—
-Y
-java:S1128"FRemove this unused import 'com.whu.spatialIndex.geohash.GPSToGeoHash'.(•Ø§
-f
-java:S3776"RRefactor this method to reduce its Cognitive Complexity from 33 to the 15 allowed.(†ýÝ•
-N	java:S899";Do something with the "boolean" value returned by "delete".(ßñ ß
-N	java:S899";Do something with the "boolean" value returned by "delete".(ßñ ß
-?
-java:S1481"+Remove this unused "params" local variable.(½¬á¢
-T	java:S125"<This block of commented-out lines of code should be removed.(î¬Û¦ûÿÿÿÿ
-O	java:S125"<This block of commented-out lines of code should be removed.(ýÊ¼™
-N	java:S125"<This block of commented-out lines of code should be removed.(¬ÁÞ1
-O	java:S125"<This block of commented-out lines of code should be removed.(ºþÂÚ
-T	java:S125"<This block of commented-out lines of code should be removed.(çðœñùÿÿÿÿ
-O	java:S125"<This block of commented-out lines of code should be removed.(êÍò
-O	java:S125"<This block of commented-out lines of code should be removed.(ƒÓè
-O	java:S125"<This block of commented-out lines of code should be removed.(ÔŒì„
-N	java:S125"<This block of commented-out lines of code should be removed.(üÉÇ}
-O	java:S125"<This block of commented-out lines of code should be removed.(æ„À×
-O	java:S125"<This block of commented-out lines of code should be removed.(Œ°Œ
-O	java:S125"<This block of commented-out lines of code should be removed.(ž€Œ
-O	java:S125"<This block of commented-out lines of code should be removed.(ñ±™Œ
-T	java:S125"<This block of commented-out lines of code should be removed.(éØ»Úûÿÿÿÿ
-O	java:S125"<This block of commented-out lines of code should be removed.(ƒÓè
-T	java:S125"<This block of commented-out lines of code should be removed.(×Ê‹üÿÿÿÿ
-T	java:S125"<This block of commented-out lines of code should be removed.(ƒ³úÃùÿÿÿÿ
-N	java:S125"<This block of commented-out lines of code should be removed.(ïÀ›D
-T	java:S125"<This block of commented-out lines of code should be removed.(éØ»Úûÿÿÿÿ
+H
+java:S1481,"+Remove this unused "params" local variable.(½¬á¢8©´×‰Ó.
+b
+java:S1128"FRemove this unused import 'com.whu.spatialIndex.geohash.GPSToGeoHash'.(•Ø§8©´×‰Ó.
+]	java:S125/"<This block of commented-out lines of code should be removed.(î¬Û¦ûÿÿÿÿ8©´×‰Ó.
+n	java:S117Í"QRename this local variable to match the regular expression '^[a-z][a-zA-Z0-9]*$'.(ÿ¸ö—8©´×‰Ó.
+g
+java:S4042Ð"IUse "java.nio.Files#delete" here for better messages on error conditions.(ßñ ß8©´×‰Ó.
+Y	java:S125ñ"<This block of commented-out lines of code should be removed.(ž€Œ8©´×‰Ó.
+Y	java:S125î"<This block of commented-out lines of code should be removed.(Œ°Œ8©´×‰Ó.
+g
+java:S4042º"IUse "java.nio.Files#delete" here for better messages on error conditions.(ßñ ß8©´×‰Ó.
+X	java:S125é"<This block of commented-out lines of code should be removed.(üÉÇ}8©´×‰Ó.
+X	java:S899º";Do something with the "boolean" value returned by "delete".(ßñ ß8©´×‰Ó.
+Y	java:S125ì"<This block of commented-out lines of code should be removed.(æ„À×8©´×‰Ó.
+Y	java:S125ö"<This block of commented-out lines of code should be removed.(ñ±™Œ8©´×‰Ó.
+o
+java:S3776)"RRefactor this method to reduce its Cognitive Complexity from 33 to the 15 allowed.(†ýÝ•8©´×‰Ó.
+Y	java:S125†"<This block of commented-out lines of code should be removed.(ƒÓè8©´×‰Ó.
+Y	java:S125¬"<This block of commented-out lines of code should be removed.(ƒÓè8©´×‰Ó.
+^	java:S125ô"<This block of commented-out lines of code should be removed.(éØ»Úûÿÿÿÿ8©´×‰Ó.
+^	java:S125Î"<This block of commented-out lines of code should be removed.(×Ê‹üÿÿÿÿ8©´×‰Ó.
+X	java:S125Z"<This block of commented-out lines of code should be removed.(ºþÂÚ8©´×‰Ó.
+Y	java:S125Ü"<This block of commented-out lines of code should be removed.(ÔŒì„8©´×‰Ó.
+]	java:S125`"<This block of commented-out lines of code should be removed.(çðœñùÿÿÿÿ8©´×‰Ó.
+W	java:S125="<This block of commented-out lines of code should be removed.(¬ÁÞ18©´×‰Ó.
+^	java:S125Ô"<This block of commented-out lines of code should be removed.(ƒ³úÃùÿÿÿÿ8©´×‰Ó.
+p
+java:S1192"MDefine a constant instead of duplicating this literal "issuanceDate" 3 times.(´–ª´úÿÿÿÿ8©´×‰Ó.
+X	java:S1254"<This block of commented-out lines of code should be removed.(ýÊ¼™8©´×‰Ó.
+n	java:S117‡"QRename this local variable to match the regular expression '^[a-z][a-zA-Z0-9]*$'.(¸Ïè¬8©´×‰Ó.
+X	java:S125ñ"<This block of commented-out lines of code should be removed.(ïÀ›D8©´×‰Ó.
+^	java:S125ü"<This block of commented-out lines of code should be removed.(éØ»Úûÿÿÿÿ8©´×‰Ó.
+v
+java:S2293,"YReplace the type specification in this constructor call with the diamond operator ("<>").(½¬á¢8©´×‰Ó.
+X	java:S899Ð";Do something with the "boolean" value returned by "delete".(ßñ ß8©´×‰Ó.
+X	java:S125s"<This block of commented-out lines of code should be removed.(êÍò8©´×‰Ó.

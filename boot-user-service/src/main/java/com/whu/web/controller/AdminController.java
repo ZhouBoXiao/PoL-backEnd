@@ -1,7 +1,6 @@
 package com.whu.web.controller;
 
 
-import com.alibaba.dubbo.config.spring.context.annotation.EnableDubbo;
 import com.alibaba.fastjson.JSON;
 import com.battcn.swagger.properties.ApiDataType;
 import com.battcn.swagger.properties.ApiParamType;
@@ -19,13 +18,10 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.util.HashMap;
 import java.util.Map;
-//import org.mybatis.spring.annotation.MapperScan;
 
 
 @RestController
 @RequestMapping("/PoL/admin")
-//@MapperScan(basePackages = {"com.whu.mapper"})
-@EnableDubbo  //启动Dubbo注解
 @Api(tags = "1.2", description = "后台", value = "后台")
 public class AdminController {
 

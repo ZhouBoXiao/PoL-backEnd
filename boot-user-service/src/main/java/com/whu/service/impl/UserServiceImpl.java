@@ -32,7 +32,6 @@ import static com.whu.tools.Constant.*;
 import static com.whu.tools.Tools.*;
 
 @Service
-@com.alibaba.dubbo.config.annotation.Service  //注册到注册中心中
 public class UserServiceImpl implements UserService {
 
     private static final org.slf4j.Logger logger = org.slf4j.LoggerFactory.getLogger(UserServiceImpl.class);
@@ -113,6 +112,7 @@ public class UserServiceImpl implements UserService {
 //                        EthereumApi.getInstance().web3j,
 //                        transactionManager,
 //                        EthereumApi.getInstance().contractGasProvider);
+                //  调用验证合约
                 String result = verifyManager.verify(array.toJSONString()).send();
 
                 System.out.println("result : "+result);
@@ -337,7 +337,7 @@ public class UserServiceImpl implements UserService {
             String account = wallet.getString("address");
 
 //            tmpFile = createTempFile(wallet);
-
+            // 证书查询合约
             CertQuery certQuery = CertQuery.deploy(
                     //部署合约
                     EthereumApi.getInstance().web3j,
@@ -353,6 +353,7 @@ public class UserServiceImpl implements UserService {
             if ("".equals(Constant.userManagerContractAddress)){
                 return null;
             }
+            // 用户管理合约
             UserManager userManager = UserManager.load(Constant.userManagerContractAddress,
                     EthereumApi.getInstance().web3j,
                     EthereumApi.getInstance().transactionManager,

@@ -8,7 +8,7 @@ contract ExAddDemo is ExCall {
 
     string A;
     string B;
-    string C;
+    storage string C;
 
     function setA(string a) public constant returns(string){
         A = a;

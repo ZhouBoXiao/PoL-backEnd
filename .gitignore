@@ -1,0 +1,7 @@
+# Created by .ignore support plugin (hsz.mobi)
+.gitignore
+.idea/PoL-backEnd.iml
+boot-common/target/generated-sources/
+boot-common/target/generated-test-sources/
+boot-interface/target/generated-sources/
+boot-interface/target/generated-test-sources/

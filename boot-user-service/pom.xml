@@ -124,18 +124,12 @@
             <artifactId>swagger-spring-boot-starter</artifactId>
             <version>1.4.5-RELEASE</version>
         </dependency>
-        <!-- spring boot 整合dubbo
-        导入zookeeper-3.4.9.jar 同时还将curator-client.jar相关导入
--->
+
         <dependency>
             <groupId>javax.validation</groupId>
             <artifactId>validation-api</artifactId>
         </dependency>
-        <dependency>
-            <groupId>com.alibaba.boot</groupId>
-            <artifactId>dubbo-spring-boot-starter</artifactId>
-            <version>0.2.0</version>
-        </dependency>
+
 
 
 

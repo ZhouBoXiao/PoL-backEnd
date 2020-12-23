@@ -1,7 +1,6 @@
 package com.whu.web.controller;
 
 
-import com.alibaba.dubbo.config.spring.context.annotation.EnableDubbo;
 import com.alibaba.fastjson.JSON;
 import com.alibaba.fastjson.JSONObject;
 import com.battcn.swagger.properties.ApiDataType;
@@ -24,8 +23,6 @@ import java.util.Map;
 
 @RestController
 @RequestMapping("/PoL")
-//@MapperScan(basePackages = {"com.whu.mapper"})
-@EnableDubbo  //启动Dubbo注解
 @Api(tags = "1.1", description = "后台", value = "后台")
 public class UserController {
 

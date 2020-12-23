@@ -2,10 +2,10 @@
 <project version="4">
   <component name="WebServers">
     <option name="servers">
-      <webServer id="3f2fc758-eae6-45ee-b7d9-f5b7bb627851" name="PoL" url="http://202.114.114.47">
-        <fileTransfer host="202.114.114.47" port="22" rootFolder="/home/lmars" accessType="SFTP">
+      <webServer id="5e429a66-0713-4640-8b65-43f7d42698d9" name="202.114.114.47" url="http://202.114.114.47">
+        <fileTransfer host="202.114.114.47" port="22" rootFolder="/home/lmars/PoL/" accessType="SFTP">
           <advancedOptions>
-            <advancedOptions dataProtectionLevel="Private" shareSSLContext="true" />
+            <advancedOptions controlEncoding="utf-8" dataProtectionLevel="Private" passiveMode="true" shareSSLContext="true" />
           </advancedOptions>
           <option name="port" value="22" />
         </fileTransfer>

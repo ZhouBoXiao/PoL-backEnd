@@ -1,9 +1,0 @@
-
-q
-java:S1104"VMake geoHashCon a static final constant or non-public and provide accessors if needed.(ÚÆÝ¬üÿÿÿÿ
-r
-java:S1104"WMake userManager a static final constant or non-public and provide accessors if needed.(™ò­Ëÿÿÿÿÿ
-t
-java:S1104"YMake verifyManager a static final constant or non-public and provide accessors if needed.(óÔëþýÿÿÿÿ
-K
-java:S1128"0Remove this unused import 'java.io.IOException'.(ªº»Úýÿÿÿÿ

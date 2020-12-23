@@ -14,9 +14,6 @@
     <bytecodeTargetLevel>
       <module name="boot-common" target="1.8" />
       <module name="boot-interface" target="1.7" />
-      <module name="boot-interface-api" target="1.8" />
-      <module name="boot-search-service" target="1.8" />
-      <module name="boot-user-pojo" target="1.8" />
       <module name="boot-user-service" target="1.8" />
     </bytecodeTargetLevel>
   </component>

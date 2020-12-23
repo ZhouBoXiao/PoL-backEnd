@@ -1,0 +1,29 @@
+
+c	java:S100^"NRename this method name to match the regular expression '^[a-z][a-zA-Z0-9]*$'.(÷ÏÑç
+J
+java:S1133<"5Do not forget to remove this deprecated code someday.(€∂Õ?
+b	java:S100D"NRename this method name to match the regular expression '^[a-z][a-zA-Z0-9]*$'.(ôù¥z
+?
+java:S1123ô"(Add the missing @deprecated Javadoc tag.(≤›»‘
+L
+java:S1133™"5Do not forget to remove this deprecated code someday.(Œ±†˚
+L
+java:S1133î"5Do not forget to remove this deprecated code someday.(·ö±À
+?
+java:S1123™"(Add the missing @deprecated Javadoc tag.(Œ±†˚
+i	java:S100ã"NRename this method name to match the regular expression '^[a-z][a-zA-Z0-9]*$'.(Ô†ØÒˇˇˇˇˇ
+?
+java:S1123≥"(Add the missing @deprecated Javadoc tag.(¯€“¨
+L
+java:S1133≥"5Do not forget to remove this deprecated code someday.(¯€“¨
+=
+java:S1123<"(Add the missing @deprecated Javadoc tag.(€∂Õ?
+J
+java:S11333"5Do not forget to remove this deprecated code someday.(±¥ÔG
+=
+java:S11233"(Add the missing @deprecated Javadoc tag.(±¥ÔG
+h	java:S100V"NRename this method name to match the regular expression '^[a-z][a-zA-Z0-9]*$'.(Úñ—Ω˘ˇˇˇˇ
+?
+java:S1123î"(Add the missing @deprecated Javadoc tag.(·ö±À
+L
+java:S1133ô"5Do not forget to remove this deprecated code someday.(≤›»‘

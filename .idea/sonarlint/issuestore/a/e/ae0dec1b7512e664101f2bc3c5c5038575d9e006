@@ -1,42 +1,0 @@
-
-Y	java:S125‹"<This block of commented-out lines of code should be removed.(Õø®Æ8×šÍ±É.
-X	java:S125K"<This block of commented-out lines of code should be removed.(¼«ç…8×šÍ±É.
-z
-java:S1104%"_Make contractGasProvider a static final constant or non-public and provide accessors if needed.(‡šÖÆÿÿÿÿÿ
-^	java:S125¥"<This block of commented-out lines of code should be removed.(ûºä•úÿÿÿÿ8×šÍ±É.
-l
-java:S1104#"QMake web3j a static final constant or non-public and provide accessors if needed.(Ç£ñÿşÿÿÿÿ
-:
-java:S2129"$Remove this "BigInteger" constructor(õÔè
-O
-java:S1068"4Remove this unused "INFURA_TEST_NODE" private field.(öÑ“·üÿÿÿÿ
-X	java:S1253"<This block of commented-out lines of code should be removed.(¹½Ê¨8×šÍ±É.
-X	java:S125n"<This block of commented-out lines of code should be removed.(‡è¤³8×šÍ±É.
-R
-java:S1191"5Use classes from the Java API instead of Sun classes.(†„å8åÁË±É.
-I
-java:S1068$"3Remove this unused "contractAddress" private field.(ÿÌ÷ı
-Y	java:S125"<This block of commented-out lines of code should be removed.(ÅàÂ8×šÍ±É.
-C
-java:S1068"-Remove this unused "GAS_LIMIT" private field.(õÔè
-B
-java:S1068"-Remove this unused "GAS_PRICE" private field.(òûÉ
-E
-java:S1068"/Remove this unused "PRIVATE_KEY" private field.(«¡›È
-J
-java:S1068"4Remove this unused "INFURA_MAIN_NODE" private field.(¦ôÉñ
-9
-java:S2129"$Remove this "BigInteger" constructor(òûÉ
-?
-java:S2129"$Remove this "BigInteger" constructor(÷İˆ·ÿÿÿÿÿ
-]	java:S125g"<This block of commented-out lines of code should be removed.(‹îÓùùÿÿÿÿ8×šÍ±É.
-V
-java:S1128"9Remove this unused import 'sun.awt.image.OffScreenImage'.(†„å8åÁË±É.
-X	java:S125r"<This block of commented-out lines of code should be removed.(Œßİ°8×šÍ±É.
-V	java:S125."<This block of commented-out lines of code should be removed.(ÕîŞÆşÿÿÿÿ
-Y	java:S125•"<This block of commented-out lines of code should be removed.(ùÁøü8×šÍ±É.
-Y	java:S125"<This block of commented-out lines of code should be removed.(‹‚ ¿8×šÍ±É.
-t
-java:S1104&"^Make transactionManager a static final constant or non-public and provide accessors if needed.(ôëŞó
-J
-java:S1068"/Remove this unused "INITIAL_WEI" private field.(÷İˆ·ÿÿÿÿÿ

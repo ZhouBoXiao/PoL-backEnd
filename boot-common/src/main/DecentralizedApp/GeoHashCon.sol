@@ -310,6 +310,7 @@ contract GeoHashCon{
     // }
 
     // string _json1;
+
     function insert(string geohash, string cert) public {
 
         geo[geohash] = geo[geohash].concat( cert, "," );

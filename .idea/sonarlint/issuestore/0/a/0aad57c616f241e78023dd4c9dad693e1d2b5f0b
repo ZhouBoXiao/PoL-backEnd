@@ -1,13 +1,0 @@
-
-f	java:S117H"QRename this local variable to match the regular expression '^[a-z][a-zA-Z0-9]*$'.(›¼áð
-R
-java:S30660"<Lower the visibility of this setter or remove it altogether.(¥‹¦í
-W
-java:S30668"<Lower the visibility of this setter or remove it altogether.(Õ¢˜¡úÿÿÿÿ
-R
-java:S3066@"<Lower the visibility of this setter or remove it altogether.(º¾ƒû
-R
-java:S3066H"<Lower the visibility of this setter or remove it altogether.(›¼áð
-h	java:S116"SRename this field "res_code" to match the regular expression '^[a-z][a-zA-Z0-9]*$'.(Œ®Ó´
-h	java:S100D"NRename this method name to match the regular expression '^[a-z][a-zA-Z0-9]*$'.(˜”›ºøÿÿÿÿ
-c	java:S100H"NRename this method name to match the regular expression '^[a-z][a-zA-Z0-9]*$'.(›¼áð

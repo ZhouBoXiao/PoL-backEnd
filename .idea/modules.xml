@@ -2,6 +2,7 @@
 <project version="4">
   <component name="ProjectModuleManager">
     <modules>
+      <module fileurl="file://$PROJECT_DIR$/.idea/PoL-backEnd.iml" filepath="$PROJECT_DIR$/.idea/PoL-backEnd.iml" />
       <module fileurl="file://$PROJECT_DIR$/boot-common/boot-common.iml" filepath="$PROJECT_DIR$/boot-common/boot-common.iml" />
       <module fileurl="file://$PROJECT_DIR$/boot-interface/boot-interface.iml" filepath="$PROJECT_DIR$/boot-interface/boot-interface.iml" />
       <module fileurl="file://$PROJECT_DIR$/boot-user-service/boot-user-service.iml" filepath="$PROJECT_DIR$/boot-user-service/boot-user-service.iml" />

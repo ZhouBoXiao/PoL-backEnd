@@ -33,7 +33,6 @@ import static com.whu.tools.Constant.gridIndexContractAddress;
 
 
 @Service
-@com.alibaba.dubbo.config.annotation.Service  //注册到注册中心中
 public class AdminServiceImpl implements AdminService {
     private static final org.slf4j.Logger logger = org.slf4j.LoggerFactory.getLogger(AdminServiceImpl.class);
 
@@ -164,18 +163,21 @@ public class AdminServiceImpl implements AdminService {
 
                 String username = queryBody.getString("username");
                 logger.info("username: " + username);
+                // 根据用户名查询到合约地址
                 String conAddress = userManager.getContractByUsername(username).send();
                 logger.info("conAddress: " + conAddress);
+                // 根据合约地址加载合约查询对象
                 CertQuery certQuery = CertQuery.load(conAddress, EthereumApi.getInstance().web3j, EthereumApi.getInstance().transactionManager,
                         EthereumApi.getInstance().contractGasProvider);
                 logger.info("----------------------------------------------------------------------------");
 //                logger.info(certQuery.sumOfCerts());
 //                logger.info(certQuery.listAll().send());
+                // 执行查询函数
                 result = certQuery.search(startTime, endTime).send();
                 logger.info("result: "+ result);
             } else {
                 /*
-                //此处应该添加查询管理员的身份信息
+                //TODO 此处应该添加查询管理员的身份信息
 
                 tmpFile = createTempFile(wallet);  //生成临时文件存储钱包
                 Credentials credentials =

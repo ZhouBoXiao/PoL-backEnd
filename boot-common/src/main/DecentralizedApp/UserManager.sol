@@ -16,7 +16,7 @@ contract UserManager{
     	string addr;  // user address
     }
     struct KeyFlag {
-    	string key;
+    	string key; // user address
     	bool deleted;
     }
     itmap self;
